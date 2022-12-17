@@ -9,7 +9,7 @@ from statistics import mean
 import datetime
 from pathlib import Path
 
-my_file = Path('database_patients.csv')
+data = Path('database_patients.csv')
 
 # impostazione grafica iniziale
 
