@@ -8,7 +8,7 @@ import time
 from statistics import mean
 import datetime
 
-data = "database_patients.csv"
+data = "/database_patients.csv"
 
 # impostazione grafica iniziale
 
