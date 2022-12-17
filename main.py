@@ -8,14 +8,6 @@ import time
 from statistics import mean
 import datetime
 
-from pyecharts.charts import Bar
-from pyecharts import options as opts
-import streamlit.components.v1 as components
-
-from streamlit.logger import get_logger
-
-LOGGER = get_logger(__name__)
-
 data = "database_patients.csv"
 
 # impostazione grafica iniziale
