@@ -7,8 +7,11 @@ from sqlite3 import Error
 import time
 from statistics import mean
 import datetime
+import csv
 
-data = "/database_patients.csv"
+
+with open("database_patients.csv") as csv_file:
+    csv_reader = csv.Reader(csv_file, delimiter=',')
 
 # impostazione grafica iniziale
 
