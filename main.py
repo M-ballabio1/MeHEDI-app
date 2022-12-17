@@ -142,7 +142,7 @@ with form:
         #soddMean=round(mean(df['Soddisfazione']))
         #marcMean=round(mean(df['Marchio']))
         #engaMean=round(mean(df['Engagment']))
-        prov2=len(df)
+        #prov2=len(df)
         #CustomSatisf=round((soddMean+marcMean+engaMean)/(3))
         
 
@@ -152,5 +152,5 @@ with form:
         with a:
             st.write("CUSTOMER SATISFACTION")
         with b:
-            st.write("NUMERO REPORT FATTI", prov2)
+            st.write("NUMERO REPORT FATTI")
         st.balloons()
