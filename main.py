@@ -7,11 +7,9 @@ from sqlite3 import Error
 import time
 from statistics import mean
 import datetime
-import csv
+from pathlib import Path
 
-
-with open("database_patients.csv") as csv_file:
-    data = csv.Reader(csv_file, delimiter=',')
+my_file = Path('database_patients.csv')
 
 # impostazione grafica iniziale
 
