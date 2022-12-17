@@ -139,18 +139,18 @@ with form:
         df, [[author, bug_type, comment, str(date), satisf, engagment, str(datetime_object)]])
 
 
-        soddMean=round(mean(df['Soddisfazione']))
-        marcMean=round(mean(df['Marchio']))
-        engaMean=round(mean(df['Engagment']))
+        #soddMean=round(mean(df['Soddisfazione']))
+        #marcMean=round(mean(df['Marchio']))
+        #engaMean=round(mean(df['Engagment']))
         prov2=len(df)
-        CustomSatisf=round((soddMean+marcMean+engaMean)/(3))
+        #CustomSatisf=round((soddMean+marcMean+engaMean)/(3))
         
 
         st.write("## Results analysis")
         a, b = st.columns(2)
 
         with a:
-            st.write("CUSTOMER SATISFACTION", str(CustomSatisf))
+            st.write("CUSTOMER SATISFACTION")
         with b:
             st.write("NUMERO REPORT FATTI", prov2)
         st.balloons()
