@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-
 import pandas as pd
 import streamlit as st
 from PIL import Image
 import sqlite3
 from sqlite3 import Error
 import time
-from htbuilder import div, big, h2, styles
-from htbuilder.units import rem
 from statistics import mean
 import datetime
 
@@ -21,23 +18,12 @@ LOGGER = get_logger(__name__)
 
 data = "database_patients.csv"
 
-COLOR_BLUE = "#1C83E1"
-COLOR_CYAN = "#00C0F2"
-
 # impostazione grafica iniziale
 
 st.set_page_config(page_title="Customer Satisfaction", page_icon="📌", layout="centered")
 #st.sidebar.header("Feedback reporting")
 
-st.write('<base target="_blank">', unsafe_allow_html=True)
-prev_time = [time.time()]
-a, b = st.columns([2, 10])
-with a:
-    st.text("")
-    #st.image(image1, width=110)
-with b:
-    st.title("Customer Satisfaction CX")
-
+st.title("Customer Satisfaction CX")
 st.write("Vediamo alcune informazioni sul tool Customer Satisfaction Analyzer")
 
 
@@ -62,28 +48,6 @@ with st.expander("ℹ️ Istruzioni generali", expanded=False):
     st.markdown("")
     #st.image(image)
 st.write("")
-
-
-#st.write(df)
-
-# functions
-
-def display_dial(title, value, color):
-        st.markdown(
-            div(
-                style=styles(
-                    text_align="center",
-                    color=color,
-                    padding=(rem(0.8), 0, rem(3), 0),
-                )
-            )(
-                h2(style=styles(font_size=rem(0.8), font_weight=600, padding=0))(title),
-                big(style=styles(font_size=rem(3), font_weight=800, line_height=1))(
-                    value
-                ),
-            ),
-            unsafe_allow_html=True,
-        )
 
 def CustomerSatisf(a):
     k=mean(a)
@@ -132,19 +96,5 @@ with form:
         
 
             st.write("## Results analysis")
-            a, b = st.columns(2)
-
-            with a:
-                display_dial("CUSTOMER SATISFACTION", str(CustomSatisf), COLOR_BLUE)
-            with b:
-                display_dial("NUMERO REPORT FATTI", prov2, COLOR_CYAN)
+            st.write(prov2)
             st.balloons()
-
-if submitted==True:
-    c = (Bar()
-    .add_xaxis(["Soddisfazione", "Marchio", "Engagment"])
-    .add_yaxis('Grado di soddisfazione', [soddMean, marcMean, engaMean])
-    .set_global_opts(title_opts=opts.TitleOpts(title="KPI Customer Satisfaction", subtitle="2022-2023"))
-    .render_embed() # generate a local HTML file
-    )
-    components.html(c, width=1000, height=1000)
