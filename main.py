@@ -83,8 +83,8 @@ st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 t1, t2 = st.columns((0.15,1)) 
 
 t1.image(image, width = 180)
-t2.title("MedTech Expereince Dashboard - MedMIB Hospital")
-t2.markdown("Vediamo alcune informazioni sul tool Patient Satisfaction Analyzer")
+t2.title("MedTech Hospital Experience Dashboard - MedMIB Hospital")
+t2.markdown("# This section shows some information about MeHEDI - Tool of Patient Satisfaction")
 
 df = connect_to_gsheet()
 expander = st.expander("See all records")
