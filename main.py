@@ -135,10 +135,9 @@ with form:
     
     #risorse umane e accoglienza
     qualita = cols[0].slider("Qualità del personale :", 1, 100, 1)
-    pulizia = cols[0].slider("Pulizia degli ambienti :", 1, 100, 1)
-    empatia = cols[1].slider("Grado di empatia personale :", 1, 100, 1)
-    info_terapeutiche = cols[1].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
-    
+    pulizia = cols[1].slider("Pulizia degli ambienti :", 1, 100, 1)
+    empatia = cols[2].slider("Grado di empatia personale :", 1, 100, 1)
+    info_terapeutiche = cols[3].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
     submitted = st.form_submit_button(label="Submit")
     if submitted==True:
         datetime_object = datetime.datetime.now()
