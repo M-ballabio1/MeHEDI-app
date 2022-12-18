@@ -94,7 +94,7 @@ with expander:
 with st.expander("ℹ️ Istruzioni generali", expanded=False):
     st.markdown(
         """
-        ## Informazioni Tool CSA
+        ## Informazioni Tool MeHEDI
         L'obiettivo di questo tool è quello di fornire uno strumento per una misurazione
         della soddsifazione dei pazienti
         """
@@ -118,29 +118,41 @@ st.write("")
 
 form = st.form(key="annotation", clear_on_submit = True,)
 with form:
-    cols = st.columns((1, 1))
-    author = cols[0].text_input("Autore feedback:")
-    bug_type = cols[1].selectbox(
-        "Tipologia Annotazione:", ["Feedback", "Suggerimento", "Segnalazione Errore", "Altro"], index=2)
-    comment = st.text_area("Commenti:")
-    cols = st.columns(2)
-    date = cols[0].date_input("Quando è avvenuto l'annotazione o il problema:")
-    satisf = cols[1].slider("Grado di soddisfazione dei tool :", 1, 100, 2)
-    cols = st.columns(2)
-    marchio = cols[0].slider("Riconoscibilità marchio:", 1, 100, 2)
-    engagment = cols[1].slider("Engagment del User:", 1, 100, 2)
+    cols = st.columns((1, 1, 1, 1))
+    
+    #info paziente
+    author = cols[0].text_input("Nome del paziente:")
+    eta = cols[1].text_input("Età anagrafica:")
+    sesso = cols[2].selectbox(
+        "Sesso:", ["Maschio", "Femmina", "Non specificato"], index=2)
+    email = cols[3].text_input("Età anagrafica:")
+    
+    #infrastruttura fisica tecnologica
+    date = cols[0].date_input("Quando è stato in ospedale:")
+    infras = cols[1].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
+    proces = cols[2].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
+    sicurezza = cols[3].slider("Sicurezza ospedale :", 1, 100, 1)
+    
+    #risorse umane e accoglienza
+    qualita = cols[0].slider("Qualità del personale :", 1, 100, 1)
+    pulizia = cols[0].slider("Pulizia degli ambienti :", 1, 100, 1)
+    empatia = cols[1].slider("Grado di empatia personale :", 1, 100, 1)
+    info_terapeutiche = cols[1].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
+    
     submitted = st.form_submit_button(label="Submit")
     if submitted==True:
         datetime_object = datetime.datetime.now()
         st.success("Successfully")
         add_row_to_gsheet(
-        df, [[author, bug_type, comment, str(date), satisf, engagment, str(datetime_object)]])
+        df, [[author, eta, sesso, email,
+              str(date), infras, proces, sicurezza,
+              qualita, pulizia, empatia, info_terapeutiche, str(datetime_object)]])
 
-
+        df_new=getdata(df)
         #soddMean=round(mean(df['Soddisfazione']))
         #marcMean=round(mean(df['Marchio']))
         #engaMean=round(mean(df['Engagment']))
-        #prov2=len(df)
+        prov2=len(df_new)
         #CustomSatisf=round((soddMean+marcMean+engaMean)/(3))
         
 
@@ -148,7 +160,7 @@ with form:
         a, b = st.columns(2)
 
         with a:
-            st.write("CUSTOMER SATISFACTION")
+            st.write("CUSTOMER SATISFACTION: 80")
         with b:
-            st.write("NUMERO REPORT FATTI")
+            st.write("NUMERO REPORT FATTI: ",df_new)
         st.balloons()
