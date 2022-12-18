@@ -118,28 +118,28 @@ st.write("")
 
 form = st.form(key="annotation", clear_on_submit = True,)
 with form:
-    cols = st.columns((1, 1, 1, 1))
+    cols = st.columns((1, 1, 1))
     
     #info paziente
     author = cols[0].text_input("Nome del paziente:")
     eta = cols[1].text_input("Età anagrafica:")
     sesso = cols[2].selectbox(
         "Sesso:", ["Maschio", "Femmina", "Non specificato"], index=2)
-    email = cols[3].text_input("Età anagrafica:")
+    #email = cols[3].text_input("Età anagrafica:")
     
-    cols = st.columns((1, 1, 1, 1))
+    cols2 = st.columns((4))
     #infrastruttura fisica tecnologica
-    date = cols[0].date_input("Quando è stato in ospedale:")
-    infras = cols[1].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
-    proces = cols[2].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
-    sicurezza = cols[3].slider("Sicurezza ospedale :", 1, 100, 1)
+    date = cols2[0].date_input("Quando è stato in ospedale:")
+    infras = cols2[1].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
+    proces = cols2[2].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
+    sicurezza = cols2[3].slider("Sicurezza ospedale :", 1, 100, 1)
     
-    cols = st.columns((1, 1, 1, 1))
+    cols3 = st.columns((1, 1, 1, 1))
     #risorse umane e accoglienza
-    qualita = cols[0].slider("Qualità del personale :", 1, 100, 1)
-    pulizia = cols[1].slider("Pulizia degli ambienti :", 1, 100, 1)
-    empatia = cols[2].slider("Grado di empatia personale :", 1, 100, 1)
-    info_terapeutiche = cols[3].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
+    qualita = cols3[0].slider("Qualità del personale :", 1, 100, 1)
+    pulizia = cols3[1].slider("Pulizia degli ambienti :", 1, 100, 1)
+    empatia = cols3[2].slider("Grado di empatia personale :", 1, 100, 1)
+    info_terapeutiche = cols3[3].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
     submitted = st.form_submit_button(label="Submit")
     if submitted==True:
         datetime_object = datetime.datetime.now()
