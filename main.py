@@ -127,12 +127,14 @@ with form:
         "Sesso:", ["Maschio", "Femmina", "Non specificato"], index=2)
     email = cols[3].text_input("Età anagrafica:")
     
+    cols = st.columns((1, 1, 1, 1))
     #infrastruttura fisica tecnologica
     date = cols[0].date_input("Quando è stato in ospedale:")
     infras = cols[1].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
     proces = cols[2].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
     sicurezza = cols[3].slider("Sicurezza ospedale :", 1, 100, 1)
     
+    cols = st.columns((1, 1, 1, 1))
     #risorse umane e accoglienza
     qualita = cols[0].slider("Qualità del personale :", 1, 100, 1)
     pulizia = cols[1].slider("Pulizia degli ambienti :", 1, 100, 1)
