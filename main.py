@@ -82,7 +82,7 @@ st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="centered")
 
 t1, t2 = st.columns((0.07,1)) 
 
-t1.image('images/Medical_Logo', width = 120)
+t1.image(image, width = 120)
 t2.title("MedTech Expereince Dashboard - MedMIB Hospital")
 t2.markdown("Vediamo alcune informazioni sul tool Patient Satisfaction Analyzer")
 
