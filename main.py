@@ -75,14 +75,17 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 
 # impostazione grafica iniziale
 
-st.set_page_config(page_title="Customer Satisfaction", page_icon="📌", layout="centered")
+st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="centered")
 #st.sidebar.header("Feedback reporting")
 
-st.title("Customer Satisfaction")
+t1, t2 = st.columns((0.07,1)) 
 
-st.write("Vediamo alcune informazioni sul tool Customer Satisfaction Analyzer")
+t1.image('images/Medical_Logo', width = 120)
+t2.title("MedTech Expereince Dashboard - MedMIB Hospital")
+t2.markdown("Vediamo alcune informazioni sul tool Patient Satisfaction Analyzer")
 
 df = connect_to_gsheet()
+st.write(df)
 
 with st.expander("ℹ️ Istruzioni generali", expanded=False):
     st.markdown(
