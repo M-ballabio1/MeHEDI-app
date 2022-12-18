@@ -82,7 +82,7 @@ st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 t1, t2 = st.columns((0.10,1)) 
 
 t1.image(image, width = 180)
-original_title = '<p style="font-family:Courier; color:"#228B22"; font-size: 35px;">MedTech Hospital Experience Dashboard - MedMIB Hospital</p>'
+original_title = '<p color:"#228B22"; font-size: 90px;">MedTech Hospital Experience Dashboard - MedMIB Hospital</p>'
 t2.markdown(original_title, unsafe_allow_html=True)
 t2.markdown("### This section shows some information about MeHEDI - Tool of Patient Satisfaction")
 
