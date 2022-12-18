@@ -84,7 +84,7 @@ t1, t2 = st.columns((0.15,1))
 
 t1.image(image, width = 180)
 t2.title("MedTech Hospital Experience Dashboard - MedMIB Hospital")
-t2.markdown("# This section shows some information about MeHEDI - Tool of Patient Satisfaction")
+t2.markdown("### This section shows some information about MeHEDI - Tool of Patient Satisfaction")
 
 df = connect_to_gsheet()
 expander = st.expander("See all records")
