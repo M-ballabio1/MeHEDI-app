@@ -90,7 +90,7 @@ df = connect_to_gsheet()
 expander = st.expander("See all records")
 with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector))
+    st.dataframe(get_data(df))
 
 with st.expander("ℹ️ Istruzioni generali", expanded=False):
     st.markdown(
