@@ -80,7 +80,7 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 #st.sidebar.header("Feedback reporting")
 
-t1, t2 = st.columns((0.15,1)) 
+t1, t2 = st.columns((0.10,1)) 
 
 t1.image(image, width = 180)
 t2.title("MedTech Hospital Experience Dashboard - MedMIB Hospital")
