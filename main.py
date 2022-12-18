@@ -80,14 +80,17 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 #st.sidebar.header("Feedback reporting")
 
-t1, t2 = st.columns((0.07,1)) 
+t1, t2 = st.columns((0.15,1)) 
 
 t1.image(image, width = 180)
 t2.title("MedTech Expereince Dashboard - MedMIB Hospital")
 t2.markdown("Vediamo alcune informazioni sul tool Patient Satisfaction Analyzer")
 
 df = connect_to_gsheet()
-st.write(df)
+expander = st.expander("See all records")
+with expander:
+    st.write(f"Open original [Google Sheet]({GSHEET_URL})")
+    st.dataframe(get_data(gsheet_connector))
 
 with st.expander("ℹ️ Istruzioni generali", expanded=False):
     st.markdown(
@@ -100,7 +103,7 @@ with st.expander("ℹ️ Istruzioni generali", expanded=False):
     st.markdown("")
     st.markdown(
         """
-        ## Perchè misurare Customer Satisfaction?
+        ## Perchè misurare Patients Satisfaction?
         L'efficacia di un'iniziativa di business non è data solo dalla misurazione degli outcome (es. revenue),
         1. Miglioramento percepito della Customer Experience dei prodotti e servizi creati e lanciati rispetto al passato
         2. Miglioramento dell'Employee Experience portata dal nuovo framework operativo
@@ -111,15 +114,6 @@ with st.expander("ℹ️ Istruzioni generali", expanded=False):
     #st.image(image)
 st.write("")
 
-
-#st.write(df)
-
-
-def CustomerSatisf(a):
-    k=mean(a)
-    return k
-
-#df = pd.read_csv(data)
 
 # creazione webform
 
