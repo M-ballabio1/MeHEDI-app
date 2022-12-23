@@ -145,7 +145,7 @@ with form:
         datetime_object = datetime.datetime.now()
         st.success("Successfully")
         add_row_to_gsheet(
-        df, [[author, eta, sesso, email,
+        df, [[author, eta, sesso,
               str(date), infras, proces, sicurezza,
               qualita, pulizia, empatia, info_terapeutiche, str(datetime_object)]])
 
