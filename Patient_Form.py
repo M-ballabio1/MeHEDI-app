@@ -78,7 +78,7 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 # impostazione grafica iniziale
 st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 
-t1, t2 = st.columns((1, 0,15)) 
+t1, t2 = st.columns((1, 0.15)) 
 
 t1.title("MedTech Hospital Experience Dashboard - MedMIB Hospital")
 t1.markdown("### This section shows some information about MeHEDI - Tool of Patient Satisfaction")
