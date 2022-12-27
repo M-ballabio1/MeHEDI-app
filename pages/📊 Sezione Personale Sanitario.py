@@ -3,10 +3,9 @@ import plotly.express as px  # pip install plotly-express
 import streamlit as st  # pip install streamlit
 
 
+st.title("Sezione Personale Sanitario")
+
 # --- USER AUTHENTICATION ---
-
-import streamlit as st
-
 def check_password():
     """Returns `True` if the user had a correct password."""
 
@@ -29,6 +28,7 @@ def check_password():
         st.text_input(
             "Password", type="password", on_change=password_entered, key="password"
         )
+        st.button("Click me")
         return False
     elif not st.session_state["password_correct"]:
         # Password not correct, show input + error.
@@ -36,15 +36,13 @@ def check_password():
         st.text_input(
             "Password", type="password", on_change=password_entered, key="password"
         )
+        st.button("Click me")
         st.error("😕 User not known or password incorrect")
         return False
     else:
         # Password correct.
+        st.button("Click me")
         return True
 
-if check_password():
-    st.write("Here goes your normal Streamlit app...")
-    st.button("Click me")
-    
-    if st.button==True:
-        st.title("Sezione Personale Sanitario")
+if check_password(): 
+    st.markdown("Sezione dedicata agli specialisti di medicina generale per visionar andamento Poliambulatorio")
