@@ -63,13 +63,14 @@ with form:
     cols = st.columns(2)
     date = cols[0].date_input("Bug date occurrence:")
     bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
+    datetime_object = datetime.datetime.now()
     submitted = st.form_submit_button(label="Submit")
 
 
 if submitted:
     add_row_to_gsheet(
         gsheet_connector,
-        [[author, bug_type, comment, str(date), bug_severity]],
+        [[author, bug_type, comment, str(date), bug_severity, str(datetime_object)]],
     )
     st.success("Thanks! Your bug was recorded.")
     st.balloons()
