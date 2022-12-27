@@ -166,5 +166,5 @@ with form:
         with a:
             st.write("CUSTOMER SATISFACTION: 80")
         with b:
-            st.write("NUMERO REPORT FATTI: ",df_new)
+            st.write("NUMERO REPORT FATTI: ",8)
         st.balloons()
