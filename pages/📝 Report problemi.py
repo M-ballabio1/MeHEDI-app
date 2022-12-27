@@ -40,22 +40,6 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector) -> pd.DataFrame:
-    values = (
-        gsheet_connector.values()
-        .get(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
-        )
-        .execute()
-    )
-
-    df = pd.DataFrame(values["values"])
-    df.columns = df.iloc[0]
-    df = df[1:]
-    return df
-
-
 def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
@@ -64,23 +48,11 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
         valueInputOption="USER_ENTERED",
     ).execute()
 
-
-st.set_page_config(page_title="Bug report")
-
 st.title("Bug report!")
 
 gsheet_connector = connect_to_gsheet()
 
-st.sidebar.write(
-    f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
-)
-
-st.sidebar.write(
-    f"[Read more](https://docs.streamlit.io/knowledge-base/tutorials/databases/public-gsheet) about connecting your Streamlit app to Google Sheets."
-)
-
 form = st.form(key="annotation")
-
 with form:
     cols = st.columns((1, 1))
     author = cols[0].text_input("Report author:")
@@ -101,8 +73,3 @@ if submitted:
     )
     st.success("Thanks! Your bug was recorded.")
     st.balloons()
-
-expander = st.expander("See all records")
-with expander:
-    st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector))
