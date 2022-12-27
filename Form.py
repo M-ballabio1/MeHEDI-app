@@ -78,23 +78,14 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 # impostazione grafica iniziale
 st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 
-t1, t2 = st.columns((0.10,1)) 
+t1, t2 = st.columns((0.20,1)) 
 
 t1.image(image, width = 150)
 t2.title("MedTech Hospital Experience Dashboard - MedMIB Hospital")
 t2.markdown("### This section shows some information about MeHEDI - Tool of Patient Satisfaction")
 
 #append pages
-st.sidebar.success("Select a page above.")
-
-if "my_input" not in st.session_state:
-    st.session_state["my_input"] = ""
-
-my_input = st.text_input("Input a text here", st.session_state["my_input"])
-submit = st.button("Submit")
-if submit:
-    st.session_state["my_input"] = my_input
-    st.write("You have entered: ", my_input)
+#st.sidebar.success("Select a page above.")
 
 # connect and append data
 df = connect_to_gsheet()
