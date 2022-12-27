@@ -28,7 +28,7 @@ def check_password():
         st.text_input(
             "Password", type="password", on_change=password_entered, key="password"
         )
-        st.button("Click me")
+        st.write("Click enter to log")
         return False
     elif not st.session_state["password_correct"]:
         # Password not correct, show input + error.
@@ -36,13 +36,26 @@ def check_password():
         st.text_input(
             "Password", type="password", on_change=password_entered, key="password"
         )
-        st.button("Click me")
+        st.write("Click enter to log")
         st.error("😕 User not known or password incorrect")
         return False
     else:
-        # Password correct.
-        st.button("Click me")
+        # Password correct
         return True
 
 if check_password(): 
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionar andamento Poliambulatorio")
+    
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.header("A cat")
+        st.image("https://static.streamlit.io/examples/cat.jpg")
+
+    with col2:
+        st.header("A dog")
+        st.image("https://static.streamlit.io/examples/dog.jpg")
+
+    with col3:
+        st.header("An owl")
+        st.image("https://static.streamlit.io/examples/owl.jpg")
