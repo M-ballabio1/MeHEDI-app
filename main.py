@@ -149,7 +149,7 @@ with form:
               str(date), infras, proces, sicurezza,
               qualita, pulizia, empatia, info_terapeutiche, str(datetime_object)]])
 
-        df_new=getdata(df)
+        #df_new=getdata(df)
         #soddMean=round(mean(df['Soddisfazione']))
         #marcMean=round(mean(df['Marchio']))
         #engaMean=round(mean(df['Engagment']))
