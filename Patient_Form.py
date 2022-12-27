@@ -156,7 +156,7 @@ with form:
         #soddMean=round(mean(df['Soddisfazione']))
         #marcMean=round(mean(df['Marchio']))
         #engaMean=round(mean(df['Engagment']))
-        prov2=len(df_new)
+        #prov2=len(df_new)
         #CustomSatisf=round((soddMean+marcMean+engaMean)/(3))
         
 
