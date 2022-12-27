@@ -11,6 +11,7 @@ SPREADSHEET_ID = "1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8"
 SHEET_NAME = "Bug_Database"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
+
 @st.experimental_singleton()
 def connect_to_gsheet():
     # Create a connection object.
@@ -63,8 +64,10 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
         valueInputOption="USER_ENTERED",
     ).execute()
 
-st.title("Report problemi")
-st.markdown("Prova")
+
+st.set_page_config(page_title="Bug report")
+
+st.title("Bug report!")
 
 gsheet_connector = connect_to_gsheet()
 
