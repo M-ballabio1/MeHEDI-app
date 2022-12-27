@@ -5,5 +5,3 @@ plotly
 openpyxl
 pillow
 pickle
-streamlit-authenticator
-pathlib
