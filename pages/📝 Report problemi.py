@@ -60,7 +60,7 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 st.title("Report problemi")
 st.markdown("Prova")
 
-#gsheet_connector = connect_to_gsheet()
+gsheet_connector = connect_to_gsheet()
 
 st.sidebar.write(
     f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
