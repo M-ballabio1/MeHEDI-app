@@ -28,5 +28,4 @@ if authentication_status == None:
     st.warning("Please enter your username and password")
 
 if authentication_status:
-
-st.title("Sezione Personale Sanitario")
+    st.title("Sezione Personale Sanitario")
