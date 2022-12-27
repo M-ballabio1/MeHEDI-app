@@ -4,4 +4,4 @@ streamlit==1.13.0
 plotly
 openpyxl
 pillow
-pickle
+streamlit-authenticator
