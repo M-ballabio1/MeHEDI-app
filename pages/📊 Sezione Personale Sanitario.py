@@ -48,6 +48,14 @@ if check_password():
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
     st.dataframe(get_data(df))
     
+    # Content
+    base = alt.Chart(source).properties(height=300)
+
+    bar = base.mark_bar().encode(
+        x=alt.X('Qualità struttura', title='Number of Records'),
+        y=alt.Y('Sicurezza', title='Origin'),
+        color=alt.Color('Origin:N', legend=None)
+    )
     
     col1, col2, col3 = st.columns(3)
 
