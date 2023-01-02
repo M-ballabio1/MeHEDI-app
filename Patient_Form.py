@@ -151,20 +151,4 @@ with form:
         df, [[author, eta, sesso,
               str(date), infras, proces, sicurezza,
               qualita, pulizia, empatia, info_terapeutiche, str(datetime_object)]])
-
-        #df_new=getdata(df)
-        #soddMean=round(mean(df['Soddisfazione']))
-        #marcMean=round(mean(df['Marchio']))
-        #engaMean=round(mean(df['Engagment']))
-        #prov2=len(df_new)
-        #CustomSatisf=round((soddMean+marcMean+engaMean)/(3))
-        
-
-        st.write("## Results analysis")
-        a, b = st.columns(2)
-
-        with a:
-            st.write("CUSTOMER SATISFACTION: 80")
-        with b:
-            st.write("NUMERO REPORT FATTI: ",8)
         st.balloons()
