@@ -48,15 +48,15 @@ if check_password():
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
     st.dataframe(get_data(df))
    
+    c = alt.Chart(df).mark_circle().encode(
+            x='Sesso', y='Sicurezza', size='c', color='c', tooltip=['Maschio', 'Femmina', 'Non specificato'])
+    st.altair_chart(c, use_container_width=True)
+        
     col1, col2, col3 = st.columns(3)
 
     with col1:
         st.header("A cat")
          
-        c = alt.Chart(df).mark_circle().encode(
-            x='Sesso', y='Sicurezza', size='c', color='c', tooltip=['Maschio', 'Femmina', 'Non specificato'])
-
-        st.altair_chart(c, use_container_width=True)
     with col2:
         st.header("A dog")
         st.image("https://static.streamlit.io/examples/dog.jpg")
