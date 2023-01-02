@@ -52,13 +52,11 @@ if check_password():
 
     with col1:
         st.header("A cat")
-         # Content
-        base = alt.Chart(df).properties(height=300)
+         
+        c = alt.Chart(df).mark_circle().encode(
+            x='Sesso', y='Sicurezza', size='c', color='c', tooltip=['Maschio', 'Femmina', 'Non specificato'])
 
-        bar = base.mark_bar().encode(
-            x='Sesso',
-            y='Sicurezza'
-        )
+        st.altair_chart(c, use_container_width=True)
     with col2:
         st.header("A dog")
         st.image("https://static.streamlit.io/examples/dog.jpg")
