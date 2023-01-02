@@ -46,7 +46,7 @@ def check_password():
 
 if check_password(): 
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
-    get_data(df)
+    st.dataframe(get_data(df))
     
     
     col1, col2, col3 = st.columns(3)
