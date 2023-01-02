@@ -56,8 +56,8 @@ if check_password():
         base = alt.Chart(df).properties(height=300)
 
         bar = base.mark_bar().encode(
-            x=('Sesso', title='sesso'),
-            y=('Sicurezza', title='sicurezza'),
+            x='Sesso',
+            y='Sicurezza'
         )
     with col2:
         st.header("A dog")
