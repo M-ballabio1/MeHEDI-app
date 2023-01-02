@@ -49,7 +49,7 @@ if check_password():
     st.dataframe(get_data(df))
    
     c = alt.Chart(df).mark_circle().encode(
-            x='Sesso', y='Sicurezza', tooltip=['Maschio', 'Femmina', 'Non specificato'])
+            x='Sesso', y='Sicurezza')
     st.altair_chart(c, use_container_width=True)
         
     col1, col2, col3 = st.columns(3)
