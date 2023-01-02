@@ -48,11 +48,11 @@ if check_password():
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
     st.dataframe(get_data(df))
     
-    df1=pd.DataFrame(df)
+    #df1=pd.DataFrame(df)
    
-    c = alt.Chart(df1).mark_circle().encode(
-            x='Sesso', y='Sicurezza',)
-    st.altair_chart(c, use_container_width=True)
+    #c = alt.Chart(df1).mark_circle().encode(
+    #        x='Sesso', y='Sicurezza',)
+    #st.altair_chart(c, use_container_width=True)
         
     col1, col2, col3 = st.columns(3)
 
