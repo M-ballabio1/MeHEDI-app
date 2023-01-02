@@ -5,3 +5,4 @@ plotly
 openpyxl
 pillow
 streamlit-authenticator
+altair
