@@ -1,7 +1,7 @@
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
 import streamlit as st  # pip install streamlit
-
+import altair as alt
 
 st.title("Sezione Personale Sanitario")
 
@@ -44,7 +44,9 @@ def check_password():
         return True
 
 if check_password(): 
-    st.markdown("Sezione dedicata agli specialisti di medicina generale per visionar andamento Poliambulatorio")
+    st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
+    
+    
     
     col1, col2, col3 = st.columns(3)
 
