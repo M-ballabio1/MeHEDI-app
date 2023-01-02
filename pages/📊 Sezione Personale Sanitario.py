@@ -49,7 +49,7 @@ if check_password():
     st.dataframe(get_data(df))
     
     # Content
-    base = alt.Chart(source).properties(height=300)
+    base = alt.Chart(df).properties(height=300)
 
     bar = base.mark_bar().encode(
         x=alt.X('Qualità struttura', title='Number of Records'),
