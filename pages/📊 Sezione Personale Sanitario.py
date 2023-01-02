@@ -47,8 +47,10 @@ def check_password():
 if check_password(): 
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
     st.dataframe(get_data(df))
+    
+    df1=pd.DataFrame(df)
    
-    c = alt.Chart(df).mark_circle().encode(
+    c = alt.Chart(df1).mark_circle().encode(
             x='Sesso', y='Sicurezza',)
     st.altair_chart(c, use_container_width=True)
         
