@@ -99,7 +99,7 @@ name, authentication_status, username = authenticator.login("Login - Web applica
 page_bg_img = f"""
     <style>
     [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=2000");
+    background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-116875.jpg?w=2000");
     background-size: 100%;
     background-position: top right;
     background-repeat: no-repeat;
