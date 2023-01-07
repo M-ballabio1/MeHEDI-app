@@ -20,6 +20,8 @@ from googleapiclient.http import HttpRequest
 
 
 image = Image.open('images/Medical_Logo.png')
+img = Image.open('images/background.jpg')
+
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8"
 SHEET_NAME = "Database"
