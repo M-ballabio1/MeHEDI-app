@@ -2,7 +2,7 @@ import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
 import streamlit as st  # pip install streamlit
 import altair as alt
-from Patient_Form import df, get_data
+#from Patient_Form import df, get_data
 
 st.title("Sezione Personale Sanitario")
 
@@ -46,7 +46,7 @@ def check_password():
 
 if check_password(): 
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
-    st.dataframe(get_data(df))
+    #st.dataframe(get_data(df))
     
     #df1=pd.DataFrame(df)
    
