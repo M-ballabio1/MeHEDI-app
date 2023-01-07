@@ -99,7 +99,7 @@ name, authentication_status, username = authenticator.login("Login - Web applica
 page_bg_img = f"""
     <style>
     [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://i.pinimg.com/originals/21/ff/db/21ffdb6b76b0c0f41fa02b227894bb73.jpg");
+    background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=2000");
     background-size: 190%;
     background-position: top left;
     background-repeat: no-repeat;
@@ -128,7 +128,7 @@ if authentication_status == None:
     st.warning("Please enter your username and password")
     st.write('<base target="_blank">', unsafe_allow_html=True)
     prev_time = [time.time()]
-    a, b = st.columns([1, 10])
+    a, b = st.columns([2, 10])
     with a:
         st.image(image, width=175)      
     with b:
