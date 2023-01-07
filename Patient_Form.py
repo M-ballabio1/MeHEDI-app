@@ -101,7 +101,7 @@ page_bg_img = f"""
     [data-testid="stAppViewContainer"] > .main {{
     background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=2000");
     background-size: 100%;
-    background-position: top left;
+    background-position: top right;
     background-repeat: no-repeat;
     background-attachment: local;
     }}
