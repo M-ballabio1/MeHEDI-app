@@ -217,12 +217,12 @@ if authentication_status:
                       qualita, pulizia, empatia, info_terapeutiche, str(datetime_object)]])
                 st.balloons()
                 
-    if name=="Matteo Ballabio":
+    if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti,
             "Bug Report": bug_report,
             "Dashboard": dashboard_patient_satisf}
-    elif name=="Antonio Di Pasquale":
+    elif name=="Gentile paziente":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti}
 
