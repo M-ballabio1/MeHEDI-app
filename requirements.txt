@@ -6,3 +6,4 @@ openpyxl
 pillow
 streamlit-authenticator
 altair
+deta
