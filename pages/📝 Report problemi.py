@@ -49,9 +49,10 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
         valueInputOption="USER_ENTERED",
     ).execute()
 
-st.title("Bug report!")
+
 
 def bug_report():
+    st.title("Bug report!")
     gsheet_connector = connect_to_gsheet()
 
     form = st.form(key="annotation")
