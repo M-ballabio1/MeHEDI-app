@@ -226,7 +226,7 @@ if authentication_status:
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti}
 
-    selected_page = st.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
+    selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
     
     page_bg_img = f"""
@@ -253,3 +253,18 @@ if authentication_status:
     </style>
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
+    st.sidebar.info(
+        """
+        Questa è una webapp creata da che consente di valutare la Patient Satisfaction
+        
+        Web App URL: <https://xxx.streamlitapp.com>
+        """
+    )
+
+    st.sidebar.title("Support")
+    st.sidebar.info(
+        """
+        Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
+        """
+    )
+    st.sidebar.image(image, width=70)
