@@ -1,10 +1,10 @@
 import os
 from deta import Deta  # pip install deta
-from dotenv import load_dotenv  # pip install python-dotenv
+#from dotenv import load_dotenv  # pip install python-dotenv
 
 
 # Load the environment variables
-load_dotenv(".env")
+#load_dotenv(".env")
 DETA_KEY = "a0w6uut8_foJPGGyBzv236A6RoFFiUea7EcESm9oG"
 
 # Initialize with a project key
