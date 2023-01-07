@@ -94,7 +94,7 @@ hashed_passwords = [user["password"] for user in users]
 
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     "sales_dashboard", "abcdef", cookie_expiry_days=30)
-name, authentication_status, username = authenticator.login("Login - Web application Customer Satisfaction CX", "main")
+name, authentication_status, username = authenticator.login("Login - Web application MEHEDI Patient's satisfaction", "main")
 
 page_bg_img = f"""
     <style>
