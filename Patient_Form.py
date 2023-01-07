@@ -267,4 +267,4 @@ if authentication_status:
         Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
         """
     )
-    st.sidebar.image(image, width=70)
+    st.sidebar.image(image, width=100)
