@@ -18,7 +18,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 
-from apps.bug import bug_fun
+from apps.ReportProblemi import bug_report
 from apps.dashboard import dashboard_fun
 
 image = Image.open('images/Medical_Logo.png')
@@ -195,8 +195,8 @@ if authentication_status:
     if name=="Matteo Ballabio":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti,
-            "Bug Report": bug_fun,
-            "Dashboard": dashboard_fun}
+            "Bug Report": bug_report,
+            "Dashboard": dashboard_patient_satisf}
     elif name=="Antonio Di Pasquale":
         page_names_to_funcs = {
             "Form Customer Satisfaction": form_pazienti}
