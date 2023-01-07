@@ -19,7 +19,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 
 from pages.Report_problemi import bug_report
-from pages.dashboard import dashboard_patient_satisf
+from pages.Dashboard import dashboard_patient_satisf
 
 image = Image.open('images/Medical_Logo.png')
 img = Image.open('images/background.jpg')
