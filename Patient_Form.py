@@ -8,6 +8,7 @@ from statistics import mean
 import datetime
 import database as db
 import streamlit_authenticator as stauth
+import base64
 
 import google_auth_httplib2
 import httplib2
@@ -125,7 +126,7 @@ if authentication_status == None:
     prev_time = [time.time()]
     a, b = st.columns([1, 10])
     with a:
-        st.image(image1, width=175)      
+        st.image(image, width=175)      
     with b:
         st.text("")  
 
