@@ -224,16 +224,15 @@ if authentication_status:
             "Dashboard": dashboard_patient_satisf}
     elif name=="Antonio Di Pasquale":
         page_names_to_funcs = {
-            "Form Customer Satisfaction": form_pazienti}
+            "Form Patient Satisfaction": form_pazienti}
 
-    selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
+    selected_page = st.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
-
-    st.sidebar.title("About")
+    
     page_bg_img = f"""
     <style>
     [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://www.xmple.com/wallpaper/gradient-linear-orange-grey-1920x1080-c2-dcdcdc-ff8c00-a-180-f-14.svg");
+    background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-116875.jpg?w=2000");
     background-size: 190%;
     background-position: top left;
     background-repeat: no-repeat;
@@ -254,19 +253,3 @@ if authentication_status:
     </style>
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
-    st.sidebar.info(
-        """
-        Questa è una webapp creata da Pwc Italy che consente di valutare Customer Satisfaction dei tool
-        offerti al cliente Rossi.Spa.
-        
-        Web App URL: <https://xxx.streamlitapp.com>
-        """
-    )
-
-    st.sidebar.title("Support")
-    st.sidebar.info(
-        """
-        Per eventuali problemi nell'utilizzo app rivolgersi a: DIG-CoE Pwc Italy
-        """
-    )
-    st.sidebar.image(image1, width=70)
