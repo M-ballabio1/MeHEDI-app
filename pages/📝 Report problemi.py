@@ -51,27 +51,27 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 
 st.title("Bug report!")
 
-gsheet_connector = connect_to_gsheet()
+def bug_report():
+    gsheet_connector = connect_to_gsheet()
 
-form = st.form(key="annotation")
-with form:
-    cols = st.columns((1, 1))
-    author = cols[0].text_input("Report author:")
-    bug_type = cols[1].selectbox(
-        "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
-    )
-    comment = st.text_area("Comment:")
-    cols = st.columns(2)
-    date = cols[0].date_input("Bug date occurrence:")
-    bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
-    datetime_object = datetime.datetime.now()
-    submitted = st.form_submit_button(label="Submit")
+    form = st.form(key="annotation")
+    with form:
+        cols = st.columns((1, 1))
+        author = cols[0].text_input("Report author:")
+        bug_type = cols[1].selectbox(
+            "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
+        )
+        comment = st.text_area("Comment:")
+        cols = st.columns(2)
+        date = cols[0].date_input("Bug date occurrence:")
+        bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
+        datetime_object = datetime.datetime.now()
+        submitted = st.form_submit_button(label="Submit")
 
-
-if submitted:
-    add_row_to_gsheet(
-        gsheet_connector,
-        [[author, bug_type, comment, str(date), bug_severity, str(datetime_object)]],
-    )
-    st.success("Thanks! Your bug was recorded.")
-    st.balloons()
+    if submitted:
+        add_row_to_gsheet(
+            gsheet_connector,
+            [[author, bug_type, comment, str(date), bug_severity, str(datetime_object)]],
+        )
+        st.success("Thanks! Your bug was recorded.")
+        st.balloons()
