@@ -5,13 +5,13 @@ from deta import Deta  # pip install deta
 
 # Load the environment variables
 #load_dotenv(".env")
-DETA_KEY = "a0w6uut8_foJPGGyBzv236A6RoFFiUea7EcESm9oG"
+DETA_KEY = "a0slxdit_WqXwNKB9MYqBfFLqeNVQyaBnbRwYs1Kr"
 
 # Initialize with a project key
 deta = Deta(DETA_KEY)
 
 # This is how to create/connect a database
-db = deta.Base("users_cx_db")
+db = deta.Base("users_mehedi_db")
 
 
 def insert_user(username, name, password):
