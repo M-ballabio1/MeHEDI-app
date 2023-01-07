@@ -21,7 +21,7 @@ from googleapiclient.http import HttpRequest
 from utils.Report_problemi import bug_report
 from utils.Dashboard import dashboard_patient_satisf
 
-image = Image.open('images/Medical_Logo.png')
+image = Image.open('images/Medical_Logo-no_back.png')
 img = Image.open('images/background.jpg')
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
