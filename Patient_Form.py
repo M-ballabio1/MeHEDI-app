@@ -232,7 +232,7 @@ if authentication_status:
     page_bg_img = f"""
     <style>
     [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://i.pinimg.com/736x/1a/ee/5c/1aee5c344846f449350feae457ea350e.jpg");
+    background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-116875.jpg?w=2000");
     background-size: 160%;
     background-position: top left;
     background-repeat: no-repeat;
