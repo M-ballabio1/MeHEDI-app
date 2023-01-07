@@ -7,3 +7,4 @@ pillow
 streamlit-authenticator
 altair
 deta
+dotenv
