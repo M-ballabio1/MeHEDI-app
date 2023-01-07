@@ -18,8 +18,8 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 
-from pages.Report_problemi import bug_report
-from pages.Dashboard import dashboard_patient_satisf
+from utils.Report_problemi import bug_report
+from utils.Dashboard import dashboard_patient_satisf
 
 image = Image.open('images/Medical_Logo.png')
 img = Image.open('images/background.jpg')
