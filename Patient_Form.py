@@ -96,6 +96,31 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     "sales_dashboard", "abcdef", cookie_expiry_days=30)
 name, authentication_status, username = authenticator.login("Login - Web application Customer Satisfaction CX", "main")
 
+page_bg_img = f"""
+    <style>
+    [data-testid="stAppViewContainer"] > .main {{
+    background-image: url("https://i.pinimg.com/originals/21/ff/db/21ffdb6b76b0c0f41fa02b227894bb73.jpg");
+    background-size: 190%;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    }}
+    [data-testid="stSidebar"] > div:first-child {{
+    background-image: url("data:image/png;base64,{img}");
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    }}
+    [data-testid="stHeader"] {{
+    background: rgba(0,0,0,0);
+    }}
+    [data-testid="stToolbar"] {{
+    right: 2rem;
+    }}
+    </style>
+    """
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 if authentication_status == False:
     st.error("Username/password is incorrect")
 
