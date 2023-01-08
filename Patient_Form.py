@@ -233,7 +233,7 @@ if authentication_status:
     <style>
     [data-testid="stAppViewContainer"] > .main {{
     background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-116875.jpg?w=2000");
-    background-size: 160%;
+    background-size: 250%;
     background-position: top left;
     background-repeat: no-repeat;
     background-attachment: local;
