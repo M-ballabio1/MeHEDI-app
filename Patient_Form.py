@@ -125,12 +125,11 @@ if authentication_status == False:
     st.error("Username/password is incorrect")
 
 if authentication_status == None:
-    st.warning("Please enter your username and password")
     st.write('<base target="_blank">', unsafe_allow_html=True)
     prev_time = [time.time()]
-    a, b = st.columns([2, 10])
+    a, b = st.columns([1, 10])
     with a:
-        st.image(image, width=400)      
+        st.image(image, width=500)      
     with b:
         st.text("")  
 
