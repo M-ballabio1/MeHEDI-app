@@ -130,7 +130,7 @@ if authentication_status == None:
     prev_time = [time.time()]
     a, b = st.columns([2, 10])
     with a:
-        st.image(image, width=225)      
+        st.image(image, width=400)      
     with b:
         st.text("")  
 
