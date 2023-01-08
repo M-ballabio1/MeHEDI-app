@@ -96,31 +96,6 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     "sales_dashboard", "abcdef", cookie_expiry_days=30)
 name, authentication_status, username = authenticator.login("Login - Web application MEHEDI Patient's satisfaction", "main")
 
-page_bg_img = f"""
-    <style>
-    [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://www.solidbackgrounds.com/images/1920x1080/1920x1080-light-green-solid-color-background.jpg");
-    background-size: 550%;
-    background-position: top right;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    }}
-    [data-testid="stSidebar"] > div:first-child {{
-    background-image: url("data:image/png;base64,{img}");
-    background-position: center; 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    }}
-    [data-testid="stHeader"] {{
-    background: rgba(0,0,0,0);
-    }}
-    [data-testid="stToolbar"] {{
-    right: 2rem;
-    }}
-    </style>
-    """
-st.markdown(page_bg_img, unsafe_allow_html=True)
-
 if authentication_status == False:
     st.error("Username/password is incorrect")
 
