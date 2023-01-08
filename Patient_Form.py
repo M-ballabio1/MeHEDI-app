@@ -233,7 +233,7 @@ if authentication_status:
     <style>
     [data-testid="stAppViewContainer"] > .main {{
     background-image: url("https://www.xmple.com/wallpaper/one-colour-plain-green-solid-color-single-1920x1080-c-e0f4e4-f-24.svg");
-    background-size: 550%;
+    background-size: 5500%;
     background-position: top left;
     background-repeat: no-repeat;
     background-attachment: local;
