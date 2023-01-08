@@ -104,7 +104,7 @@ if authentication_status == None:
     prev_time = [time.time()]
     a, b = st.columns([1, 10])
     with a:
-        st.image(image, width=500)      
+        st.image(image, width=400)      
     with b:
         st.text("")  
 
@@ -120,7 +120,7 @@ if authentication_status:
 
         t1.title("MedTech Hospital Experience Dashboard - MedMIB Hospital")
         t1.markdown("### This section shows some information about MeHEDI - Tool of Patient Satisfaction")
-        t2.image(image, width = 150)
+        t2.image(image, width = 250)
 
         #append pages
         #st.sidebar.success("Select a page above.")
@@ -202,31 +202,7 @@ if authentication_status:
 
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
-    
-    page_bg_img = f"""
-    <style>
-    [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://www.xmple.com/wallpaper/one-colour-plain-green-solid-color-single-1920x1080-c-e0f4e4-f-24.svg");
-    background-size: 5500%;
-    background-position: top left;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    }}
-    [data-testid="stSidebar"] > div:first-child {{
-    background-image: url("data:image/png;base64,{img}");
-    background-position: center; 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    }}
-    [data-testid="stHeader"] {{
-    background: rgba(0,0,0,0);
-    }}
-    [data-testid="stToolbar"] {{
-    right: 2rem;
-    }}
-    </style>
-    """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+   
     st.sidebar.info(
         """
         Questa è una webapp creata da che consente di valutare la Patient Satisfaction
@@ -241,4 +217,4 @@ if authentication_status:
         Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
         """
     )
-    st.sidebar.image(image, width=100)
+    st.sidebar.image(image, width=150)
