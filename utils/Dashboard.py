@@ -16,8 +16,8 @@ def dashboard_patient_satisf():
     #        x='Sesso', y='Sicurezza',)
     #st.altair_chart(c, use_container_width=True)
     
-    with open('ui/style.css')as f:
-        st.markdown("<style>{f.read()}</style>", unsafe_allow_html = True)
+    #with open('ui/style.css')as f:
+     #   st.markdown("<style>{f.read()}</style>", unsafe_allow_html = True)
     
     g1, g2, g3 = st.columns(3)
     g1.metric(label = "Safety", value = ("96 %"),)
