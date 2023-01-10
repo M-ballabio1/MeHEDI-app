@@ -112,6 +112,7 @@ if authentication_status == None:
         Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.
         
         ACCESSO PAZIENTE - username: guest | password: paz123
+        
         ACCESSO MANAGEMENT - username: mballabio | password: mat123
         """
     ) 
