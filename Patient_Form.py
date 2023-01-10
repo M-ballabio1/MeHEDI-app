@@ -103,7 +103,7 @@ if authentication_status == False:
 if authentication_status == None:
     st.write('<base target="_blank">', unsafe_allow_html=True)
     prev_time = [time.time()]
-    a, b = st.columns([1, 5])
+    a, b = st.columns([1, 1])
     with a:
         st.image(image, width=400)      
     with b:
