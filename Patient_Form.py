@@ -107,7 +107,7 @@ if authentication_status == None:
     with a:
         st.image(image, width=400)      
     with b:
-        st.sidebar.info(
+        st.info(
         """
         Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.
         
