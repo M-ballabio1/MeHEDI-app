@@ -111,13 +111,8 @@ if authentication_status == None:
         st.text("")  
 
 if authentication_status:
-    #placeholder.empty()
-
-    # ---- SIDEBAR ----
-    f1, f2, f3 = st.columns((1, 0.85, 0.15))
-    f1.authenticator.logout("Logout", "main")
-    f2.sidebar.title(f"Welcome {name}")
     
+    authenticator.logout("Logout", "main")   
     def form_pazienti():
         t1, t2 = st.columns((1, 0.15)) 
 
@@ -216,6 +211,9 @@ if authentication_status:
     elif name=="Gentile paziente":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti}
-
-    selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
+    
+    f1, f2, f3 = st.columns((1, 0.85, 0.15))
+    f1.title(f"Welcome {name}")
+    selected_page = f2.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
+    f3.markdown("")
