@@ -111,8 +111,12 @@ if authentication_status == None:
         st.text("")  
 
 if authentication_status:
+    #placeholder.empty()
+
+    # ---- SIDEBAR ----
+    authenticator.logout("Logout", "sidebar")
+    st.sidebar.title(f"Welcome {name}")
     
-    authenticator.logout("Logout", "main")   
     def form_pazienti():
         t1, t2 = st.columns((1, 0.15)) 
 
@@ -149,20 +153,6 @@ if authentication_status:
                 """
             )
             st.markdown("")
-            st.info(
-            """
-            Questa è una webapp creata da che consente di valutare la Patient Satisfaction
-
-            Web App URL: <https://xxx.streamlitapp.com>
-            """
-            )
-
-            st.title("Support")
-            st.info(
-            """
-            Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
-            """
-            )
             #st.image(image)
         st.write("")
 
@@ -211,9 +201,22 @@ if authentication_status:
     elif name=="Gentile paziente":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti}
-    
-    f1, f2, f3 = st.columns((1, 0.85, 0.15))
-    f1.markdown(f"Welcome {name}")
-    selected_page = f2.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
+
+    selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
-    f3.markdown("")
+   
+    st.sidebar.info(
+        """
+        Questa è una webapp creata da che consente di valutare la Patient Satisfaction
+        
+        Web App URL: <https://xxx.streamlitapp.com>
+        """
+    )
+
+    st.sidebar.title("Support")
+    st.sidebar.info(
+        """
+        Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
+        """
+    )
+    st.sidebar.image(image, width=150)
