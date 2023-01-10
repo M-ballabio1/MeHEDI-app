@@ -87,7 +87,6 @@ st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 
 # --- USER AUTHENTICATION ---
 
-st.header("MEHEDI web-application")
 users = db.fetch_all_users()
 
 usernames = [user["key"] for user in users]
@@ -102,6 +101,7 @@ if authentication_status == False:
     st.error("Username/password is incorrect")
 
 if authentication_status == None:
+    st.header("MEHEDI web-application")
     st.write('<base target="_blank">', unsafe_allow_html=True)
     prev_time = [time.time()]
     a, b = st.columns([1, 10])
@@ -213,7 +213,7 @@ if authentication_status:
             "Form Patient Satisfaction": form_pazienti}
     
     f1, f2, f3 = st.columns((1, 0.85, 0.15))
-    f1.title(f"Welcome {name}")
+    f1.markdown(f"Welcome {name}")
     selected_page = f2.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
     f3.markdown("")
