@@ -4,6 +4,7 @@ import streamlit as st  # pip install streamlit
 import altair as alt
 #from Patient_Form import df, get_data
 
+
 def dashboard_patient_satisf():
     st.title("Sezione Personale Sanitario")
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
@@ -14,6 +15,22 @@ def dashboard_patient_satisf():
     #c = alt.Chart(df1).mark_circle().encode(
     #        x='Sesso', y='Sicurezza',)
     #st.altair_chart(c, use_container_width=True)
+    
+    with open('ui/style.css')as f:
+        st.markdown(f”<style>{f.read()}</style>”, unsafe_allow_html = True)
+    
+    g1, g2, g3 = st.columns(3)
+    g1.metric(label = “Safety”,
+    value = (96 %),
+    )
+    g2.metric(label = “Drugs treatment cost”,
+     value = (500.230 €),
+     delta = 210€)
+    )
+    col3.metric(label = “Accessi giornalieri”,
+     value = (150),
+     delta = 12)
+    )
 
     col1, col2 = st.columns(2)
 
