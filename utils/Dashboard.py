@@ -23,7 +23,7 @@ def dashboard_patient_satisf():
     g1.metric(label = "Safety", value = ("96 %"),)
     g2.metric(label = "Drugs treatment cost",
     value = ("500.230 €"),
-    delta = 210€))
+    delta = "210€"))
     g3.metric(label = "Accessi giornalieri",
     value = ("150"),
     delta = "12"))
