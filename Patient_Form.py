@@ -101,14 +101,20 @@ if authentication_status == False:
     st.error("Username/password is incorrect")
 
 if authentication_status == None:
-    st.header("MEHEDI web-application")
     st.write('<base target="_blank">', unsafe_allow_html=True)
     prev_time = [time.time()]
     a, b = st.columns([1, 10])
     with a:
         st.image(image, width=400)      
     with b:
-        st.text("")  
+        st.sidebar.info(
+        """
+        Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.
+        
+        ACCESSO PAZIENTE - username: guest | password: paz123
+        ACCESSO MANAGEMENT - username: mballabio | password: mat123
+        """
+    ) 
 
 if authentication_status:
     #placeholder.empty()
