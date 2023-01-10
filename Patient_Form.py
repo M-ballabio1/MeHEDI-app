@@ -86,6 +86,8 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 
 # --- USER AUTHENTICATION ---
+
+st.header("MEHEDI web-application")
 users = db.fetch_all_users()
 
 usernames = [user["key"] for user in users]
