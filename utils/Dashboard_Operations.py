@@ -57,7 +57,6 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     return df
 
 df_operations=connect_to_gsheet()
-df_operations=pd.DataFrame(df_operations)
 
 def dashboard_operations():
     
