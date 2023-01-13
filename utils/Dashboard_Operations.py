@@ -7,7 +7,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 
-from Paziente_Form.form import df
+from Pazient_From import form_pazienti
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8"
@@ -56,13 +56,12 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     df = df[1:]
     return df
 
+df_operations=connect_to_gsheet()
 
 def dashboard_operations():
     
     st.title("Dashboard MedTech Operations")
-    df = connect_to_gsheet()
-    
-    st.dataframe(get_data(gsheet_connector))
+    st.dataframe(get_data(df_operations))
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
