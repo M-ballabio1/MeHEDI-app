@@ -58,7 +58,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 
 df_operations=connect_to_gsheet()
 
-def dashboard_operations():
+def dashboard_economics():
     
     st.title("Dashboard MedTech Economics")
     expander = st.expander("See all records")
