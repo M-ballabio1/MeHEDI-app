@@ -17,16 +17,16 @@ def dashboard_patient_satisf():
     #st.altair_chart(c, use_container_width=True)
     
     #with open('ui/style.css')as f:
-     #   st.markdown("<style>{f.read()}</style>", unsafe_allow_html = True)
+    #   st.markdown("<style>{f.read()}</style>", unsafe_allow_html = True)
     
     g1, g2, g3 = st.columns(3)
-    g1.metric(label = "Safety", value = ("96 %"),)
-    g2.metric(label = "Drugs treatment cost",
-    value = ("500.230 €"),
-    delta = ("210€"))
-    g3.metric(label = "Accessi giornalieri",
-    value = ("150"),
-    delta = ("12"))
+    g1.metric(label = "Patient Experience", value = ("91 %"),)
+    g2.metric(label = "Safety Medical Center",
+    value = ("88%"),
+    delta = ("+6"))
+    g3.metric(label = "Empatia personale",
+    value = ("76%"),
+    delta = ("-5%"))
 
     col1, col2 = st.columns(2)
 
