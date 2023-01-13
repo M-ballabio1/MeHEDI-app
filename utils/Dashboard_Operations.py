@@ -53,6 +53,24 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 
 def dashboard_operations():
     st.title("Dashboard MedTech Operations")
-    gsheet_connector = connect_to_gsheet()
+    df = connect_to_gsheet()
     
-    df=pd
+    st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
+    
+
+    cols = st.columns(2)
+    sessoFil = cols[0].sidebar.multiselect(
+        "Select the type of Annotation:",
+        options=df["Sesso"].unique(),
+        default=df["Sesso"].unique()
+    )
+
+    cateFil = cols[1].sidebar.multiselect(
+        "Seleziona il livello di marchio:",
+        options=df["Categoria Visita"].unique(),
+        default=df["Categoria Visita"].unique()
+    )
+
+    df_selection = df.query(
+        "Sesso == @SessoFil & Categoria Visita == @cateFil"
+    )
