@@ -6,7 +6,7 @@ import altair as alt
 
 
 def dashboard_patient_satisf():
-    st.title("Sezione Personale Sanitario")
+    st.title("Dashboard Patient Satisfaction")
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
     #st.dataframe(get_data(df))
 
@@ -23,7 +23,7 @@ def dashboard_patient_satisf():
     g1.metric(label = "Patient Experience", value = ("91 %"),)
     g2.metric(label = "Safety Medical Center",
     value = ("88%"),
-    delta = ("+6"))
+    delta = ("+6%"))
     g3.metric(label = "Empatia personale",
     value = ("76%"),
     delta = ("-5%"))
