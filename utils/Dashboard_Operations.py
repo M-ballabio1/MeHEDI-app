@@ -68,20 +68,22 @@ def dashboard_operations():
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
+    g1, g2, g3 = st.columns(3)
+    g1.metric(label = "Safety", value = ("96 %"),)
+    g2.metric(label = "Drugs treatment cost",
+    value = ("500.230 €"),
+    delta = ("210€"))
+    g3.metric(label = "Accessi giornalieri",
+    value = ("150"),
+    delta = ("12"))
 
-    cols = st.columns(2)
-    sessoFil = cols[0].multiselect(
-        "Select the type of Annotation:",
-        options=df_operations["Sesso"].unique(),
-        default=df_operations["Sesso"].unique()
-    )
+    col1, col2 = st.columns(2)
 
-    cateFil = cols[1].multiselect(
-        "Seleziona il livello di marchio:",
-        options=df_operations["Categoria Visita"].unique(),
-        default=df_operations["Categoria Visita"].unique()
-    )
+    with col1:
+        st.header("Patient satisfaction")
+        st.image("https://www.datapine.com/images/patient-satisfaction-dashboard.png")
 
-    df_selection = df.query(
-        "Sesso == @SessoFil & Categoria Visita == @cateFil"
-    )
+    with col2:
+        st.header("Health data")
+        st.image("https://www.datapine.com/images/hospital-kpi-dashboard.png")
+    
