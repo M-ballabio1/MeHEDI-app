@@ -40,6 +40,20 @@ def connect_to_gsheet():
     gsheet_connector = service.spreadsheets()
     return gsheet_connector
 
+def get_data(gsheet_connector) -> pd.DataFrame:
+    values = (
+        gsheet_connector.values()
+        .get(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME}!A:E",
+        )
+        .execute()
+    )
+
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    return df
 
 def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
@@ -54,6 +68,8 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 def dashboard_operations():
     st.title("Dashboard MedTech Operations")
     df = connect_to_gsheet()
+    
+    get_data(df)
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
