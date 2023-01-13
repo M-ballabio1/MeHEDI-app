@@ -57,6 +57,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     return df
 
 df_operations=connect_to_gsheet()
+df_operations=pd.DataFrame(data=df_operations)
 
 def dashboard_operations():
     
@@ -86,4 +87,6 @@ def dashboard_operations():
     with col2:
         st.header("Health data")
         st.image("https://www.datapine.com/images/hospital-kpi-dashboard.png")
+    
+    st.write(df_operations["Incassato trattamento"].mean)
     
