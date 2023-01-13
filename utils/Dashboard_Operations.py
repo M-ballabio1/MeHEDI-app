@@ -59,13 +59,13 @@ def dashboard_operations():
     
 
     cols = st.columns(2)
-    sessoFil = cols[0].sidebar.multiselect(
+    sessoFil = cols[0].multiselect(
         "Select the type of Annotation:",
         options=df["Sesso"].unique(),
         default=df["Sesso"].unique()
     )
 
-    cateFil = cols[1].sidebar.multiselect(
+    cateFil = cols[1].multiselect(
         "Seleziona il livello di marchio:",
         options=df["Categoria Visita"].unique(),
         default=df["Categoria Visita"].unique()
