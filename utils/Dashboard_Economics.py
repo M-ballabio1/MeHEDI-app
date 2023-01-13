@@ -77,8 +77,8 @@ def dashboard_economics():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.header("Patient satisfaction")
-        st.image("https://www.datapine.com/images/patient-satisfaction-dashboard.png")
+        st.header("Economics")
+        st.image("https://www.slideteam.net/media/catalog/product/cache/1280x720/d/a/dashboard_depicting_hospital_kpi_with_treatment_costs_slide01.jpg")
 
     with col2:
         st.header("Health data")
