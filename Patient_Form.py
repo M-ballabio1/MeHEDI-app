@@ -20,7 +20,7 @@ from googleapiclient.http import HttpRequest
 
 from utils.Dashboard_Operations import dashboard_operations
 from utils.Dashboard import dashboard_patient_satisf
-from utils.Dashboard import dashboard_economics
+from utils.Dashboard_Economics import dashboard_economics
 
 image = Image.open('images/Medical_Logo-no_back.png')
 img = Image.open('images/background.jpg')
