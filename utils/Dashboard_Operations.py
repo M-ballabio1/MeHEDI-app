@@ -69,7 +69,7 @@ def dashboard_operations():
     st.title("Dashboard MedTech Operations")
     df = connect_to_gsheet()
     
-    get_data(df)
+    st.dataframe(get_data(gsheet_connector))
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
