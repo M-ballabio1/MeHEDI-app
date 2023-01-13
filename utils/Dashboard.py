@@ -32,8 +32,8 @@ def dashboard_patient_satisf():
 
     with col1:
         st.header("Patient satisfaction")
-        st.image("https://www.datapine.com/images/patient-satisfaction-dashboard.png")
+        st.image("https://www.healthcareitnews.com/sites/hitn/files/Stanford%20dashboard-HITN.png")
 
     with col2:
         st.header("Health data")
-        st.image("https://www.datapine.com/images/hospital-kpi-dashboard.png")
+        st.image("https://www.slideteam.net/media/catalog/product/cache/1280x720/p/a/patient_satisfaction_measurement_dashboard_service_ppt_show_vector_slide01.jpg")
