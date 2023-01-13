@@ -20,6 +20,7 @@ from googleapiclient.http import HttpRequest
 
 from utils.Dashboard_Operations import dashboard_operations
 from utils.Dashboard import dashboard_patient_satisf
+from utils.Dashboard import dashboard_economics
 
 image = Image.open('images/Medical_Logo-no_back.png')
 img = Image.open('images/background.jpg')
@@ -204,7 +205,8 @@ if authentication_status:
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti,
             "Dashboard Operations": dashboard_operations,
-            "Dashboard Patient Satisfaction": dashboard_patient_satisf}
+            "Dashboard Patient Satisfaction": dashboard_patient_satisf,
+            "Dashboard Economics": dashboard_economics}
     elif name=="Gentile paziente":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti}
