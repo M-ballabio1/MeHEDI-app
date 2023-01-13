@@ -62,7 +62,7 @@ def dashboard_operations():
     
     st.title("Dashboard MedTech Operations")
     expander = st.expander("See all records")
-        with expander:
+    with expander:
         st.write(f"Open original [Google Sheet]({GSHEET_URL})")
         st.dataframe(get_data(df_operations))
     
