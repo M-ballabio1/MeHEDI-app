@@ -87,5 +87,3 @@ def dashboard_operations():
         st.header("Health data")
         st.image("https://www.datapine.com/images/hospital-kpi-dashboard.png")
     
-    st.write(df_operations["Incassato trattamento"].mean)
-    
