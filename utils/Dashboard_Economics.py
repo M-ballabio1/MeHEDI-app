@@ -11,7 +11,7 @@ def dashboard_economics():
     st.title("Dashboard MedTech Economics")
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
         
-    g1, g2, g3 = st.columns(2)
+    g1, g2, g3 = st.columns(3)
     g1.metric(label = "Fatturato mensile", value = ("505.000€"), delta = ("20.000€"))
     g2.metric(label = "Fatturato annuale", value = ("1.214.500€"), delta = ("70.000€"))
     g3.metric(label = "Costi menisili",
