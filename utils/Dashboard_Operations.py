@@ -6,61 +6,6 @@ import streamlit as st
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
 
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import HttpRequest
-
-#from Patient_Form import form_pazienti
-
-SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-SPREADSHEET_ID = "1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8"
-SHEET_NAME = "Database_Operations"
-GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-
-@st.experimental_singleton()
-def connect_to_gsheet():
-    # Create a connection object.
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=[SCOPE],
-    )
-
-    # Create a new Http() object for every request
-    def build_request(http, *args, **kwargs):
-        new_http = google_auth_httplib2.AuthorizedHttp(
-            credentials, http=httplib2.Http()
-        )
-        return HttpRequest(new_http, *args, **kwargs)
-
-    authorized_http = google_auth_httplib2.AuthorizedHttp(
-        credentials, http=httplib2.Http()
-    )
-    service = build(
-        "sheets",
-        "v4",
-        requestBuilder=build_request,
-        http=authorized_http,
-    )
-    gsheet_connector = service.spreadsheets()
-    return gsheet_connector
-
-def get_data(gsheet_connector) -> pd.DataFrame:
-    values = (
-        gsheet_connector.values()
-        .get(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
-        )
-        .execute()
-    )
-
-    df = pd.DataFrame(values["values"])
-    df.columns = df.iloc[0]
-    df = df[1:]
-    return df
-
-df_operations=connect_to_gsheet()
-
 def dashboard_operations():    
     
     def display_dial(title, value, color):
@@ -97,12 +42,12 @@ def dashboard_operations():
     value = ("150"),
     delta = ("12"))
     
-    polarity_color = "#89CFF0"
-    subjectivity_color = "#89CFF0"
+    color1 = "#89CFF0"
+    color2 = "#89CFF0"
 
     a, b = st.columns(2)
 
     with a:
-        display_dial("POLARITY", "60", polarity_color)
+        display_dial("Tempo d'attesa", "26 min", color1)
     with b:
-        display_dial("SUBJECTIVITY", "77", subjectivity_color)
+        display_dial("Numero nuovi ingressi", "114", color2)
