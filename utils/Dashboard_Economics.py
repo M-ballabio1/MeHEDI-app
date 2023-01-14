@@ -12,10 +12,6 @@ from googleapiclient.http import HttpRequest
 def dashboard_economics():
     
     st.title("Dashboard MedTech Economics")
-    expander = st.expander("See all records")
-    with expander:
-        st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-        st.dataframe(get_data(df_operations))
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
