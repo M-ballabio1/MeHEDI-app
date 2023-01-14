@@ -51,7 +51,7 @@ def dashboard_operations():
     with b:
         display_dial("Numero nuovi ingressi", "114", color2)
         
-     col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         st.header("Operations")
         st.image("https://www.solverglobal.com/wp-content/uploads/2020/09/PowerBI_Dashboard_04-1.jpg")
