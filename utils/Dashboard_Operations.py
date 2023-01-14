@@ -61,7 +61,9 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 
 df_operations=connect_to_gsheet()
 
-def display_dial(title, value, color):
+def dashboard_operations():
+    
+    def display_dial(title, value, color):
         st.markdown(
             div(
                 style=styles(
@@ -77,8 +79,6 @@ def display_dial(title, value, color):
             ),
             unsafe_allow_html=True,
         )
-
-def dashboard_operations():
     
     st.title("Dashboard MedTech Operations")
     expander = st.expander("See all records")
@@ -105,16 +105,4 @@ def dashboard_operations():
     with a:
         display_dial("POLARITY", 60, polarity_color)
     with b:
-        display_dial(
-            "SUBJECTIVITY", 77, subjectivity_color
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.header("Patient satisfaction")
-        st.image("https://www.datapine.com/images/patient-satisfaction-dashboard.png")
-
-    with col2:
-        st.header("Health data")
-        st.image("https://www.datapine.com/images/hospital-kpi-dashboard.png")
-    
+        display_dial("SUBJECTIVITY", 77, subjectivity_color
