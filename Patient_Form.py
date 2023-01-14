@@ -25,9 +25,6 @@ from utils.Dashboard_Economics import dashboard_economics
 image = Image.open('images/Medical_Logo-no_back.png')
 img = Image.open('images/background.jpg')
 
-with open('style.css') as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8"
 SHEET_NAME = "Database"
@@ -88,6 +85,9 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 
 # impostazione grafica iniziale
 st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
+
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # --- USER AUTHENTICATION ---
 
