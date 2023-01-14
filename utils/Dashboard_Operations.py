@@ -28,8 +28,7 @@ def dashboard_operations():
     st.title("Dashboard MedTech Operations")
     expander = st.expander("See all records")
     with expander:
-        st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-        st.dataframe(get_data(df_operations))
+        st.write("In questa sezione dovrà esserci la dashbaord con i KPI riferiti all'ambito Operations-Healthcare")
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
