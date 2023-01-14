@@ -3,9 +3,7 @@ import httplib2
 import pandas as pd
 import datetime
 import streamlit as st
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import HttpRequest
+from st_radial import st_radial
 
 #from Patient_Form import form_pazienti
 
@@ -15,12 +13,13 @@ def dashboard_economics():
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
-    with open('style.css') as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    #with open('ui/style.css') as f:
+    #    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
         
-    g1, g2 = st.columns(2)
+    g1, g2, g3 = st.columns(2)
     g1.metric(label = "Fatturato mensile", value = ("505.000€"), delta = ("20.000€"))
-    g2.metric(label = "Costi menisili",
+    g2.st_radial('Metric 1', value=88)
+    g3.metric(label = "Costi menisili",
     value = ("202.300 €"),
     delta = ("10.000€"))
 
