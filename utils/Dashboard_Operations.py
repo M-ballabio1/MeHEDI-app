@@ -97,8 +97,8 @@ def dashboard_operations():
     value = ("150"),
     delta = ("12"))
     
-    polarity_color = COLOR_BLUE
-    subjectivity_color = COLOR_CYAN
+    polarity_color = "#89CFF0"
+    subjectivity_color = "#89CFF0"
 
     a, b = st.columns(2)
 
