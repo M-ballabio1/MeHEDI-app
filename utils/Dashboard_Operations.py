@@ -61,7 +61,9 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 
 df_operations=connect_to_gsheet()
 
-def display_dial(title, value, color):
+def dashboard_operations():    
+    
+    def display_dial(title, value, color):
         st.markdown(
             div(
                 style=styles(
@@ -77,8 +79,6 @@ def display_dial(title, value, color):
             ),
             unsafe_allow_html=True,
         )
-
-def dashboard_operations():    
     
     st.title("Dashboard MedTech Operations")
     expander = st.expander("See all records")
