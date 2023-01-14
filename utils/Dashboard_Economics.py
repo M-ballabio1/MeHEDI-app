@@ -13,7 +13,7 @@ def dashboard_economics():
         
     g1, g2, g3 = st.columns(2)
     g1.metric(label = "Fatturato mensile", value = ("505.000€"), delta = ("20.000€"))
-    g2.st_radial('Metric 1', value=88)
+    g2.metric(label = "Fatturato annuale", value = ("1.214.500€"), delta = ("70.000€"))
     g3.metric(label = "Costi menisili",
     value = ("202.300 €"),
     delta = ("10.000€"))
