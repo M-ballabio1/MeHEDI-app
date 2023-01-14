@@ -105,4 +105,4 @@ def dashboard_operations():
     with a:
         display_dial("POLARITY", "60", polarity_color)
     with b:
-        display_dial("SUBJECTIVITY", "77", subjectivity_color
+        display_dial("SUBJECTIVITY", "77", subjectivity_color)
