@@ -46,8 +46,15 @@ def dashboard_operations():
     color2 = "#89CFF0"
 
     a, b = st.columns(2)
-
     with a:
         display_dial("Tempo d'attesa", "26 min", color1)
     with b:
         display_dial("Numero nuovi ingressi", "114", color2)
+        
+     col1, col2 = st.columns(2)
+    with col1:
+        st.header("Operations")
+        st.image("https://www.solverglobal.com/wp-content/uploads/2020/09/PowerBI_Dashboard_04-1.jpg")
+    with col2:
+        st.header("Outcome/Cost")
+        st.image("https://cdn.sisense.com/wp-content/uploads/Hospital-performance.png")
