@@ -3,18 +3,13 @@ import httplib2
 import pandas as pd
 import datetime
 import streamlit as st
-from st_radial import st_radial
 
 #from Patient_Form import form_pazienti
 
 def dashboard_economics():
     
     st.title("Dashboard MedTech Economics")
-    
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
-    
-    #with open('ui/style.css') as f:
-    #    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
         
     g1, g2, g3 = st.columns(2)
     g1.metric(label = "Fatturato mensile", value = ("505.000€"), delta = ("20.000€"))
