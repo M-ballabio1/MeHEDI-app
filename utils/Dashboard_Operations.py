@@ -3,6 +3,9 @@ import httplib2
 import pandas as pd
 import datetime
 import streamlit as st
+from htbuilder import div, big, h2, styles
+from htbuilder.units import rem
+
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
@@ -58,6 +61,23 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 
 df_operations=connect_to_gsheet()
 
+def display_dial(title, value, color):
+        st.markdown(
+            div(
+                style=styles(
+                    text_align="center",
+                    color=color,
+                    padding=(rem(0.8), 0, rem(3), 0),
+                )
+            )(
+                h2(style=styles(font_size=rem(0.8), font_weight=600, padding=0))(title),
+                big(style=styles(font_size=rem(3), font_weight=800, line_height=1))(
+                    value
+                ),
+            ),
+            unsafe_allow_html=True,
+        )
+
 def dashboard_operations():
     
     st.title("Dashboard MedTech Operations")
@@ -76,9 +96,20 @@ def dashboard_operations():
     g3.metric(label = "Accessi giornalieri",
     value = ("150"),
     delta = ("12"))
+    
+    polarity_color = COLOR_BLUE
+    subjectivity_color = COLOR_CYAN
 
+    a, b = st.columns(2)
+
+    with a:
+        display_dial("POLARITY", 60, polarity_color)
+    with b:
+        display_dial(
+            "SUBJECTIVITY", 77, subjectivity_color
+    
     col1, col2 = st.columns(2)
-
+    
     with col1:
         st.header("Patient satisfaction")
         st.image("https://www.datapine.com/images/patient-satisfaction-dashboard.png")
