@@ -19,7 +19,7 @@ def dashboard_economics():
     
     st.markdown("""**Questa sezione mostra i risultati dell'analisi utilizzando i dati delle operations di MeHedi""")
     
-    with open('style.css') as f:
+    with open('ui/style.css') as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
         
     g1, g2 = st.columns(2)
