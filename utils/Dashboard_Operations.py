@@ -86,6 +86,8 @@ def dashboard_operations():
    st.title("Dashboard MedTech Operations")
    df_new=connect_to_gsheet
    
+   df_new=pd.DataFrame(df_new)
+   
    prova=len(df_new)
 
    expander = st.expander("See all records")
