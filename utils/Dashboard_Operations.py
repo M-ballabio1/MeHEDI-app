@@ -28,7 +28,7 @@ def dashboard_operations():
         )
     
     st.title("Dashboard MedTech Operations")
-    df_data = pd.read_excel("./datasets/DatasetOperations_Economics.xlsx")
+    df_data = pd.read_excel("/datasets/DatasetOperations_Economics.xlsx")
     
     df_data.groupby(['Data Visita']).size()
     st.write(df_data[0])
