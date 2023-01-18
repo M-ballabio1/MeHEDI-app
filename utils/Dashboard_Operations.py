@@ -6,6 +6,8 @@ import streamlit as st
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
 
+
+
 def dashboard_operations():    
     
     def display_dial(title, value, color):
@@ -26,6 +28,11 @@ def dashboard_operations():
         )
     
     st.title("Dashboard MedTech Operations")
+    df_data = pd.read_excel("./datasets/DatasetOperations_Economics.xlsx")
+    
+    df_data.groupby(['Data Visita']).size()
+    st.write(df_data[0])
+    
     expander = st.expander("See all records")
     with expander:
         st.write("In questa sezione dovrà esserci la dashbaord con i KPI riferiti all'ambito Operations-Healthcare")
@@ -49,7 +56,9 @@ def dashboard_operations():
         display_dial("Tempo d'attesa", "26 min", color1)
     with b:
         display_dial("Numero nuovi ingressi", "114", color2)
-        
+    
+    
+    
     col1, col2 = st.columns(2)
     with col1:
         st.header("Operations")
