@@ -98,7 +98,7 @@ names = [user["name"] for user in users]
 hashed_passwords = [user["password"] for user in users]
 
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-    "sales_dashboard", "abcdef", cookie_expiry_days=30)
+    "sales_dashboard", "abcdef", cookie_expiry_days=90)
 name, authentication_status, username = authenticator.login("Login - Web application MEHEDI Patient's satisfaction", "main")
 
 if authentication_status == False:
