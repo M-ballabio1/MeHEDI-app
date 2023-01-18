@@ -13,7 +13,7 @@ def dashboard_operations():
    SHEET_NAME = "Database_Operations"
    GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
    
-   sh = gc.open_by_url(GSHEET_URL)
+   sh = gs.open_by_url(GSHEET_URL)
    ws = sh.worksheet('Database_Operations')
    
    df = pd.DataFrame(ws.get_all_records())
