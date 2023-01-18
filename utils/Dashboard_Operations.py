@@ -8,18 +8,6 @@ from htbuilder.units import rem
 import gspread
 
 def dashboard_operations():
-   SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-   SPREADSHEET_ID = "1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8"
-   SHEET_NAME = "Database_Operations"
-   GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-   
-   gc = gspread.service_account()
-   sh = gc.open("Patient Record Data")
-   s_range = sh.worksheet("Database_Operations")
-   
-   df = pd.DataFrame(sh.get_all_records())
-   df.head()
-   st.dataframe(df)
    
    def display_dial(title, value, color):
      st.markdown(
@@ -39,11 +27,6 @@ def dashboard_operations():
      )
     
    st.title("Dashboard MedTech Operations")
-   df_new=connect_to_gsheet
-   
-   df_new=pd.DataFrame(df_new)
-   
-   prova=len(df_new)
 
    expander = st.expander("See all records")
    with expander:
@@ -57,7 +40,7 @@ def dashboard_operations():
    value = ("500.230 €"),
    delta = ("210€"))
    g3.metric(label = "Accessi giornalieri",
-   value = prova,
+   value = ("221"),
    delta = ("12"))
 
    color1 = "#89CFF0"
