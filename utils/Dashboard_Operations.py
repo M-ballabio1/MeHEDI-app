@@ -85,6 +85,8 @@ def dashboard_operations():
     
    st.title("Dashboard MedTech Operations")
    df_new=connect_to_gsheet
+   
+   prova=df_new["Sicurezza"].mean()
 
    expander = st.expander("See all records")
    with expander:
@@ -98,7 +100,7 @@ def dashboard_operations():
    value = ("500.230 €"),
    delta = ("210€"))
    g3.metric(label = "Accessi giornalieri",
-   value = ("150"),
+   value = prova,
    delta = ("12"))
 
    color1 = "#89CFF0"
