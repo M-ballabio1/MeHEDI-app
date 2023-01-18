@@ -7,8 +7,6 @@ from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
 from openpyxl import Workbook
 from io import BytesIO
- 
-
 
 def dashboard_operations(): 
    
@@ -30,11 +28,7 @@ def dashboard_operations():
         )
     
     st.title("Dashboard MedTech Operations")
-    
     df_data = pd.read_excel("DatasetOperations_Economics.xlsx")
-    
-    df_data.groupby(['Data Visita']).size()
-    st.write(df_data[0])
     
     expander = st.expander("See all records")
     with expander:
