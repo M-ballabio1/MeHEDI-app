@@ -194,4 +194,4 @@ st.sidebar.info(
     Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
     """
 )
-st.sidebar.image(image, width=150)
+st.sidebar.image(image, width=250)
