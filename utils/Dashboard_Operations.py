@@ -10,9 +10,7 @@ from io import BytesIO
  
 
 
-def dashboard_operations():    
-    # Give the location of the file
-    path = "/datasets/DatasetOperations_Economics.xlsx"
+def dashboard_operations(): 
    
     def display_dial(title, value, color):
         st.markdown(
@@ -33,17 +31,7 @@ def dashboard_operations():
     
     st.title("Dashboard MedTech Operations")
     
-    workbook = Workbook()
-
-    with NamedTemporaryFile() as tmp:
-         workbook.save(tmp.name)
-         data = BytesIO(tmp.read())
-
-    st.download_button("Retrieve file",
-         data=data,
-         mime='xlsx',
-         file_name="Foglio1")
-    df_data = pd.read_excel(wb_obj)
+    df_data = pd.read_excel("DatasetOperations_Economics.xlsx")
     
     df_data.groupby(['Data Visita']).size()
     st.write(df_data[0])
