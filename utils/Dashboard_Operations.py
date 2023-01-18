@@ -5,14 +5,15 @@ import datetime
 import streamlit as st
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
-import openpyxl
- 
-# Give the location of the file
-path = "/datasets/DatasetOperations_Economics.xlsx"
+from openpyxl import Workbook
+from io import BytesIO
  
 
+
 def dashboard_operations():    
-    
+    # Give the location of the file
+    path = "/datasets/DatasetOperations_Economics.xlsx"
+   
     def display_dial(title, value, color):
         st.markdown(
             div(
@@ -31,11 +32,17 @@ def dashboard_operations():
         )
     
     st.title("Dashboard MedTech Operations")
-    # workbook object is created
-    wb_obj = openpyxl.load_workbook(path)
+    
+    workbook = Workbook()
 
-    sheet_obj = wb_obj.active
-    max_col = sheet_obj.max_column
+    with NamedTemporaryFile() as tmp:
+         workbook.save(tmp.name)
+         data = BytesIO(tmp.read())
+
+    st.download_button("Retrieve file",
+         data=data,
+         mime='xlsx',
+         file_name="Foglio1")
     df_data = pd.read_excel(wb_obj)
     
     df_data.groupby(['Data Visita']).size()
