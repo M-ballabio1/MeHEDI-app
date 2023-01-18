@@ -5,8 +5,11 @@ import datetime
 import streamlit as st
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
-
-
+import openpyxl
+ 
+# Give the location of the file
+path = "/datasets/DatasetOperations_Economics.xlsx"
+ 
 
 def dashboard_operations():    
     
@@ -28,7 +31,12 @@ def dashboard_operations():
         )
     
     st.title("Dashboard MedTech Operations")
-    df_data = pd.read_excel("/datasets/DatasetOperations_Economics.xlsx")
+    # workbook object is created
+    wb_obj = openpyxl.load_workbook(path)
+
+    sheet_obj = wb_obj.active
+    max_col = sheet_obj.max_column
+    df_data = pd.read_excel(wb_obj)
     
     df_data.groupby(['Data Visita']).size()
     st.write(df_data[0])
