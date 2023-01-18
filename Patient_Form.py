@@ -89,7 +89,20 @@ st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+    login_info = oauth.login(
+        client_id=client_id,
+        client_secret=client_secret,
+        redirect_uri=redirect_uri,
+        login_button_text="Continue with Google",
+        logout_button_text="Logout",
+    )
 
+if login_info==False:
+    st.write("Please login")
+elif login_info==True:
+    user_id, user_email = login_info
+    st.sidebar(f"Welcome {user_email}")
+        
     
 def form_pazienti():
     t1, t2 = st.columns((1, 0.15)) 
