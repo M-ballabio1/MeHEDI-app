@@ -167,31 +167,31 @@ def form_pazienti():
                   qualita, pulizia, empatia, info_terapeutiche, str(datetime_object)]])
             st.balloons()
                 
-    if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
-        page_names_to_funcs = {
-            "Form Patient Satisfaction": form_pazienti,
-            "Dashboard Operations": dashboard_operations,
-            "Dashboard Patient Satisfaction": dashboard_patient_satisf,
-            "Dashboard Economics": dashboard_economics}
-    elif name=="Gentile paziente":
-        page_names_to_funcs = {
-            "Form Patient Satisfaction": form_pazienti}
+#if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
+page_names_to_funcs = {
+    "Form Patient Satisfaction": form_pazienti,
+    "Dashboard Operations": dashboard_operations,
+    "Dashboard Patient Satisfaction": dashboard_patient_satisf,
+    "Dashboard Economics": dashboard_economics}
+#elif name=="Gentile paziente":
+#    page_names_to_funcs = {
+#        "Form Patient Satisfaction": form_pazienti}
 
-    selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
-    page_names_to_funcs[selected_page]()
-   
-    st.sidebar.info(
-        """
-        Questa è una webapp creata da che consente di valutare la Patient Satisfaction
-        
-        Web App URL: <https://xxx.streamlitapp.com>
-        """
-    )
+selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
+page_names_to_funcs[selected_page]()
 
-    st.sidebar.title("Support")
-    st.sidebar.info(
-        """
-        Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
-        """
-    )
-    st.sidebar.image(image, width=150)
+st.sidebar.info(
+    """
+    Questa è una webapp creata da che consente di valutare la Patient Satisfaction
+
+    Web App URL: <https://xxx.streamlitapp.com>
+    """
+)
+
+st.sidebar.title("Support")
+st.sidebar.info(
+    """
+    Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
+    """
+)
+st.sidebar.image(image, width=150)
