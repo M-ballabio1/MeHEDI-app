@@ -5,7 +5,7 @@ import datetime
 import streamlit as st
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
-import gspread as gs
+import gspread
 
 def dashboard_operations():
    SCOPE = "https://www.googleapis.com/auth/spreadsheets"
@@ -13,10 +13,11 @@ def dashboard_operations():
    SHEET_NAME = "Database_Operations"
    GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
    
-   sh = gs.open_by_key("1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8")
-   ws = sh.worksheet('Database_Operations')
+   gc = gspread.service_account()
+   sh = gc.open("Patient Record Data")
+   s_range = sh.worksheet("Database_Operations")
    
-   df = pd.DataFrame(ws.get_all_records())
+   df = pd.DataFrame(sh.get_all_records())
    df.head()
    st.dataframe(df)
    
