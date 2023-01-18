@@ -8,4 +8,4 @@ streamlit-authenticator==0.1.5
 altair
 deta
 htbuilder
-gspread-pandas
+streamlit-google-oauth
