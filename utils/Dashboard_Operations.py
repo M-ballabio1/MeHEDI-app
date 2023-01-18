@@ -86,7 +86,7 @@ def dashboard_operations():
    st.title("Dashboard MedTech Operations")
    df_new=connect_to_gsheet
    
-   prova=df_new["Sicurezza"].mean()
+   prova=len(df_new)
 
    expander = st.expander("See all records")
    with expander:
