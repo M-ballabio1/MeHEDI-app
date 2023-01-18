@@ -28,7 +28,8 @@ def dashboard_operations():
         )
     
     st.title("Dashboard MedTech Operations")
-    df_data = pd.read_csv("DatasetOperations_Economics.csv")
+    with open("DatasetOperations_Economics.csv") as f:
+         df_data = pd.read_csv(f)
     
     expander = st.expander("See all records")
     with expander:
