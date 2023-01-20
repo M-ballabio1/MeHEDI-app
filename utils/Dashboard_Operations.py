@@ -5,7 +5,6 @@ import datetime
 import streamlit as st
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
-import gspread
 
 def dashboard_operations():
    
