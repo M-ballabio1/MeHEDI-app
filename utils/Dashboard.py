@@ -8,9 +8,10 @@ import altair as alt
 def dashboard_patient_satisf():
     st.title("Dashboard Patient Satisfaction")
     st.markdown("Sezione dedicata agli specialisti di medicina generale per visionare andamento Poliambulatorio")
-    #st.dataframe(get_data(df))
-
-    #df1=pd.DataFrame(df)
+    
+    data="DatasetOperations_Economics.xlsx"
+    
+    df=pd.read_excel(data)
 
     #c = alt.Chart(df1).mark_circle().encode(
     #        x='Sesso', y='Sicurezza',)
@@ -18,6 +19,16 @@ def dashboard_patient_satisf():
     
     #with open('ui/style.css')as f:
     #   st.markdown("<style>{f.read()}</style>", unsafe_allow_html = True)
+    
+    #df=connect_to_gsheet()
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.multiselect("Area", df["Categoria Visita"])
+    with col2:
+        st.header("Outcome/Cost")
+    with col2:
+        st.header("Outcome/Cost")
     
     g1, g2, g3 = st.columns(3)
     g1.metric(label = "Patient Experience", value = ("91 %"),)
