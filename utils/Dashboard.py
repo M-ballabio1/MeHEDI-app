@@ -26,9 +26,9 @@ def dashboard_patient_satisf():
     with col1:
         st.write("Filtra in base a ciò che ti interessa")
     with col2:
-        st.multiselect("Area", df["Categoria Visita"].unique())
-    with col2:
-        st.multiselect("Area", df["Sesso"].unique())
+        st.multiselect("Categoria Visita", df["Categoria Visita"].unique())
+    with col3:
+        st.multiselect("Sesso Pazienti", df["Sesso"].unique())
     
     g1, g2, g3 = st.columns(3)
     g1.metric(label = "Patient Experience", value = ("91 %"),)
