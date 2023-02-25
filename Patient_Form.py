@@ -154,7 +154,7 @@ if authentication_status:
         
         t1, t2 = st.columns((1, 0.10)) 
 
-        t1.image(image, width=700)
+        t1.image(image, width=1000)
         hide_img_fs = '''
         <style>
         button[title="View fullscreen"]{
