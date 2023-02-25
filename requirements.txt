@@ -9,3 +9,4 @@ altair
 matplotlib
 deta
 htbuilder
+streamlit-elements
