@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import date
+from datetime import timedelta
+ 
 
 def dashboard_operations():
     
@@ -40,10 +42,14 @@ def dashboard_operations():
    new_title = '<p style="font-size: 22px;">🔁 Filtra ciò che ti interessa</p>'
    st.sidebar.markdown(new_title, unsafe_allow_html=True)
    st.sidebar.markdown("")
-   st.sidebar.multiselect("Categoria Visita", df["Categoria Visita"].unique())
-   st.sidebar.multiselect("Sesso Pazienti", df["Sesso"].unique())
-   st.sidebar.multiselect("Provenienza", df["Regione Nascita"].unique())
+   Categ_Visita_Fil=st.sidebar.multiselect("Categoria Visita", df["Categoria_Visita"].unique(), default=["CARDIOLOGIA","RADIOLOGIA","IMMUNOLOGIA"])
+   Sesso_Fil=st.sidebar.multiselect("Sesso Pazienti", df["Sesso"].unique())
+   Proveni_Fil=st.sidebar.multiselect("Provenienza", df["RegioneResidenza"].unique())
    
+   dfs = {Categ_Visita_Fi: df[df["Categoria_Visita"] == Categ_Visita_Fi] for Categ_Visita_Fi in Categ_Visita_Fil}
+   #df_selection = df.query(
+   #     "Categoria_Visita == @Categ_Visita_Fil & Sesso == @Sesso_Fil & RegioneResidenza == @Proveni_Fil"
+   # )
    
    st.title("Dashboard MedTech Operations")   
    expander = st.expander("See all records")
@@ -59,7 +65,10 @@ def dashboard_operations():
 
    #filter dataset only to date < to today (dd/mm/YY)
    today = date.today()
+   # Yesterday date
+   yesterday = today - timedelta(days = 1)
    date_oggi = today.strftime("%m/%d/%Y")
+   date_yesterday = yesterday.strftime("%m/%d/%Y")
    df1 = df1.loc[(df1['Data Visita'] <= date_oggi)]
    
    #ricavo settimana corrente
@@ -71,30 +80,51 @@ def dashboard_operations():
    if delta_ricav_now_sett_scorsa>0:
        delta_ricav_now_sett_scorsa="+"+str(delta_ricav_now_sett_scorsa)+"€"
    else:
-       delta_ricav_now_sett_scorsa="-"+str(delta_ricav_now_sett_scorsa)+"€"
+       delta_ricav_now_sett_scorsa=str(delta_ricav_now_sett_scorsa)+"€"
    
-   df1["linea_sicurezza_prezzo"]=0.65*df1["Prezzo pieno trattamento Paziente"]
-   #linea_sicurezza = (df1["linea_sicurezza_prezzo"])
+   #media mobile e target
+   df1["MA_sicurezza_prezzo"]=df1["Prezzo pieno trattamento Paziente"].rolling(2).mean()
+   df1["target_sicurezza_prezzo"]=1500
    
+   #numero accesso giornaliero oggi e ieri
+   df2= df["Data Visita"].value_counts()
+   dt_oggi=df2.loc[date_oggi][0]
+   dt_ieri=df2.loc[date_yesterday][0]
+   if dt_oggi < dt_ieri:
+       dt_ieri="-"+str(dt_ieri)
+   else:
+       dt_ieri="+"+str(dt_ieri)
+       
    g1, g2, g3 = st.columns(3)
    with g1:
        st.metric(label = dicit , value = str(int(ricavo_settimanale))+" €", delta=delta_ricav_now_sett_scorsa)
    with g2:
-       st.metric(label = "Drugs treatment cost", value = ("500.230 €"), delta = ("210€"))
+       st.metric(label = "Accesso giornaliero ambulatorio", value = dt_oggi, delta = dt_ieri)
    with g3:
        st.metric(label = "Accessi giornalieri",value = ("221"), delta = ("12"))
 
    a, b = st.columns(2)
    with a:
-     st.header("Outcome/Cost")
+     # Ricavi dai trattamenti ambulatoriali nel tempo
+     st.header("Revenue dai trattamenti ambulatorio")
      fig = px.bar(df1, x ="Data Visita", y='Prezzo pieno trattamento Paziente', color='Prezzo pieno trattamento Paziente',template = 'ggplot2',width=800, height=400)
-     #fig.add_scatter(x ="Data Visita", y=df1["linea_sicurezza_prezzo"], mode='lines', line=dict(color="black"), name='Target')
-     fig.update_layout(title_text="Ricavi Settimanali derivanti dalle visite ambulatoriali")
+     fig.add_trace(go.Scatter(x=df1['Data Visita'], y=df1["MA_sicurezza_prezzo"],mode='lines', line=dict(color="orange"), name='Media Mobile a 2 week'))
+     fig.add_trace(go.Scatter(x=df1['Data Visita'], y=df1["target_sicurezza_prezzo"],mode='lines', line=dict(color="blue"), name='Safety Target'))
+     fig.update_layout(legend=dict(
+        yanchor="top",
+        y=0.99,
+        xanchor="left",
+        x=0.01))
+     #fig.update_layout(title_text="Ricavi Settimanali derivanti dalle visite ambulatoriali")
      a.plotly_chart(fig, use_container_width=True)
 
    with b:
-     display_dial("Numero nuovi ingressi", "114", color2)
-    
+       # Count frequency visite ambulatorio filtered by TYPE
+       st.header("Visite ambulatorio per tipologia")
+       fig = go.Figure()
+       fig.add_trace(go.Bar(x=Categ_Visita_Fil, y=df["Categoria_Visita"].value_counts()))
+       b.plotly_chart(fig, use_container_width=True)
+
    st.write(df)
    st.write(df1)
-
+   st.write(df2)
