@@ -218,20 +218,20 @@ if authentication_status:
                     """)
                 st.markdown("")
             st.write("")
-            new_title = '<b style="font-family:serif; color:#6082B6; font-size: 40px;">📌 Quanto tempo hai a disposizione per compilare il form?</b>'
+            new_title = '<b style="font-family:serif; color:#6082B6; font-size: 28px;">📌 Quanto tempo hai a disposizione per compilare il form?</b>'
             st.markdown(new_title, unsafe_allow_html=True)
             st.write("")
             slider = st.slider(label='Trascina lo slider', min_value=1,max_value=10, value=1, key='Form5')
         with b:
             st.write("")
         with c:
-            st.image(img2, width=180)
+            st.image(img2, width=200)
         if slider<2:
             form = st.form(key="annotation1", clear_on_submit = True,)
             with form:
                 #new_title = '<b style="font-family:serif; color:#6082B6; font-size: 35px;">MEDi Form:</b>'
                 #st.markdown(new_title, unsafe_allow_html=True)
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 25px;">Informazioni Generali Pazienti</b>'
+                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">Informazioni Generali Pazienti</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
                 cols = st.columns((1, 1, 1, 1))
                 #info paziente
@@ -242,7 +242,7 @@ if authentication_status:
                 date = cols[3].date_input("Quando è stato in ospedale:")
     
                 #infrastruttura fisica tecnologica
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 25px;">Informazioni Infrastruttura e Processi</b>'
+                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">Informazioni Infrastruttura e Processi</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
                 cols2 = st.columns((3))
                 infras = cols2[0].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
@@ -250,7 +250,7 @@ if authentication_status:
                 sicurezza = cols2[2].slider("Sicurezza ospedale :", 1, 100, 1)
                 
                 #risorse umane e accoglienza
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 25px;">Informazioni Risorse umane e Qualità percepita</b>'
+                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">Informazioni Risorse umane e Qualità percepita</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
                 cols3 = st.columns((1, 1, 1, 1))
                 qualita = cols3[0].slider("Qualità del personale :", 1, 100, 1)
