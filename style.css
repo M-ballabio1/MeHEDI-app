@@ -1,7 +1,7 @@
-
 /* Move block container higher */
-div.block-container.css-18e3th9.egzxvld2 {
-  margin-top: -4em;
+div.block-container css-18e3th9 {
+  padding-top: 0 rem;
+  margin-top: -15m;
 }
 
 /* Adjustments for the logo image*/
@@ -21,6 +21,21 @@ div.css-wnm74r.e16fv1kl3 {
   margin-left: 30%;
   margin-right: 20%;
 }
+
+/* Row 1 */
+div.css-j5r0tf.e1tzin5v2 {
+    background-color: rgb(189, 195, 199);
+    padding: 0.5% 0.5% 0.5% 0.5%;
+    border-radius: 25px;
+}
+
+/* Row 2 */
+div.css-12w0qpk.e1tzin5v2 {
+    background-color: rgba(174, 168, 211, 0.6);
+    padding: 1% 1% 1% 1%;
+    border-radius: 10px;
+}
+div.css-dm3ece.everg990{
 
 }
 
