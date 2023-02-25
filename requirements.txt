@@ -10,3 +10,4 @@ matplotlib
 deta
 htbuilder
 streamlit-elements
+wordcloud
