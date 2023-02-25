@@ -154,7 +154,7 @@ if authentication_status:
         
         t1, t2 = st.columns((1, 0.10)) 
 
-        t1.image(image)
+        t1.image(image, width=300)
         hide_img_fs = '''
         <style>
         button[title="View fullscreen"]{
@@ -190,7 +190,7 @@ if authentication_status:
         with a:
             st.write("")
         with b:
-            st.image(image3, width=230)
+            st.image(image3, width=180)
         with c:
             st.write("")
         
@@ -218,14 +218,14 @@ if authentication_status:
                     """)
                 st.markdown("")
             st.write("")
-            new_title = '<b style="font-family:serif; color:#6082B6; font-size: 40px;">📌 Quanto tempo hai a disposizione per compilare il form?</b>'
+            new_title = '<b style="font-family:serif; color:#6082B6; font-size: 30px;">📌 Quanto tempo hai a disposizione per compilare il form?</b>'
             st.markdown(new_title, unsafe_allow_html=True)
             st.write("")
             slider = st.slider(label='Trascina lo slider', min_value=1,max_value=10, value=1, key='Form5')
         with b:
             st.write("")
         with c:
-            st.image(img2, width=300)
+            st.image(img2, width=250)
         if slider<2:
             form = st.form(key="annotation1", clear_on_submit = True,)
             with form:
