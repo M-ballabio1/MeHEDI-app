@@ -4,16 +4,12 @@ import pandas as pd
 import streamlit as st
 from PIL import Image
 import time
-from statistics import mean
 import datetime
 import database as db
 import streamlit_authenticator as stauth
-import base64
 
 import google_auth_httplib2
 import httplib2
-import pandas as pd
-import streamlit as st
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
