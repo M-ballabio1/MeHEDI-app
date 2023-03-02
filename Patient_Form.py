@@ -30,10 +30,10 @@ SPREADSHEET_ID = "1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8"
 SHEET_NAME = "Database"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
-#data="DatasetOperations_Economics.xlsx"
-#df_data=pd.DataFrame(data)
+# impostazione grafica iniziale
+st.set_page_config(page_title="MeHEDI", page_icon="🏥", layout="wide")
 
-@st.experimental_singleton()
+@st.cache_resource()
 def connect_to_gsheet():
     # Create a connection object.
     credentials = service_account.Credentials.from_service_account_info(
@@ -85,10 +85,6 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
         valueInputOption="USER_ENTERED",
     ).execute()
 
-
-# impostazione grafica iniziale
-st.set_page_config(page_title="MeHEDI", page_icon="📌", layout="wide")
-
 # --- USER AUTHENTICATION ---
 
 users = db.fetch_all_users()
@@ -107,7 +103,7 @@ if authentication_status == False:
 if authentication_status == None:
     st.write('<base target="_blank">', unsafe_allow_html=True)
     prev_time = [time.time()]
-    a, b = st.columns([1, 1])
+    a, b, = st.columns([1, 1])
     with a:
         st.image(image2, width=300)      
         hide_img_fs = '''
@@ -137,12 +133,13 @@ if authentication_status:
     
     def form_pazienti():
         
+        #serve per allargare margini da block-container
         st.markdown("""
         <style>
-               .css-18e3th9 {
+               .css-k1ih3n {
                     padding-top: 0rem;
                     padding-bottom: 4rem;
-                    padding-left: 4rem;
+                    padding-left: 4em;
                     padding-right: 4rem;
                 }
         </style>
@@ -191,7 +188,7 @@ if authentication_status:
             st.write("")
         
         # creazione webform
-        i,a,b,c = st.columns([0.2,7,0.1,2])
+        i,a,b,c,d = st.columns([0.2,7,0.1,2,1.5])
         with i:
             st.write("")
         with a:
@@ -221,13 +218,18 @@ if authentication_status:
         with b:
             st.write("")
         with c:
-            st.image(img2, width=200)
+            st.info("Ciao, sono Cleo il tuo assistente personale!")
+            with st.spinner('Vorrei dirti qualcosa'):
+                time.sleep(2)
+            st.info('Posso aiutarti a compilare il nostro form di Patient Satisfaction')
+        with d:
+            st.image(img2)
         if slider<2:
             form = st.form(key="annotation1", clear_on_submit = True,)
             with form:
                 #new_title = '<b style="font-family:serif; color:#6082B6; font-size: 35px;">MEDi Form:</b>'
                 #st.markdown(new_title, unsafe_allow_html=True)
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">Informazioni Generali Pazienti</b>'
+                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">➡️ Informazioni Generali Pazienti</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
                 cols = st.columns((1, 1, 1, 1))
                 #info paziente
@@ -238,7 +240,7 @@ if authentication_status:
                 date = cols[3].date_input("Quando è stato in ospedale:")
     
                 #infrastruttura fisica tecnologica
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">Informazioni Infrastruttura e Processi</b>'
+                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">➡️ Informazioni Infrastruttura e Processi</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
                 cols2 = st.columns((3))
                 infras = cols2[0].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
@@ -246,7 +248,7 @@ if authentication_status:
                 sicurezza = cols2[2].slider("Sicurezza ospedale :", 1, 100, 1)
                 
                 #risorse umane e accoglienza
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">Informazioni Risorse umane e Qualità percepita</b>'
+                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">➡️ Informazioni Risorse umane e Qualità percepita</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
                 cols3 = st.columns((1, 1, 1, 1))
                 qualita = cols3[0].slider("Qualità del personale :", 1, 100, 1)
