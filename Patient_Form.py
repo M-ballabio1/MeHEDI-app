@@ -192,22 +192,28 @@ if authentication_status:
         with i:
             st.write("")
         with a:
-            with st.expander("ℹ️ Istruzioni generali", expanded=False):
+            with st.expander("ℹ️ Istruzioni generali compilazione form", expanded=False):
                 st.markdown(
                     """
-                    ## Informazioni Tool MeHEDI
-                    L'obiettivo di questo tool è quello di fornire uno strumento per una misurazione
-                    della soddsifazione dei pazienti
+                    ### Framework Return on Experience of MeHEDI
+                    Questo framework serve alla struttura sanitaria per raccogliere il feedback riguardo i servizi erogati ai suoi pazienti. Per qualsiasi problematica alla fine della compilazione del form sarà possibile contattare la struttura tramite e-mail.
                     """
                 )
-                st.markdown("")
                 st.markdown(
                     """
-                    ## Perchè misurare Patients Satisfaction?
-                    L'efficacia di un'iniziativa di business non è data solo dalla misurazione degli outcome (es. revenue),
-                    1. Miglioramento percepito della Customer Experience dei prodotti e servizi creati e lanciati rispetto al passato
-                    2. Miglioramento dell'Employee Experience portata dal nuovo framework operativo
-                    3. Miglioramento della performance di business (Outcome) - revenue, costi ecc
+                    ### Istruzioni alla compilazione del Form
+                    Gentile paziente,
+                    
+                    Il suo medico l'ha indirizzata al reparto di Radiologia per alcuni esami. Ora, al termine degli esami e mentre lascia il nostro reparto, vorremmo farle alcune domande sul nostro reparto e sulla sua esperienza. Le sue risposte ci permetteranno di migliorare la qualità del servizio offerto a lei come paziente. Teniamo molto alla sua opinione.
+                    
+                    Ci vorranno solo pochi minuti del vostro tempo. Leggete attentamente ogni domanda, scegliete la vostra risposta e contrassegnatela. Se ritenete di non essere in grado di rispondere a una domanda specifica, passate alla successiva.
+                    
+                    Per alcune domande vorremmo che ci desse un punteggio, che va da 1 a 5: 5 significa che è molto soddisfatto e 1 che è molto insoddisfatto. Potete darci qualsiasi punteggio che ritenete corretto. Un punteggio come 3,5 va bene e può essere dato *[5=molto soddisfatto, 4=soddisfatto, 3=neutro, né soddisfatto né insoddisfatto, 2=insoddisfatto, 1=molto insoddisfatto]*.
+                    
+                    ### Perchè vogliamo misurare la Patient Satisfaction?
+                    1. Miglioramento dei servizi offerti dalla struttura mirata nelle aree segnalate 
+                    2. Far risparmiare il tempo dei nostripazienti tramite una migliore Patient Experience della nostra struttura
+                    3. Monitoraggio dei punti di forza e punti di miglioramento della nostra struttura
                     """)
                 st.markdown("")
             st.write("")
@@ -221,50 +227,67 @@ if authentication_status:
             st.info("Ciao, sono Cleo il tuo assistente personale!")
             with st.spinner('Vorrei dirti qualcosa'):
                 time.sleep(2)
-            st.info('Posso aiutarti a compilare il nostro form di Patient Satisfaction')
+            st.info('Posso aiutarti a compilare il nostro form di Patient Satisfaction. Se hai dubbi non esitare a consultare la sezione "Istruzioni generali compilazione form"')
         with d:
             st.image(img2)
-        if slider<2:
+        if slider<4:
             form = st.form(key="annotation1", clear_on_submit = True,)
             with form:
-                #new_title = '<b style="font-family:serif; color:#6082B6; font-size: 35px;">MEDi Form:</b>'
-                #st.markdown(new_title, unsafe_allow_html=True)
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">➡️ Informazioni Generali Pazienti</b>'
+                new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
-                cols = st.columns((1, 1, 1, 1))
-                #info paziente
-                author = cols[0].text_input("Nome del paziente:")
-                eta = cols[1].text_input("Età anagrafica:")
-                sesso = cols[2].selectbox(
-                    "Sesso:", ["Maschio", "Femmina", "Non specificato"], index=2)
-                date = cols[3].date_input("Quando è stato in ospedale:")
+                st.info("➡️ 1. Come ha preso l'appuntamento?")
+                cols = st.columns((1, 1))
+                #APPUNTAMENTO
+                var_a1 = cols[0].selectbox("Ho preso un appuntamento:",  ["Personalmente",  "Telefono",  "Sito Web", "E-mail",  "Tramite medico",  "Altro"])
+                var_a2= cols[1].slider("Quanto è soddisfatto della facilità di fissare un appuntamento?", 1, 5, 1)
     
-                #infrastruttura fisica tecnologica
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">➡️ Informazioni Infrastruttura e Processi</b>'
-                st.markdown(new_title, unsafe_allow_html=True)
-                cols2 = st.columns((3))
-                infras = cols2[0].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
-                proces = cols2[1].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
-                sicurezza = cols2[2].slider("Sicurezza ospedale :", 1, 100, 1)
+                #ACCOGLIENZA
+                st.info("➡️ 2. Sull'accoglienza del nostro dipartimento")
+                cols2 = st.columns((2))
+                var_c1 = cols2[0].slider("Quanto è soddisfatto dell'accoglienza del nostro reparto?", 1, 5, 1)
+                var_c2 = cols2[1].slider("Quanto è soddisfatto del tempo che ha dovuto attendere per essere aiutato alla reception?", 1, 5, 1)
                 
-                #risorse umane e accoglienza
-                new_title = '<b style="font-family:serif; color:#6082B6; font-size: 18px;">➡️ Informazioni Risorse umane e Qualità percepita</b>'
-                st.markdown(new_title, unsafe_allow_html=True)
-                cols3 = st.columns((1, 1, 1, 1))
-                qualita = cols3[0].slider("Qualità del personale :", 1, 100, 1)
-                pulizia = cols3[1].slider("Pulizia degli ambienti :", 1, 100, 1)
-                empatia = cols3[2].slider("Grado di empatia personale :", 1, 100, 1)
-                info_terapeutiche = cols3[3].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
+                #PROCEDURA
+                st.info("➡️ Sulla procedura che le è stata prescritta")
+                cols3 = st.columns((1, 1, 1))
+                var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
+                var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 5, 1)
+                var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+                
+                #SPIEGAZIONE RISULTATI
+                st.info("➡️ Spiegazioni risultati del dipartimento")
+                cols3 = st.columns((1, 1, 1))
+                var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+                var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+                var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  5,  1)
+                
+                #ESPERIENZA COME PAZIENTE
+                st.info("➡️ Com'è stata la sua esperienza nel reparto come paziente")
+                cols3 = st.columns((1, 1, 1, 1, 1))
+                var_h1 = cols3[0].slider("Quanto è soddisfatto della disponibilità di servizi igienici? ", 1,  5,  1)
+                var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  5,  1)
+                var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  5,  1)
+                var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  5,  1)
+                var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  5,  1)
+                
                 submitted = st.form_submit_button(label="Submit")
                 if submitted==True:
                     datetime_object = datetime.datetime.now()
                     st.success("Successfully")
                     add_row_to_gsheet(
-                    df, [[author, eta, sesso,
-                          str(date), infras, proces, sicurezza,
-                          qualita, pulizia, empatia, info_terapeutiche, str(datetime_object)]])
+                    df, [[var_a1, var_a2, "",
+                            "", "", "",
+                            var_c1, var_c2, "",
+                            var_d1, var_d2, var_d3, "","", "", "",
+                            "", "", 
+                            var_f1, var_f2, var_f3,
+                            "","", "", "","",
+                            var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
+                            "", "", 
+                            "", 
+                            str(datetime_object)]])
                     st.balloons()
-        if slider>1 and slider<6:
+        if slider>3 and slider<8:
             form = st.form(key="annotation2", clear_on_submit = True,)
             with form:
                 
@@ -310,7 +333,7 @@ if authentication_status:
                           type_vis, durata_vis, durata_attesa_vis]])
                     st.balloons()
         
-        if slider>5 and slider<10:
+        if slider>7:
             form = st.form(key="annotation3", clear_on_submit = True,)
             with form:
                 
@@ -360,66 +383,6 @@ if authentication_status:
                           str(date), infras, proces, sicurezza,
                           qualita, pulizia, empatia, info_terapeutiche, str(datetime_object),
                           type_vis, durata_vis, durata_attesa_vis, utili_vis, pay_vis]])
-                    st.balloons()
-        if slider==10:
-            form = st.form(key="annotation4", clear_on_submit = True,)
-            with form:
-                
-                st.write("Informazioni Generali Pazienti")
-                cols = st.columns((1, 1, 1, 1))
-                #info paziente              
-                author = cols[0].text_input("Nome del paziente:")
-                eta = cols[1].text_input("Età anagrafica:")
-                sesso = cols[2].selectbox(
-                    "Sesso:", ["Maschio", "Femmina", "Non specificato"], index=2)
-                date = cols[3].date_input("Quando è stato in ospedale:")
-    
-                #infrastruttura fisica tecnologica
-                st.write("Informazioni Infrastruttura e Processi")
-                cols2 = st.columns((3))
-                infras = cols2[0].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
-                proces = cols2[1].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
-                sicurezza = cols2[2].slider("Sicurezza ospedale :", 1, 100, 1)
-                
-                #risorse umane e accoglienza
-                st.write("Informazioni Risorse umane e Qualità percepita")
-                cols3 = st.columns((1, 1, 1, 1))
-                qualita = cols3[0].slider("Qualità del personale :", 1, 100, 1)
-                pulizia = cols3[1].slider("Pulizia degli ambienti :", 1, 100, 1)
-                empatia = cols3[2].slider("Grado di empatia personale :", 1, 100, 1)
-                info_terapeutiche = cols3[3].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
-                
-                #prestazione ambulatoriale ricevuta
-                st.write("Informazioni attese Prestazione Ricevuta")
-                cols3 = st.columns((3))
-                type_vis = cols3[0].selectbox("A quale macro area afferisce la prestazione che ha ricevuto:", ("RISONANZA","ELETTROMIOGRAFIA","TOMOGRAFIA","ECOGRAFIA","RADIOGRAFIA","ECODOPPLER"))
-                durata_vis = cols3[1].selectbox("Quanto è durata la visita:",options=[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
-                durata_attesa_vis = cols3[2].selectbox("Quanto è durata il tempo di attesa prima della visita:",options=[0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,60])
-                
-                #tempi di attesa trattamenti
-                st.write("Prezzo e Utilità Prestazione Ricevuta")
-                cols3 = st.columns((2))
-                utili_vis = cols3[0].selectbox("Ritieni che la visita effettuata ti sia servita:",options=["Molto Utile","Utile","Equo","Poco utile","Inutile"])
-                pay_vis = cols3[1].selectbox("Ritieni di aver pagato per la visita un prezzo:",options=["Troppo alto","Equo","Troppo basso"])
-                
-                #feedback
-                st.write("Feedback miglioramenti")
-                cols3 = st.columns((4))
-                valut_vis = cols3[0].selectbox("Come valuti nel complesso la tua visita nel nostro centro?",options=[0,1,2,3,4,5,6,7,8,9,10])
-                valut_pos_area_vis = cols3[1].selectbox("Qual è il punto di forza del nostro centro?",options=['Empatia personale', 'Prezzi', 'Sicurezza trasmessa', 'Pulizia ambienti', 'Competenza personale', 'Reperimento informazioni da moltemplici fonti (telefono, sito)', 'Tempi di attesa'])
-                valut_neg_area_vis = cols3[2].selectbox("Qual è il punto di debolezza del nostro centro?",options=['Empatia personale', 'Orari struttura', 'Prezzi', 'Sicurezza trasmessa', 'Pulizia ambienti', 'Competenza personale', 'Reperimento informazioni da moltemplici fonti (telefono, sito)', 'Tempi di attesa'])
-                feed_vis = cols3[3].text_area("Scrivici che cosa miglioreresti del nostro centro. La tua opinione per noi conta!")
-                
-                submitted = st.form_submit_button(label="Submit")
-                if submitted==True:
-                    datetime_object = datetime.datetime.now()
-                    st.success("Successfully")
-                    add_row_to_gsheet(
-                    df, [[author, eta, sesso,
-                          str(date), infras, proces, sicurezza,
-                          qualita, pulizia, empatia, info_terapeutiche, str(datetime_object),
-                          type_vis, durata_vis, durata_attesa_vis, utili_vis, pay_vis,
-                          valut_vis, valut_pos_area_vis, valut_neg_area_vis, feed_vis]])
                     st.balloons()
                 
     if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
