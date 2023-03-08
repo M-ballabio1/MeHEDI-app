@@ -469,7 +469,7 @@ if authentication_status:
             
             #INFORMAZIONI PROCEDURA
             st.info("➡️ 5. Informazioni sulle procedure")
-            cols3 = st.columns((1, 1, 1))
+            cols3 = st.columns((1, 1))
             var_e1 = cols3[0].selectbox("Ha ricevuto informazioni scritte sulla procedura?", ["SI", "NO"])
             var_e2 = cols3[1].slider("Ha consultato un professionista della salute per farsi spiegare i risultati?", 1,  7,  1)
             
