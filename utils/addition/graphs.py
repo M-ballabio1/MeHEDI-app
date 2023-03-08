@@ -1,4 +1,4 @@
-from streamlit_elements import elements, mui
+rom streamlit_elements import elements, mui
 from streamlit_elements import nivo
 
 DATA = [{"taste": "RISULTATI", "Peso Area": 4},
@@ -14,14 +14,17 @@ def graph_pes(DATA):
                     data=DATA,
                     keys=["Peso Area"],
                     indexBy="taste",
-                    maxValue=5,
+                    maxValue=7,
                     valueFormat=">-.2f",
-                    margin={"top": 80, "right": 50, "bottom": 80, "left": 50},
-                    borderColor={"from": "color"},
+                    margin={"top": 80, "right": 60, "bottom": 80, "left": 60},
                     gridLabelOffset=36,
                     dotSize=10,
-                    dotColor="#ec8989",
-                    dotBorderWidth=2,
+                    dotColor={"theme": "background"},
+                    dotBorderWidth=1,
+                    fillOpacity=0.85,
+                    borderWidth=2,
+                    borderColor="#e08367",
+                    dotBorderColor="#e08367",
                     motionConfig="wobbly",
                     legends=[
                         {
@@ -47,6 +50,11 @@ def graph_pes(DATA):
                     theme={
                         "background": "#E4E3E3",
                         "textColor": "#31333F",
+                        "grid": {"line": {
+                                            "stroke": "#b3bcc4",
+                                            "strokeWidth": 1
+                                        }
+                                    },
                         "tooltip": {
                             "container": {
                                 "background": "#E4E3E3",
