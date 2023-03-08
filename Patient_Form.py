@@ -17,6 +17,7 @@ from googleapiclient.http import HttpRequest
 from utils.Dashboard_Operations import dashboard_operations
 from utils.Dashboard import dashboard_patient_satisf
 from utils.Dashboard_Economics import dashboard_economics
+from utils.addition.graphs import graph_pes
 
 #css_file="style.css"
 image = Image.open('images/logo_form4.png')
@@ -225,14 +226,12 @@ if authentication_status:
             st.write("")
         with c:
             st.info("Ciao, sono Cleo il tuo assistente personale!")
-            with st.spinner('Vorrei dirti qualcosa'):
-                time.sleep(2)
             st.info('Posso aiutarti a compilare il nostro form di Patient Satisfaction. Se hai dubbi non esitare a consultare la sezione "Istruzioni generali compilazione form"')
         with d:
             st.image(img2)
         if slider<4:
-            form = st.form(key="annotation1", clear_on_submit = True,)
-            with form:
+            col1,  col2 = st.columns([1, 0.50])
+            with col1:
                 new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
                 st.info("➡️ 1. Come ha preso l'appuntamento?")
@@ -240,53 +239,62 @@ if authentication_status:
                 #APPUNTAMENTO
                 var_a1 = cols[0].selectbox("Ho preso un appuntamento:",  ["Personalmente",  "Telefono",  "Sito Web", "E-mail",  "Tramite medico",  "Altro"])
                 var_a2= cols[1].slider("Quanto è soddisfatto della facilità di fissare un appuntamento?", 1, 5, 1)
-    
+
                 #ACCOGLIENZA
                 st.info("➡️ 2. Sull'accoglienza del nostro dipartimento")
                 cols2 = st.columns((2))
                 var_c1 = cols2[0].slider("Quanto è soddisfatto dell'accoglienza del nostro reparto?", 1, 5, 1)
                 var_c2 = cols2[1].slider("Quanto è soddisfatto del tempo che ha dovuto attendere per essere aiutato alla reception?", 1, 5, 1)
                 
-                #PROCEDURA
-                st.info("➡️ Sulla procedura che le è stata prescritta")
-                cols3 = st.columns((1, 1, 1))
-                var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
-                var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 5, 1)
-                var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+            #PROCEDURA
+            st.info("➡️ Sulla procedura che le è stata prescritta")
+            cols3 = st.columns((1, 1, 1))
+            var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
+            var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 5, 1)
+            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+            
+            #SPIEGAZIONE RISULTATI
+            st.info("➡️ Spiegazioni risultati del dipartimento")
+            cols3 = st.columns((1, 1, 1))
+            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  5,  1)
+            
+            #ESPERIENZA COME PAZIENTE
+            st.info("➡️ Com'è stata la sua esperienza nel reparto come paziente")
+            cols3 = st.columns((1, 1, 1, 1, 1))
+            var_h1 = cols3[0].slider("Quanto è soddisfatto della disponibilità di servizi igienici? ", 1,  5,  1)
+            var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  5,  1)
+            var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  5,  1)
+            var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  5,  1)
+            var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  5,  1)
+            submitted = st.button(label="Submit")
+            with col2:
+                med_accoglienza=(var_c1+var_c2)/2
+                med_experience=(var_h1+var_h2+var_h5+var_h7+var_h9)/5
+                DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
+                            {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
+                            {"taste": "PROCEDURE", "Peso Area": var_d2},
+                            {"taste": "RISULTATI", "Peso Area": var_f3},
+                            {"taste": "ESPERIENZA", "Peso Area": med_experience}]
+                graph_pes(DATA)
                 
-                #SPIEGAZIONE RISULTATI
-                st.info("➡️ Spiegazioni risultati del dipartimento")
-                cols3 = st.columns((1, 1, 1))
-                var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
-                var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
-                var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  5,  1)
-                
-                #ESPERIENZA COME PAZIENTE
-                st.info("➡️ Com'è stata la sua esperienza nel reparto come paziente")
-                cols3 = st.columns((1, 1, 1, 1, 1))
-                var_h1 = cols3[0].slider("Quanto è soddisfatto della disponibilità di servizi igienici? ", 1,  5,  1)
-                var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  5,  1)
-                var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  5,  1)
-                var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  5,  1)
-                var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  5,  1)
-                
-                submitted = st.form_submit_button(label="Submit")
-                if submitted==True:
-                    datetime_object = datetime.datetime.now()
-                    st.success("Successfully")
-                    add_row_to_gsheet(
-                    df, [[var_a1, var_a2, "",
-                            "", "", "",
-                            var_c1, var_c2, "",
-                            var_d1, var_d2, var_d3, "","", "", "",
-                            "", "", 
-                            var_f1, var_f2, var_f3,
-                            "","", "", "","",
-                            var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
-                            "", "", 
-                            "", 
-                            str(datetime_object)]])
-                    st.balloons()
+            if submitted==True:
+                datetime_object = datetime.datetime.now()
+                st.success("Successfully")
+                add_row_to_gsheet(
+                df, [[var_a1, var_a2, "",
+                        "", "", "",
+                        var_c1, var_c2, "",
+                        var_d1, var_d2, var_d3, "","", "", "",
+                        "", "", 
+                        var_f1, var_f2, var_f3,
+                        "","", "", "","",
+                        var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
+                        "", "", 
+                        "", 
+                        str(datetime_object)]])
+                st.balloons()
         if slider>3 and slider<8:
             form = st.form(key="annotation2", clear_on_submit = True,)
             with form:
