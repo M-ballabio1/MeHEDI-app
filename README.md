@@ -1,4 +1,4 @@
-# MeHEDI-app | Healthcare Data-Driven
+# MeHEDI-app | An Healthcare Data-Driven
 
 ## 0.Pre-processing and Segmentation
 
