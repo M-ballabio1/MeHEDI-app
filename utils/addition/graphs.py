@@ -1,4 +1,4 @@
-rom streamlit_elements import elements, mui
+from streamlit_elements import elements, mui
 from streamlit_elements import nivo
 
 DATA = [{"taste": "RISULTATI", "Peso Area": 4},
