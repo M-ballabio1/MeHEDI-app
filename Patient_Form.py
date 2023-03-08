@@ -165,6 +165,7 @@ if authentication_status:
         # connect and append data
         df = connect_to_gsheet()
         
+        #SIDEBAR
         st.sidebar.markdown("""<hr style="height:5px;border:none;color:#bfbfbf;background-color:#bfbfbf;" /> """, unsafe_allow_html=True)
         st.sidebar.info(
         """
@@ -188,7 +189,7 @@ if authentication_status:
         with c:
             st.write("")
         
-        # creazione webform
+        # INTRODUCTION FORM
         i,a,b,c,d = st.columns([0.2,7,0.1,2,1.5])
         with i:
             st.write("")
@@ -229,8 +230,10 @@ if authentication_status:
             st.info('Posso aiutarti a compilare il nostro form di Patient Satisfaction. Se hai dubbi non esitare a consultare la sezione "Istruzioni generali compilazione form"')
         with d:
             st.image(img2)
+            
+        # ###FORM 1
         if slider<4:
-            col1,  col2 = st.columns([1, 0.50])
+            col1,  col2 = st.columns([1, 0.60])
             with col1:
                 new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
                 st.markdown(new_title, unsafe_allow_html=True)
@@ -238,36 +241,43 @@ if authentication_status:
                 cols = st.columns((1, 1))
                 #APPUNTAMENTO
                 var_a1 = cols[0].selectbox("Ho preso un appuntamento:",  ["Personalmente",  "Telefono",  "Sito Web", "E-mail",  "Tramite medico",  "Altro"])
-                var_a2= cols[1].slider("Quanto è soddisfatto della facilità di fissare un appuntamento?", 1, 5, 1)
+                var_a2= cols[1].slider("Quanto è soddisfatto della facilità di fissare un appuntamento?", 1, 7, 1)
 
                 #ACCOGLIENZA
                 st.info("➡️ 2. Sull'accoglienza del nostro dipartimento")
                 cols2 = st.columns((2))
-                var_c1 = cols2[0].slider("Quanto è soddisfatto dell'accoglienza del nostro reparto?", 1, 5, 1)
-                var_c2 = cols2[1].slider("Quanto è soddisfatto del tempo che ha dovuto attendere per essere aiutato alla reception?", 1, 5, 1)
+                var_c1 = cols2[0].slider("Quanto è soddisfatto dell'accoglienza del nostro reparto?", 1, 7, 1)
+                var_c2 = cols2[1].slider("Quanto è soddisfatto del tempo che ha dovuto attendere per essere aiutato alla reception?", 1, 7, 1)
                 
             #PROCEDURA
-            st.info("➡️ Sulla procedura che le è stata prescritta")
+            st.info("➡️ 3. Sulla procedura che le è stata prescritta")
             cols3 = st.columns((1, 1, 1))
             var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
-            var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 5, 1)
+            var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 7, 1)
             var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
             
             #SPIEGAZIONE RISULTATI
-            st.info("➡️ Spiegazioni risultati del dipartimento")
+            st.info("➡️ 4. Spiegazioni risultati del dipartimento")
             cols3 = st.columns((1, 1, 1))
             var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
             var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
-            var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  5,  1)
+            var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  7,  1)
             
             #ESPERIENZA COME PAZIENTE
-            st.info("➡️ Com'è stata la sua esperienza nel reparto come paziente")
+            st.info("➡️ 5. Com'è stata la sua esperienza nel reparto come paziente")
             cols3 = st.columns((1, 1, 1, 1, 1))
-            var_h1 = cols3[0].slider("Quanto è soddisfatto della disponibilità di servizi igienici? ", 1,  5,  1)
-            var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  5,  1)
-            var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  5,  1)
-            var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  5,  1)
-            var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  5,  1)
+            var_h1 = cols3[0].slider("Quanto è soddisfatto della disponibilità di servizi igienici? ", 1,  7,  1)
+            var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  7,  1)
+            var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  7,  1)
+            var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  7,  1)
+            var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  7,  1)
+            
+            #INFO PAZIENTE
+            st.info("➡️ 6. La nostra analisi delle vostre risposte")
+            cols3 = st.columns((1, 1))
+            var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
+            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
+            
             submitted = st.button(label="Submit")
             with col2:
                 med_accoglienza=(var_c1+var_c2)/2
@@ -279,9 +289,16 @@ if authentication_status:
                             {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                 graph_pes(DATA)
                 
+                media_tot=(med_accoglienza+med_experience+var_a2+var_d2+var_f3)/5
             if submitted==True:
-                datetime_object = datetime.datetime.now()
                 st.success("Successfully")
+                st.balloons()
+                if media_tot<3:
+                    st. metric("Media della tua esperienza",  value=(str(media_tot)+"/7"))
+                    feedback_gen=st.text_area("Raccontaci la tua esperienza e miglioreremo sicuramente la tua esperienza")
+                    
+                #Storing data
+                datetime_object = datetime.datetime.now()
                 add_row_to_gsheet(
                 df, [[var_a1, var_a2, "",
                         "", "", "",
@@ -291,114 +308,261 @@ if authentication_status:
                         var_f1, var_f2, var_f3,
                         "","", "", "","",
                         var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
-                        "", "", 
+                        var_i1, var_i2, 
                         "", 
                         str(datetime_object)]])
-                st.balloons()
-        if slider>3 and slider<8:
-            form = st.form(key="annotation2", clear_on_submit = True,)
-            with form:
-                
-                st.write("Informazioni Generali Pazienti")
-                cols = st.columns((1, 1, 1, 1))
-                #info paziente              
-                author = cols[0].text_input("Nome del paziente:")
-                eta = cols[1].text_input("Età anagrafica:")
-                sesso = cols[2].selectbox(
-                    "Sesso:", ["Maschio", "Femmina", "Non specificato"], index=2)
-                date = cols[3].date_input("Quando è stato in ospedale:")
-    
-                #infrastruttura fisica tecnologica
-                st.write("Informazioni Infrastruttura e Processi")
-                cols2 = st.columns((3))
-                infras = cols2[0].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
-                proces = cols2[1].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
-                sicurezza = cols2[2].slider("Sicurezza ospedale :", 1, 100, 1)
-                
-                #risorse umane e accoglienza
-                st.write("Informazioni Risorse umane e Qualità percepita")
-                cols3 = st.columns((1, 1, 1, 1))
-                qualita = cols3[0].slider("Qualità del personale :", 1, 100, 1)
-                pulizia = cols3[1].slider("Pulizia degli ambienti :", 1, 100, 1)
-                empatia = cols3[2].slider("Grado di empatia personale :", 1, 100, 1)
-                info_terapeutiche = cols3[3].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
-                
-                #prestazione ambulatoriale ricevuta
-                st.write("Informazioni attese Prestazione Ricevuta")
-                cols3 = st.columns((3))
-                type_vis = cols3[0].selectbox("A quale macro area afferisce la prestazione che ha ricevuto:", ("RISONANZA","ELETTROMIOGRAFIA","TOMOGRAFIA","ECOGRAFIA","RADIOGRAFIA","ECODOPPLER"))
-                durata_vis = cols3[1].selectbox("Quanto è durata la visita:",options=[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
-                durata_attesa_vis = cols3[2].selectbox("Quanto è durata il tempo di attesa prima della visita:",options=[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
-                
-                submitted = st.form_submit_button(label="Submit")
-                if submitted==True:
-                    datetime_object = datetime.datetime.now()
-                    st.success("Successfully")
-                    add_row_to_gsheet(
-                    df, [[author, eta, sesso,
-                          str(date), infras, proces, sicurezza,
-                          qualita, pulizia, empatia, info_terapeutiche, str(datetime_object),
-                          type_vis, durata_vis, durata_attesa_vis]])
-                    st.balloons()
         
-        if slider>7:
-            form = st.form(key="annotation3", clear_on_submit = True,)
-            with form:
+        # ###FORM 2
+        if slider>3 and slider<8:
+            col1,  col2 = st.columns([1, 0.60])
+            with col1:
+                new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
+                st.markdown(new_title, unsafe_allow_html=True)
+                st.info("➡️ 1. Come ha preso l'appuntamento?")
+                cols = st.columns((1, 1, 1.7))
+                #APPUNTAMENTO
+                var_a1 = cols[0].selectbox("Ho preso un appuntamento:",  ["Personalmente",  "Telefono",  "Sito Web", "E-mail",  "Tramite medico",  "Altro"])
+                var_a2= cols[1].slider("Quanto è soddisfatto della facilità di fissare un appuntamento?", 1, 7, 1)
+                var_a3= cols[2].select_slider('Quanto tempo è trascorso tra la segnalazione del medico e l\'appuntamento?',options=["< 1 settimana", "< 1 mese", "1-3 mesi", "3-6 mesi", "> 6 mesi"])
                 
-                st.write("Informazioni Generali Pazienti")
-                cols = st.columns((1, 1, 1, 1))
-                #info paziente              
-                author = cols[0].text_input("Nome del paziente:")
-                eta = cols[1].text_input("Età anagrafica:")
-                sesso = cols[2].selectbox(
-                    "Sesso:", ["Maschio", "Femmina", "Non specificato"], index=2)
-                date = cols[3].date_input("Quando è stato in ospedale:")
-    
-                #infrastruttura fisica tecnologica
-                st.write("Informazioni Infrastruttura e Processi")
+                #SITO WEB
+                st.info("➡️ 2. Informazioni sul sito nostro sito web")
                 cols2 = st.columns((3))
-                infras = cols2[0].slider("Qualità della struttura ospedaliera :", 1, 100, 1)
-                proces = cols2[1].slider("Qualità dei processi clinici amministrativi :", 1, 100, 1)
-                sicurezza = cols2[2].slider("Sicurezza ospedale :", 1, 100, 1)
+                var_b1 = cols2[0].selectbox("Avete visitato il nostro sito web", ["SI", "NO"])
+                if var_b1=="SI":
+                    var_b2 = cols2[1].slider("Se sì, quanto è soddisfatto delle informazioni che trova sul nostro sito web?", 1, 7, 1)
+                    var_b3 = cols2[2].slider("Se sì, quanto è soddisfatto della facilità di utilizzo del nostro sito web?", 1, 7, 1)
+                else:
+                    var_add= cols2[1].selectbox("Non hai visitato il nostro sito web per quale motivo?", ["Ho avuto difficoltà a trovarlo", "Non mi interessa visitarlo", "Altro"])
+                    if var_add=="Altro":
+                        var_add2=cols2[2].text_input("Se vuoi inserisci la motivazione")
+
+            #ACCOGLIENZA
+            st.info("➡️ 3. Sull'accoglienza del nostro dipartimento")
+            cols2 = st.columns((3))
+            var_c1 = cols2[0].slider("Quanto è soddisfatto dell'accoglienza del nostro reparto?", 1, 7, 1)
+            var_c2 = cols2[1].slider("Quanto è soddisfatto del tempo che ha dovuto attendere per essere aiutato alla reception?", 1, 7, 1)
+            var_c3 = cols2[2].slider("Quanto è soddisfatto delle istruzioni ricevute per trovare l'area d'attesa corretta per la procedura?", 1, 7, 1)
                 
-                #risorse umane e accoglienza
-                st.write("Informazioni Risorse umane e Qualità percepita")
-                cols3 = st.columns((1, 1, 1, 1))
-                qualita = cols3[0].slider("Qualità del personale :", 1, 100, 1)
-                pulizia = cols3[1].slider("Pulizia degli ambienti :", 1, 100, 1)
-                empatia = cols3[2].slider("Grado di empatia personale :", 1, 100, 1)
-                info_terapeutiche = cols3[3].slider("Chiarezze delle informazioni terapeutiche :", 1, 100, 1)
+            #PROCEDURA
+            st.info("➡️ 4. Sulla procedura che le è stata prescritta")
+            cols3 = st.columns((1.3,  1.7,  1,  1,  1,  1,  1.6))
+            var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
+            var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 7, 1)
+            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+            var_d4 = cols3[3].selectbox("Si è sentito sicuro durante la procedura?", ["SI", "NO", "Indifferente"])
+            var_d5 = cols3[4].selectbox("Ha provato dolore a causa della procedura?", ["SI", "NO", "Indifferente"])
+            var_d6 = cols3[5].selectbox("Ha provato ansia durante la procedura?", ["SI", "NO", "Indifferente"])
+            var_d7 = cols3[6].slider("Quanto è soddisfatto della durata della procedura stessa?", 1, 7, 1)
+            
+            #SPIEGAZIONE RISULTATI
+            st.info("➡️ 5. Spiegazioni risultati del dipartimento")
+            cols3 = st.columns((1, 1, 1))
+            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  7,  1)
+            
+            #ESPERIENZA COME PAZIENTE
+            st.info("➡️ 6. Com'è stata la sua esperienza nel reparto come paziente")
+            cols3 = st.columns((1, 1, 1, 1, 1))
+            var_h1 = cols3[0].slider("Quanto è soddisfatto della disponibilità di servizi igienici? ", 1,  7,  1)
+            var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  7,  1)
+            var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  7,  1)
+            var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  7,  1)
+            var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  7,  1)
+            
+            #INFO PAZIENTE
+            st.info("➡️ 7. La nostra analisi delle vostre risposte")
+            cols3 = st.columns((1, 1))
+            var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
+            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
+            
+            submitted = st.button(label="Submit")
+            with col2:
+                if var_b1=="NO":
+                    med_accoglienza=(var_c1+var_c2+var_c3)/2
+                    med_experience=(var_h1+var_h2+var_h5+var_h7+var_h9)/5
+                    DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
+                                {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
+                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "RISULTATI", "Peso Area": var_f3},
+                                {"taste": "ESPERIENZA", "Peso Area": med_experience}]
+                    graph_pes(DATA)
+                    media_tot=(med_accoglienza+med_experience+var_a2+var_d2+var_f3)/5
+                elif var_b1=="SI":
+                    med_accoglienza=(var_c1+var_c2)/2
+                    med_sito=(var_b2+var_b3)/2
+                    med_experience=(var_h1+var_h2+var_h5+var_h7+var_h9)/5
+                    DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
+                                {"taste": "SITO WEB", "Peso Area": med_sito},
+                                {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
+                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "RISULTATI", "Peso Area": var_f3},
+                                {"taste": "ESPERIENZA", "Peso Area": med_experience}]
+                    graph_pes(DATA)
+                    media_tot=(med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3)/6
+                    
+            if submitted==True:
+                st.success("Successfully")
+                st.balloons()
+                if media_tot<3:
+                    st. metric("Media della tua esperienza",  value=(str(media_tot)+"/7"))
+                    feedback_gen=st.text_area("Raccontaci la tua esperienza e miglioreremo sicuramente la tua esperienza")
+                    
+                #Storing data
+                datetime_object = datetime.datetime.now()
+                add_row_to_gsheet(
+                df, [[var_a1, var_a2, var_a3,
+                        var_b1, var_b2, var_b3,
+                        var_c1, var_c2, var_c3,
+                        var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
+                        "", "", 
+                        var_f1, var_f2, var_f3,
+                        "","", "", "","",
+                        var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
+                        var_i1, var_i2, 
+                        "", 
+                        str(datetime_object)]])
+        
+        # ###FORM 3
+        if slider>7:
+            col1,  col2 = st.columns([1, 0.60])
+            with col1:
+                new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
+                st.markdown(new_title, unsafe_allow_html=True)
+                st.info("➡️ 1. Come ha preso l'appuntamento?")
+                cols = st.columns((1, 1, 1.7))
+                #APPUNTAMENTO
+                var_a1 = cols[0].selectbox("Ho preso un appuntamento:",  ["Personalmente",  "Telefono",  "Sito Web", "E-mail",  "Tramite medico",  "Altro"])
+                var_a2= cols[1].slider("Quanto è soddisfatto della facilità di fissare un appuntamento?", 1, 7, 1)
+                var_a3= cols[2].select_slider('Quanto tempo è trascorso tra la segnalazione del medico e l\'appuntamento?',options=["< 1 settimana", "< 1 mese", "1-3 mesi", "3-6 mesi", "> 6 mesi"])
                 
-                #prestazione ambulatoriale ricevuta
-                st.write("Informazioni attese Prestazione Ricevuta")
-                cols3 = st.columns((3))
-                type_vis = cols3[0].selectbox("A quale macro area afferisce la prestazione che ha ricevuto:", ("RISONANZA","ELETTROMIOGRAFIA","TOMOGRAFIA","ECOGRAFIA","RADIOGRAFIA","ECODOPPLER"))
-                durata_vis = cols3[1].selectbox("Quanto è durata la visita:",options=[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
-                durata_attesa_vis = cols3[2].selectbox("Quanto è durata il tempo di attesa prima della visita:",options=[0,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+                #SITO WEB
+                st.info("➡️ 2. Informazioni sul sito nostro sito web")
+                cols2 = st.columns((3))
+                var_b1 = cols2[0].selectbox("Avete visitato il nostro sito web", ["SI", "NO"])
+                if var_b1=="SI":
+                    var_b2 = cols2[1].slider("Se sì, quanto è soddisfatto delle informazioni che trova sul nostro sito web?", 1, 7, 1)
+                    var_b3 = cols2[2].slider("Se sì, quanto è soddisfatto della facilità di utilizzo del nostro sito web?", 1, 7, 1)
+                else:
+                    var_add= cols2[1].selectbox("Non hai visitato il nostro sito web per quale motivo?", ["Ho avuto difficoltà a trovarlo", "Non mi interessa visitarlo", "Altro"])
+                    if var_add=="Altro":
+                        var_add2=cols2[2].text_input("Se vuoi inserisci la motivazione")
+
+            #ACCOGLIENZA
+            st.info("➡️ 3. Sull'accoglienza del nostro dipartimento")
+            cols2 = st.columns((3))
+            var_c1 = cols2[0].slider("Quanto è soddisfatto dell'accoglienza del nostro reparto?", 1, 7, 1)
+            var_c2 = cols2[1].slider("Quanto è soddisfatto del tempo che ha dovuto attendere per essere aiutato alla reception?", 1, 7, 1)
+            var_c3 = cols2[2].slider("Quanto è soddisfatto delle istruzioni ricevute per trovare l'area d'attesa corretta per la procedura?", 1, 7, 1)
                 
-                #tempi di attesa trattamenti
-                st.write("Prezzo e Utilità Prestazione Ricevuta")
-                cols3 = st.columns((2))
-                utili_vis = cols3[0].selectbox("Ritieni che la visita effettuata ti sia servita:",options=["Molto Utile","Utile","Equo","Poco utile","Inutile"])
-                pay_vis = cols3[1].selectbox("Ritieni di aver pagato per la visita un prezzo:",options=["Troppo alto","Equo","Troppo basso"])
-                
-                submitted = st.form_submit_button(label="Submit")
-                if submitted==True:
-                    datetime_object = datetime.datetime.now()
-                    st.success("Successfully")
-                    add_row_to_gsheet(
-                    df, [[author, eta, sesso,
-                          str(date), infras, proces, sicurezza,
-                          qualita, pulizia, empatia, info_terapeutiche, str(datetime_object),
-                          type_vis, durata_vis, durata_attesa_vis, utili_vis, pay_vis]])
-                    st.balloons()
+            #PROCEDURA
+            st.info("➡️ 4. Sulla procedura che le è stata prescritta")
+            cols3 = st.columns((1.3,  1.7,  1,  1,  1,  1,  1.6))
+            var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
+            var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 7, 1)
+            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+            var_d4 = cols3[3].selectbox("Si è sentito sicuro durante la procedura?", ["SI", "NO", "Indifferente"])
+            var_d5 = cols3[4].selectbox("Ha provato dolore a causa della procedura?", ["SI", "NO", "Indifferente"])
+            var_d6 = cols3[5].selectbox("Ha provato ansia durante la procedura?", ["SI", "NO", "Indifferente"])
+            var_d7 = cols3[6].slider("Quanto è soddisfatto della durata della procedura stessa?", 1, 7, 1)
+            
+            #INFORMAZIONI PROCEDURA
+            st.info("➡️ 5. Informazioni sulle procedure")
+            cols3 = st.columns((1, 1, 1))
+            var_e1 = cols3[0].selectbox("Ha ricevuto informazioni scritte sulla procedura?", ["SI", "NO"])
+            var_e2 = cols3[1].slider("Ha consultato un professionista della salute per farsi spiegare i risultati?", 1,  7,  1)
+            
+            #SPIEGAZIONE RISULTATI
+            st.info("➡️ 6. Spiegazioni risultati del dipartimento")
+            cols3 = st.columns((1, 1, 1))
+            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  7,  1)
+            
+            #TEMPO ATTESA RISULTATI
+            st.info("➡️ 7. Tempo di attesa risultati")
+            cols3 = st.columns((1, 1, 1, 1, 1))
+            var_g1 = cols3[0].selectbox("Quanto tempo dovrete aspettare per i risultati?", ["Li ho già", "< 1 settimana", "< 1 mese", "1-3 mesi", "3-6 mesi", "> 6 mesi"] )
+            var_g2 = cols3[1].selectbox("L'attesa è quella che mi aspettavo e che mi era stata anticipata? ", ["SI", "NO"])
+            var_g3 = cols3[2].slider("Quanto è soddisfatto del tempo di attesa dei risultati? ", 1,  7,  1)
+            var_g4 = cols3[3].selectbox("Riceverà i risultati dal medico che l'ha inviata qui? ", ["SI", "NO"])
+            var_g5 = cols3[4].selectbox("Il medico le spiegherà i risultati? ", ["SI", "NO"])
+            
+            #ESPERIENZA COME PAZIENTE
+            st.info("➡️ 8. Com'è stata la sua esperienza nel reparto come paziente")
+            cols3 = st.columns((1, 1, 1, 1, 1))
+            var_h1 = cols3[0].slider("Quanto è soddisfatto della disponibilità di servizi igienici? ", 1,  7,  1)
+            var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  7,  1)
+            var_h3 = cols3[2].slider("Quanto è soddisfatto della disponibilità di acqua potabile o di altre bevande? ", 1,  7,  1)
+            var_h4 = cols3[3].slider("Quanto è soddisfatto del numero di posti a sedere nelle aree	di attesa?", 1,  7,  1)
+            var_h5 = cols3[4].slider("Quanto è soddisfatto della cordialità del personale ", 1,  7,  1)
+            
+            cols3 = st.columns((1, 1, 1, 1))
+            var_h6 = cols3[0].slider("Quanto è soddisfatto dell'ambiente (temperatura, rumore...) nel reparto? ", 1,  7,  1)
+            var_h7 = cols3[1].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  7,  1)
+            var_h8 = cols3[2].selectbox("Tornerebbe nel nostro reparto di radiologia per un'altra procedura", ["SI", "NO"])
+            var_h9 = cols3[3].selectbox("Consiglierebbe il nostro reparto di radiologia ai suoi familiari e amici", ["SI", "NO"])
+            
+            #INFO PAZIENTE
+            st.info("➡️ 9. La nostra analisi delle vostre risposte")
+            cols3 = st.columns((1, 1))
+            var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
+            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
+            
+            submitted = st.button(label="Submit")
+            with col2:
+                if var_b1=="NO":
+                    med_accoglienza=(var_c1+var_c2+var_c3)/2
+                    med_experience=(var_h1+var_h2+var_h3+var_h4+var_h5+var_h6+var_h7)/7
+                    DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
+                                {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
+                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "TEMPO ATTESA RISULTATI", "Peso Area": var_g3},
+                                {"taste": "RISULTATI", "Peso Area": var_f3},
+                                {"taste": "ESPERIENZA", "Peso Area": med_experience}]
+                    graph_pes(DATA)
+                    media_tot=(med_accoglienza+var_g3+med_experience+var_a2+var_d2+var_f3)/6
+                elif var_b1=="SI":
+                    med_accoglienza=(var_c1+var_c2)/2
+                    med_sito=(var_b2+var_b3)/2
+                    med_experience=(var_h1+var_h2+var_h3+var_h4+var_h5+var_h6+var_h7)/7
+                    DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
+                                {"taste": "SITO WEB", "Peso Area": med_sito},
+                                {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
+                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "TEMPO ATTESA RISULTATI", "Peso Area": var_g3},
+                                {"taste": "RISULTATI", "Peso Area": var_f3},
+                                {"taste": "ESPERIENZA", "Peso Area": med_experience}]
+                    graph_pes(DATA)
+                    media_tot=(med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3+ var_g3)/7
+                    
+            if submitted==True:
+                st.success("Successfully")
+                st.balloons()
+                if media_tot<3:
+                    st. metric("Media della tua esperienza",  value=(str(media_tot)+"/7"))
+                    feedback_gen=st.text_area("Raccontaci la tua esperienza e miglioreremo sicuramente la tua esperienza")
+                    
+                #Storing data
+                datetime_object = datetime.datetime.now()
+                add_row_to_gsheet(
+                df, [[var_a1, var_a2, var_a3,
+                        var_b1, var_b2, var_b3,
+                        var_c1, var_c2, var_c3,
+                        var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
+                        var_e1,  var_e2,  
+                        var_f1, var_f2, var_f3,
+                        var_g1, var_g2, var_g3, var_g4,var_g5,
+                        var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
+                        var_i1, var_i2, 
+                        "", 
+                        str(datetime_object)]])
                 
     if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti,
-            "Dashboard Operations": dashboard_operations,
-            "Dashboard Patient Satisfaction": dashboard_patient_satisf,
-            "Dashboard Economics": dashboard_economics}
+            "Dashboard Patient Satisfaction": dashboard_patient_satisf}
     elif name=="Gentile paziente":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti}
