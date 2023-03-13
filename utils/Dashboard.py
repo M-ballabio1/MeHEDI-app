@@ -15,13 +15,36 @@ from streamlit_elements import nivo
 
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+from PIL import Image
 
 
 def dashboard_patient_satisf():
-    st.title("Dashboard Patient Satisfaction")
+    img = Image.open('images/dashboard1_logo.png')
+    st.image(img) 
+    image3 = Image.open('images/Mehedi_logo2.png')
     
     color1 = "#1919e6"
     color2 = "#89CFF0"
+    
+    #serve per allargare margini da block-container
+    st.markdown("""
+    <style>
+           .css-k1ih3n {
+                padding-top: 0rem;
+                padding-bottom: 4rem;
+                padding-left: 4em;
+                padding-right: 4rem;
+            }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    hide_img_fs = '''
+        <style>
+        button[title="View fullscreen"]{
+            visibility: hidden;}
+        </style>
+        '''
+    st.markdown(hide_img_fs, unsafe_allow_html=True)
    
     def display_dial(title, value, color):
      st.markdown(
@@ -48,15 +71,35 @@ def dashboard_patient_satisf():
     url_1 = sheet_url.replace("/edit#gid=", "/export?format=csv&gid=")
     df=pd.read_csv(url_1)
     
+    #SIDEBAR
+    st.sidebar.markdown("""<hr style="height:5px;border:none;color:#bfbfbf;background-color:#bfbfbf;" /> """, unsafe_allow_html=True)
+    st.sidebar.info(
+    """
+    Questa è una webapp creata da che consente di valutare la Patient Satisfaction
+    
+    Web App URL: <https://xxx.streamlitapp.com>
+    """
+    )
+
+    st.sidebar.title("Support")
+    st.sidebar.info(
+        """
+        Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
+        """
+    )
+    a, b, c = st.sidebar.columns([0.2,1,0.2])
+    with a:
+        st.write("")
+    with b:
+        st.image(image3, width=170)
+    with c:
+        st.write("")
+    
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.write("🔁 Filtra ciò che ti interessa")
-    with col2:
-        df.loc[df['Età']<=15, 'age_group'] = 'Bambini'
-        df.loc[df['Età'].between(16,31), 'age_group'] = 'Ragazzi'
-        df.loc[df['Età'].between(30,60), 'age_group'] = 'Adulti'
-        df.loc[df['Età']>=60, 'age_group'] = 'Anziani'        
-        st.multiselect("Fasce di età", df["age_group"].unique())
+    with col2:  
+        st.multiselect("Fasce di età", df["Range_Età"].unique())
     with col3:
         st.multiselect("Sesso", df["Sesso"].unique())
     with col4:
@@ -64,6 +107,7 @@ def dashboard_patient_satisf():
         current_time = datetime.datetime.now()
         slider = st.slider('Select date', 0, 100, 1)
     
+    """
     #processi - strutture
     quality_str_m=df["Qualità struttura"].mean()
     quality_pro_m=df["Qualità processi"].mean()
@@ -172,11 +216,11 @@ def dashboard_patient_satisf():
     col1, col2 = st.columns(2)
     with col1:
         st.header("Word Cloud Patient Form")
-        text = """Healthcare, hospital, sanità, monitoraggio, empatia, relazioni, sanità, pulizia,
+        text = Healthcare, hospital, sanità, monitoraggio, empatia, relazioni, sanità, pulizia,
                 goals, health, sanità pubblica, esperienza, bene, healthcare, sanità, ambiente,
                 pulito, sicuro, ospedale, ambulatorio, ambulatorio, healthcare, healthcare, sanità,
                 dottori, professionisti, settore in crescita, medicina generale, cardiologia,
-                radiologia, sanità, sanitario, health, health"""
+                radiologia, sanità, sanitario, health, health
 
         # Create and generate a word cloud image:
         wordcloud = WordCloud(
@@ -189,9 +233,9 @@ def dashboard_patient_satisf():
         plt.subplots_adjust(left=-5, right=-2, top=-2, bottom=-5)
         plt.show()
         st.pyplot(fig)
-    
+   
     with col2:
         st.header("Health data")
         st.image("https://www.slideteam.net/media/catalog/product/cache/1280x720/p/a/patient_satisfaction_measurement_dashboard_service_ppt_show_vector_slide01.jpg")
-    
+     """
     df=st.write(df)
