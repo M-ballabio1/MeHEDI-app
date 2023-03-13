@@ -17,6 +17,7 @@ from googleapiclient.http import HttpRequest
 from utils.Dashboard_Operations import dashboard_operations
 from utils.Dashboard import dashboard_patient_satisf
 from utils.Dashboard_Economics import dashboard_economics
+from utils.Info_Page import landing_page
 from utils.addition.graphs import graph_pes
 
 #css_file="style.css"
@@ -562,10 +563,12 @@ if authentication_status:
     if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti,
-            "Dashboard Patient Satisfaction": dashboard_patient_satisf}
+            "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
+            "Info Framework":landing_page}
     elif name=="Gentile paziente":
         page_names_to_funcs = {
-            "Form Patient Satisfaction": form_pazienti}
+            "Form Patient Satisfaction": form_pazienti, 
+            "Info Framework":landing_page}
 
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
