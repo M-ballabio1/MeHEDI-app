@@ -23,7 +23,7 @@ def landing_page():
                 padding-top: 0rem;
                 padding-bottom: 4rem;
                 padding-left: 6em;
-                padding-right: 4rem;
+                padding-right: 10rem;
             }
     </style>
     """, unsafe_allow_html=True)
@@ -36,7 +36,7 @@ def landing_page():
         '''
     st.markdown(hide_img_fs, unsafe_allow_html=True)
 
-    new_title = '<b style="font-family:serif; color:#6082B6; font-size: 22px;">Il tool MEDi è un framework di Patient Satisfaction guidato per la compilazione di survey in ambito soddisfazione in ambito Healthcare.</b>'
+    new_title = '<b style="font-family:serif; color:#6082B6; font-size: 26px;">Il tool MEDi è un framework di Patient Satisfaction guidato per la compilazione di survey in ambito soddisfazione in ambito Healthcare.</b>'
     st.markdown(new_title, unsafe_allow_html=True)
     
     #SIDEBAR
@@ -66,110 +66,135 @@ def landing_page():
     if st.session_state.count==0:
         a, b = st.columns([7, 1.5])
         with a:
+            new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Summary Proof of Concept MEHEDI:</b>'
+            st.markdown(new_title, unsafe_allow_html=True)
             st.write(
                 """
-                **Goal Framework:**
                 
-                The framework ROXi is a web-app for associated Goals and KPI.. There are different steps to
-                complete this [**framework**](https://mail.google.com/chat/u/0/):
+                The last decade has seen an exponential growth of data in every sector due to improved sensing technologies.
+                Among these sectors we consider for this **POC the Healthcare sector**. Despite the strong growth from the technical point
+                of view of storing these data, there has not always been optimal interpretation and management of the available data.
+                
+                **What is the status of the digital transformation of Italian healthcare?**
+                
+                Saleforce Italia conducted a survey of a sample of 84 healthcare organizations including AOs, IRCSSs, Nursing Homes and Diagnostic Centers.
+                For 56% of the Italian healthcare organizations surveyed, there is still no formal strategic planning for digital innovation. For **37%, on the other hand, digitization
+                strategy is limited to individual processes**, while **7% consider digital strategy as an integral part of business strategy** to innovate patient care models.
+                
+                If you want to read the full document (POC) you can click on this [**link**](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit#), otherwise if you prefer to see to our 
+                solution click the Go Next button.
                 """
             )
-            st.markdown("- Definizione degli obiettivi progettuali")
-            st.markdown("- Associazione tra obiettivi e KPI")
-            st.markdown("- Clusterizzazione degli obiettivi inseriti in macro-aree e Review finale")
-
-            st.markdown('''
-            <style>
-            [data-testid="stMarkdownContainer"] ul{
-                padding-left:40px;
-            }
-            </style>
-            ''', unsafe_allow_html=True)
         with b:
-            st.image(img2,width=250)
+            st.image(img2,width=300)
         st.button("Go Next ⬇️", key='first', on_click=increment)
         
     if st.session_state.count==1:
         a, b = st.columns([7, 1.5])
         with a:
+            new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Summary Proof of Concept MEHEDI:</b>'
+            st.markdown(new_title, unsafe_allow_html=True)
             st.write(
                 """
-                **Goal Framework:**
                 
-                The framework ROXi is a web-app for associated Goals and KPI.. There are different steps to
-                complete this [**framework**](https://mail.google.com/chat/u/0/):
+                The last decade has seen an exponential growth of data in every sector due to improved sensing technologies.
+                Among these sectors we consider for this **POC the Healthcare sector**. Despite the strong growth from the technical point
+                of view of storing these data, there has not always been optimal interpretation and management of the available data.
+                
+                **What is the status of the digital transformation of Italian healthcare?**
+                
+                Saleforce Italia conducted a survey of a sample of 84 healthcare organizations including AOs, IRCSSs, Nursing Homes and Diagnostic Centers.
+                For 56% of the Italian healthcare organizations surveyed, there is still no formal strategic planning for digital innovation. For **37%, on the other hand, digitization
+                strategy is limited to individual processes**, while **7% consider digital strategy as an integral part of business strategy** to innovate patient care models.
+                
+                If you want to read the full document (POC) you can click on this [**link**](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit#), otherwise if you prefer to see to our 
+                solution click the Go Next button.
                 """
             )
-            st.markdown("- Definizione degli obiettivi progettuali")
-            st.markdown("- Associazione tra obiettivi e KPI")
-            st.markdown("- Clusterizzazione degli obiettivi inseriti in macro-aree e Review finale")
-
-            st.markdown('''
-            <style>
-            [data-testid="stMarkdownContainer"] ul{
-                padding-left:40px;
-            }
-            </style>
-            ''', unsafe_allow_html=True)
         with b:
-            st.image(img2,width=250)
+            st.image(img2,width=300)
+        new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Our MEHEDI\'s Solution:</b>'
+        st.markdown(new_title, unsafe_allow_html=True)
         st.write(
-            """**Type of Patient Satisfaction Form:**
-            
-            The framework ROXi is a web-app for associated Goals and KPI to Pwc's client. There are different steps to
-            complete this [**framework**](https://mail.google.com/chat/u/0/):
+            """Hospital management and practitioners need to be able to evaluate real-time the evolution of metrics related to different business areas.
+                This aspect of Digital Transformation as far as especially small centers are concerned is underestimated, done crudely through monthly reports (single photographs), or even not even considered.
             """
         )
-        st.markdown("- Definizione degli obiettivi progettuali")
-        st.markdown("- Associazione tra obiettivi e KPI")
-        st.markdown("- Clusterizzazione degli obiettivi inseriti in macro-aree e Review finale")
+        st.markdown("- **1: Creating a structured (data-driven) dialogue relationship with patients/customers (Patient satisfaction)**")
+        st.markdown("- **2: Processing insights on such data in a real-time manner (Integration and Continuous monitoring)**")
+        st.markdown("- **3: Providing strategic directions to the facility (Monitoring and Innovation), enables immediate assessment of business problems and opportunities for growth**")
+        
+        new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Project Goal:</b>'
+        st.markdown(new_title, unsafe_allow_html=True)
+        st.write(
+            """The goal of the project is to create a web-application for the integration of data derived from Patients through ad-hoc developed questionnaires (PREM)
+                with the facility's operational and economic management metrics to set up a 360-degree data-driven improvement strategy. The goal of the project is the creation of web-application 
+                for management and monitoring uses from a business management perspective concerning 3 spheres:
+            """)
+        
+        st.markdown("- **Patient Satisfaction** --> Finish ✅")
+        st.markdown("- **Operations** --> Progress 🔄")
+        st.markdown("- **Economics** (economics-billing) --> Progress 🔄")
+        
+        st.write(
+            """The application allows through the use of an access managed by authentication to collect feedback from the patient regarding patient satisfaction
+                and on the other hand, the possibility to evaluate and analyze the results derived from different strategic business areas.""")
+    
         st.button("Go Next ⬇️", key='second', on_click=increment)
     if st.session_state.count==2:
         a, b = st.columns([7, 1.5])
         with a:
+            new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Summary Proof of Concept MEHEDI:</b>'
+            st.markdown(new_title, unsafe_allow_html=True)
             st.write(
                 """
-                **Goal Framework:**
                 
-                The framework ROXi is a web-app for associated Goals and KPI.. There are different steps to
-                complete this [**framework**](https://mail.google.com/chat/u/0/):
+                The last decade has seen an exponential growth of data in every sector due to improved sensing technologies.
+                Among these sectors we consider for this **POC the Healthcare sector**. Despite the strong growth from the technical point
+                of view of storing these data, there has not always been optimal interpretation and management of the available data.
+                
+                **What is the status of the digital transformation of Italian healthcare?**
+                
+                Saleforce Italia conducted a survey of a sample of 84 healthcare organizations including AOs, IRCSSs, Nursing Homes and Diagnostic Centers.
+                For 56% of the Italian healthcare organizations surveyed, there is still no formal strategic planning for digital innovation. For **37%, on the other hand, digitization
+                strategy is limited to individual processes**, while **7% consider digital strategy as an integral part of business strategy** to innovate patient care models.
+                
+                If you want to read the full document (POC) you can click on this [**link**](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit#), otherwise if you prefer to see to our 
+                solution click the Go Next button.
                 """
             )
-            st.markdown("- Definizione degli obiettivi progettuali")
-            st.markdown("- Associazione tra obiettivi e KPI")
-            st.markdown("- Clusterizzazione degli obiettivi inseriti in macro-aree e Review finale")
-
-            st.markdown('''
-            <style>
-            [data-testid="stMarkdownContainer"] ul{
-                padding-left:40px;
-            }
-            </style>
-            ''', unsafe_allow_html=True)
         with b:
-            st.image(img2,width=250)
+            st.image(img2,width=300)
+        new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Our MEHEDI\'s Solution:</b>'
+        st.markdown(new_title, unsafe_allow_html=True)
         st.write(
-            """**Type of Patient Satisfaction Form:**
-            
-            The framework ROXi is a web-app for associated Goals and KPI to Pwc's client. There are different steps to
-            complete this [**framework**](https://mail.google.com/chat/u/0/):
+            """Hospital management and practitioners need to be able to evaluate real-time the evolution of metrics related to different business areas.
+                This aspect of Digital Transformation as far as especially small centers are concerned is underestimated, done crudely through monthly reports (single photographs), or even not even considered.
             """
         )
-        st.markdown("- Definizione degli obiettivi progettuali")
-        st.markdown("- Associazione tra obiettivi e KPI")
-        st.markdown("- Clusterizzazione degli obiettivi inseriti in macro-aree e Review finale")
-        st.markdown("")
-        st.markdown("")
-        st.markdown("")
+        st.markdown("- **1: Creating a structured (data-driven) dialogue relationship with patients/customers (Patient satisfaction)**")
+        st.markdown("- **2: Processing insights on such data in a real-time manner (Integration and Continuous monitoring)**")
+        st.markdown("- **3: Providing strategic directions to the facility (Monitoring and Innovation), enables immediate assessment of business problems and opportunities for growth**")
+        
+        new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Project Goal:</b>'
+        st.markdown(new_title, unsafe_allow_html=True)
         st.write(
-            """
-            **Metrics of Patient Satisfaction Dashboard:**
-            
-            The framework ROXi is a web-app for associated Goals and KPI. There are different steps to
-            complete this [**framework**](https://mail.google.com/chat/u/0/):
-            """
-        )
-        st.markdown("- Definizione degli obiettivi progettuali")
-        st.markdown("- Associazione tra obiettivi e KPI")
-        st.markdown("- Clusterizzazione degli obiettivi inseriti in macro-aree e Review finale")
+            """The goal of the project is to create a web-application for the integration of data derived from Patients through ad-hoc developed questionnaires (PREM)
+                with the facility's operational and economic management metrics to set up a 360-degree data-driven improvement strategy. The goal of the project is the creation of web-application 
+                for management and monitoring uses from a business management perspective concerning 3 spheres:
+            """)
+        
+        st.markdown("- **Patient Satisfaction** --> Finish ✅")
+        st.markdown("- **Operations** --> Progress 🔄")
+        st.markdown("- **Economics** (economics-billing) --> Progress 🔄")
+        
+        st.write(
+            """The application allows through the use of an access managed by authentication to collect feedback from the patient regarding patient satisfaction
+                and on the other hand, the possibility to evaluate and analyze the results derived from different strategic business areas.""")
+        
+        new_title = '<b style="font-family:serif; color:#000000; font-size: 22px;">Team of project:</b>'
+        st.markdown(new_title, unsafe_allow_html=True)
+        st.markdown("- Matteo Ballabio, Biomedical and Management Engineer, PwC consultant ")
+        st.markdown("- Luca Alessandro Cappellini, Medical Doctor, Radiology Resident, MBA fellow ")
+        st.markdown("- Federico Facoetti, Engineering and management for health ")
             

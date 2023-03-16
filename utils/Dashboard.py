@@ -4,14 +4,10 @@ import streamlit as st  # pip install streamlit
 #import altair as alt
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
-import google_auth_httplib2
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import HttpRequest
 import datetime
 
-from streamlit_elements import elements, mui, html, sync, lazy
-from streamlit_elements import nivo
+#from streamlit_elements import elements, mui, html, sync, lazy
+#from streamlit_elements import nivo
 
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt

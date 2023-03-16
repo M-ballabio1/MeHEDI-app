@@ -211,7 +211,7 @@ if authentication_status:
                     
                     Ci vorranno solo pochi minuti del vostro tempo. Leggete attentamente ogni domanda, scegliete la vostra risposta e contrassegnatela. Se ritenete di non essere in grado di rispondere a una domanda specifica, passate alla successiva.
                     
-                    Per alcune domande vorremmo che ci desse un punteggio, che va da 1 a 5: 5 significa che è molto soddisfatto e 1 che è molto insoddisfatto. Potete darci qualsiasi punteggio che ritenete corretto. Un punteggio come 3,5 va bene e può essere dato *[5=molto soddisfatto, 4=soddisfatto, 3=neutro, né soddisfatto né insoddisfatto, 2=insoddisfatto, 1=molto insoddisfatto]*.
+                    Per alcune domande vorremmo che ci desse un punteggio, che va da 1 a 7: 7 significa che è molto soddisfatto e 1 che è molto insoddisfatto. Potete darci qualsiasi punteggio che ritenete corretto.  *[7=ottimo, 6=molto soddisfatto, 5=soddisfatto, 4=neutro 3=né soddisfatto né insoddisfatto, 2=insoddisfatto, 1=molto insoddisfatto]*.
                     
                     ### Perchè vogliamo misurare la Patient Satisfaction?
                     1. Miglioramento dei servizi offerti dalla struttura mirata nelle aree segnalate 
@@ -279,7 +279,6 @@ if authentication_status:
             var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
             var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
             
-            submitted = st.button(label="Submit")
             with col2:
                 med_accoglienza=(var_c1+var_c2)/2
                 med_experience=(var_h1+var_h2+var_h5+var_h7+var_h9)/5
@@ -289,15 +288,22 @@ if authentication_status:
                             {"taste": "RISULTATI", "Peso Area": var_f3},
                             {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                 graph_pes(DATA)
-                
-                media_tot=(med_accoglienza+med_experience+var_a2+var_d2+var_f3)/5
+                media_tot=round(((med_accoglienza+med_experience+var_a2+var_d2+var_f3)/5), 1)
+            
+            if media_tot<=4:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza può essere migliorata, raccontaci cosa ne pensi e miglioreremo sicuramente")
+            elif media_tot>4 and media_tot<=5:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
+            else:
+                feedback_gen=""
+            submitted = st.button(label="Submit")
             if submitted==True:
                 st.success("Successfully")
                 st.balloons()
-                if media_tot<3:
-                    st. metric("Media della tua esperienza",  value=(str(media_tot)+"/7"))
-                    feedback_gen=st.text_area("Raccontaci la tua esperienza e miglioreremo sicuramente la tua esperienza")
-                    
                 #Storing data
                 datetime_object = datetime.datetime.now()
                 add_row_to_gsheet(
@@ -310,7 +316,7 @@ if authentication_status:
                         "","", "", "","",
                         var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                         var_i1, var_i2, 
-                        "", 
+                        feedback_gen, 
                         str(datetime_object)]])
         
         # ###FORM 2
@@ -377,8 +383,7 @@ if authentication_status:
             cols3 = st.columns((1, 1))
             var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
             var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
-            
-            submitted = st.button(label="Submit")
+
             with col2:
                 if var_b1=="NO":
                     med_accoglienza=(var_c1+var_c2+var_c3)/2
@@ -401,15 +406,22 @@ if authentication_status:
                                 {"taste": "RISULTATI", "Peso Area": var_f3},
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                     graph_pes(DATA)
-                    media_tot=(med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3)/6
-                    
+                    media_tot=round(((med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3)/6), 1)
+            
+            if media_tot<=4:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza può essere migliorata, raccontaci cosa ne pensi e miglioreremo sicuramente")
+            elif media_tot>4 and media_tot<=5:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
+            else:
+                feedback_gen=""
+            submitted = st.button(label="Submit")
             if submitted==True:
                 st.success("Successfully")
                 st.balloons()
-                if media_tot<3:
-                    st. metric("Media della tua esperienza",  value=(str(media_tot)+"/7"))
-                    feedback_gen=st.text_area("Raccontaci la tua esperienza e miglioreremo sicuramente la tua esperienza")
-                    
                 #Storing data
                 datetime_object = datetime.datetime.now()
                 add_row_to_gsheet(
@@ -422,7 +434,7 @@ if authentication_status:
                         "","", "", "","",
                         var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                         var_i1, var_i2, 
-                        "", 
+                        feedback_gen, 
                         str(datetime_object)]])
         
         # ###FORM 3
@@ -511,7 +523,6 @@ if authentication_status:
             var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
             var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
             
-            submitted = st.button(label="Submit")
             with col2:
                 if var_b1=="NO":
                     med_accoglienza=(var_c1+var_c2+var_c3)/2
@@ -536,15 +547,21 @@ if authentication_status:
                                 {"taste": "RISULTATI", "Peso Area": var_f3},
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                     graph_pes(DATA)
-                    media_tot=(med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3+ var_g3)/7
-                    
+                    media_tot=round(((med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3+ var_g3)/7), 1)
+            if media_tot<=4:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza può essere migliorata, raccontaci cosa ne pensi e miglioreremo sicuramente")
+            elif media_tot>4 and media_tot<=5:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
+            else:
+                feedback_gen=""
+            submitted = st.button(label="Submit")
             if submitted==True:
                 st.success("Successfully")
                 st.balloons()
-                if media_tot<3:
-                    st. metric("Media della tua esperienza",  value=(str(media_tot)+"/7"))
-                    feedback_gen=st.text_area("Raccontaci la tua esperienza e miglioreremo sicuramente la tua esperienza")
-                    
                 #Storing data
                 datetime_object = datetime.datetime.now()
                 add_row_to_gsheet(
@@ -557,8 +574,9 @@ if authentication_status:
                         var_g1, var_g2, var_g3, var_g4,var_g5,
                         var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
                         var_i1, var_i2, 
-                        "", 
+                        feedback_gen, 
                         str(datetime_object)]])
+                    
                 
     if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
         page_names_to_funcs = {
