@@ -2,7 +2,7 @@
 
 ## 0.Pre-processing and Segmentation
 
-### Semi-automatic method for Pre-processing 
+### Semi-automatic method for Pre-processing,
 
 This folder contain the workflow used for preprocessing T1-W images. 
 
