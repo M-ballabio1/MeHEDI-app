@@ -13,7 +13,7 @@ This folder contain the workflow used for preprocessing T1-W images.
 In this plot, there is a comparison between the different distribution curve of categorical subjects.
 In particular, we observe a big curve distribution difference in the case of high distorted case.
 Furthermore, it is interesting to note that in the case of a distorted subject from another 
-category the tissue distribution curve is quite similar to that of a healthy subject.
+category the tissue distribution curve is similar to that of a healthy subject.
 
 ![Untitled Diagram drawio](https://user-images.githubusercontent.com/78934727/143457592-504aa93f-05f3-4dc1-af7f-a5ff125a93f3.png)
 
