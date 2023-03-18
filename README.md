@@ -2,43 +2,34 @@
 
 ## MEHEDI è una web-app sviluppata con Streamlit un framework open-source (Python-based library) per lo sviluppo di app che vogliono sfruttare la tecnologia di machine learning e data science. 
 
-## 0.
+## 0. La web-app si compone delle seguenti interfacce:
 
-### Semi-automatic method for Pre-processing,
+## 1.Landing page
+![landing-page](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/landing-page.png)
+### Interfaccia di log-in
+#### 1. Log-in struttura sanitaria
+#### 2. Log-in pazienti
+![login](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/login.png)
 
-This folder contain the workflow used for preprocessing T1-W images. 
+## 2.| Interfaccia dei vari users:
+### Users: 
+#### A) Pazienti
+##### Company/Patient interaction interface: Form di Patient Satisfaction interamente digitalizzato, interattivo e customizzabile in base al grado di disponibilità del Paziente
+##### Compilazione guidata, facilitata ed adattabile al tempo a disposizione da parte del paziente
+Introduzione del framework e customizzazione del form sulla base del tempo a disposizione del Paziente.
+![istruzioni-tempo](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/Istruzioni-tempo.png)
+Scrollable scala Likert (1-7) per la valutazione
+![Experience form](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/Experience_form.png)
+Visualizzazione real-time della propria valutazione
+![grafico-realtime](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/grafico-realtime.png)
+Report finale delle valutazioni del paziente con possibilità per il paziente di lasciare commenti (open-text) che verranno analizzati sulla dashboard della struttura ed integrati con gli altri dati del form
+![comments] (https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/comments.png)
 
-![Preprocessing_giusto drawio](https://user-images.githubusercontent.com/78934727/142078775-1a50e3ad-7be1-4b12-bf15-ff93dcb0eb70.png)
+#### B)Struttura Sanitaria
+Dashboards A  (focus su Patient Satisfaction) :
+Reportistica aggregata relativa alla Patient Satisfaction misurata attraverso questionari ad-hoc
+Elaborazione insights ed integrazione con (Dashboard B e Dashboard C relative a Operations e Economics)
 
-### Plot histogram subjects (without background)
 
-In this plot, there is a comparison between the different distribution curve of categorical subjects.
-In particular, we observe a big curve distribution difference in the case of high distorted case.
-Furthermore, it is interesting to note that in the case of a distorted subject from another 
-category the tissue distribution curve is similar to that of a healthy subject.
-
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/78934727/143457592-504aa93f-05f3-4dc1-af7f-a5ff125a93f3.png)
-
-### Why use a thresholding method with manual selection of the thresholds?
-
-Why was it necessary to use a Threshold segmentation method with choice of manual thresholds compared for example to the Otsu segmentation method (automatic thresholds that minimize intra-class variance)?
-The script multi-otsu creates a segmentation based on Otsu method.
-
-![COMPARAZIONE_288618_totale](https://user-images.githubusercontent.com/78934727/144195381-34d38aae-2ca7-4fa9-9a72-a874568b148a.png)
-
-The comparison between the two segmentation methods highlights a gross segmentation by the automatic segmentation algorithm in the case of subjects with severe brain malformations. This is confirmed by the calculation of the Dice Score metric which reports very low results for the Otsu segmentation, in particular for the recognition of background and CSF.
-
-![comparison_method2 drawio](https://user-images.githubusercontent.com/78934727/144581503-b270da5f-ed2b-4652-934f-ea7ab42e9273.png)
-
-### Semi-automatic method for Segmentation 
-
-It also contains a .txt file describing the workflow used for tissue segmentation using 
-the ITKSNAP software CLI. In particular, using two different algorithms: Thresholding and Clustering.
-
-![segmentation](https://user-images.githubusercontent.com/78934727/142191006-f16cdb4e-0eef-48f1-bf62-bd1b57f991d8.png)
-
-![clustering](https://user-images.githubusercontent.com/78934727/142191087-ec51bbe9-c201-4bfa-8368-c3516a9d5caf.png)
-
-![Trunk_Cerebellum_Segmentation drawio](https://user-images.githubusercontent.com/78934727/143455141-9688d757-23a8-4869-8b80-dd9e8859d3d7.png)
 
 
