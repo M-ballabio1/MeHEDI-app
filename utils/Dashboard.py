@@ -133,7 +133,7 @@ def dashboard_patient_satisf():
         df2_att_scorsa_settimana=df.loc[(df['Timestamp'] >= date_last_week)]
         df2_medie_valori_week=df2_att_scorsa_settimana.mean()
         psi_this_week=round(df2_medie_valori_week[0].mean(), 2)
-        psi_perc=(psi_this_week/7)*100
+        psi_perc=round((psi_this_week/7)*100,2)
         #Settimana precedente alla sett scorsa psi
         df2_prima_scorsa_settimana=df.loc[(df['Timestamp'] <= date_last_week)]
         df2_medie_valori_prec_week=df2_prima_scorsa_settimana.mean()
