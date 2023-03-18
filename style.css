@@ -25,6 +25,7 @@ div.css-wnm74r.e16fv1kl3 {
 /* Row 1 */
 div.css-j5r0tf.e1tzin5v2 {
     background-color: rgb(189, 195, 199);
+    border: 2px solid rgba(200, 168, 211, 0.6);
     padding: 0.5% 0.5% 0.5% 0.5%;
     border-radius: 25px;
 }
@@ -32,11 +33,9 @@ div.css-j5r0tf.e1tzin5v2 {
 /* Row 2 */
 div.css-12w0qpk.e1tzin5v2 {
     background-color: rgba(174, 168, 211, 0.6);
+    border: 2px solid rgba(200, 168, 211, 0.6);
     padding: 1% 1% 1% 1%;
     border-radius: 10px;
-}
-div.css-dm3ece.everg990{
-
 }
 
 /* Hide hamburger menu and footer */
