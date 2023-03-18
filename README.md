@@ -1,6 +1,8 @@
 # MeHEDI-app | A Data-Driven Healthcare
 
-## 0.Pre-processing and Segmentation
+## MEHEDI è una web-app sviluppata con Streamlit un framework open-source (Python-based library) per lo sviluppo di app che vogliono sfruttare la tecnologia di machine learning e data science. 
+
+## 0.
 
 ### Semi-automatic method for Pre-processing,
 
