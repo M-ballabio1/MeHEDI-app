@@ -23,7 +23,7 @@ Scrollable scala Likert (1-7) per la valutazione
 Visualizzazione real-time della propria valutazione
 ![grafico-realtime](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/grafico-realtime.png)
 Report finale delle valutazioni del paziente con possibilità per il paziente di lasciare commenti (open-text) che verranno analizzati sulla dashboard della struttura ed integrati con gli altri dati del form
-![comments] (https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/comments.png)
+![comments](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/comments.png)
 
 #### B)Struttura Sanitaria
 Dashboards A  (focus su Patient Satisfaction) :
