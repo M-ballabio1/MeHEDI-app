@@ -62,7 +62,7 @@ def connect_to_gsheet():
     gsheet_connector = service.spreadsheets()
     return gsheet_connector
 
-
+@st.cache_data(ttl=600)
 def get_data(gsheet_connector) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
@@ -277,7 +277,7 @@ if authentication_status:
             st.info("➡️ 6. La nostra analisi delle vostre risposte")
             cols3 = st.columns((1, 1))
             var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
-            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
+            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina", "Non Specificato" ])
             
             with col2:
                 med_accoglienza=(var_c1+var_c2)/2
@@ -382,7 +382,7 @@ if authentication_status:
             st.info("➡️ 7. La nostra analisi delle vostre risposte")
             cols3 = st.columns((1, 1))
             var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
-            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
+            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina", "Non Specificato" ])
 
             with col2:
                 if var_b1=="NO":
@@ -422,20 +422,36 @@ if authentication_status:
             if submitted==True:
                 st.success("Successfully")
                 st.balloons()
-                #Storing data
-                datetime_object = datetime.datetime.now()
-                add_row_to_gsheet(
-                df, [[var_a1, var_a2, var_a3,
-                        var_b1, var_b2, var_b3,
-                        var_c1, var_c2, var_c3,
-                        var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
-                        "", "", 
-                        var_f1, var_f2, var_f3,
-                        "","", "", "","",
-                        var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
-                        var_i1, var_i2, 
-                        feedback_gen, 
-                        str(datetime_object)]])
+                if var_b1=="SI":
+                    #Storing data
+                    datetime_object = datetime.datetime.now()
+                    add_row_to_gsheet(
+                    df, [[var_a1, var_a2, var_a3,
+                            var_b1, var_b2, var_b3,
+                            var_c1, var_c2, var_c3,
+                            var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
+                            "", "", 
+                            var_f1, var_f2, var_f3,
+                            "","", "", "","",
+                            var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
+                            var_i1, var_i2, 
+                            feedback_gen, 
+                            str(datetime_object)]])
+                else:
+                    #Storing data
+                    datetime_object = datetime.datetime.now()
+                    add_row_to_gsheet(
+                    df, [[var_a1, var_a2, var_a3,
+                            var_b1, "", "",
+                            var_c1, var_c2, var_c3,
+                            var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
+                            "", "", 
+                            var_f1, var_f2, var_f3,
+                            "","", "", "","",
+                            var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
+                            var_i1, var_i2, 
+                            feedback_gen, 
+                            str(datetime_object)]])
         
         # ###FORM 3
         if slider>7:
@@ -521,7 +537,7 @@ if authentication_status:
             st.info("➡️ 9. La nostra analisi delle vostre risposte")
             cols3 = st.columns((1, 1))
             var_i1= cols3[0].select_slider('Potrebbe indicarci il suo gruppo di età (facoltativo)?',options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
-            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina" ])
+            var_i2= cols3[1].selectbox('Può indicarci il suo sesso (facoltativo)?',options=["Maschio", "Femmina", "Non Specificato"  ])
             
             with col2:
                 if var_b1=="NO":
