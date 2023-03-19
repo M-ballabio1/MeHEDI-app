@@ -271,7 +271,7 @@ if authentication_status:
             var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  7,  1)
             var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  7,  1)
             var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  7,  1)
-            var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  7,  1)
+            var_h9 = cols3[4].selectbox("Consiglierebbe il nostro reparto di radiologia ai suoi familiari e amici", ["SI", "NO"])
             
             #INFO PAZIENTE
             st.info("➡️ 6. La nostra analisi delle vostre risposte")
@@ -281,7 +281,7 @@ if authentication_status:
             
             with col2:
                 med_accoglienza=(var_c1+var_c2)/2
-                med_experience=(var_h1+var_h2+var_h5+var_h7+var_h9)/5
+                med_experience=(var_h1+var_h2+var_h5+var_h7)/4
                 DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
                             {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
                             {"taste": "PROCEDURE", "Peso Area": var_d2},
@@ -317,7 +317,7 @@ if authentication_status:
                         var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                         var_i1, var_i2, 
                         feedback_gen, 
-                        str(datetime_object)]])
+                        str(datetime_object),  "Form_breve"]])
         
         # ###FORM 2
         if slider>3 and slider<8:
@@ -376,7 +376,7 @@ if authentication_status:
             var_h2 = cols3[1].slider("Quanto è soddisfatto della pulizia del reparto? ", 1,  7,  1)
             var_h5 = cols3[2].slider("Quanto è soddisfatto della cordialità del personale ", 1,  7,  1)
             var_h7 = cols3[3].slider("Ha ritenuto che la sua privacy sia stata rispettata? ", 1,  7,  1)
-            var_h9 = cols3[4].slider("Consiglierebbe il nostro reparto di radiologia", 1,  7,  1)
+            var_h9 = cols3[4].selectbox("Consiglierebbe il nostro reparto di radiologia ai suoi familiari e amici", ["SI", "NO"])
             
             #INFO PAZIENTE
             st.info("➡️ 7. La nostra analisi delle vostre risposte")
@@ -387,10 +387,11 @@ if authentication_status:
             with col2:
                 if var_b1=="NO":
                     med_accoglienza=(var_c1+var_c2+var_c3)/2
-                    med_experience=(var_h1+var_h2+var_h5+var_h7+var_h9)/5
+                    med_experience=(var_h1+var_h2+var_h5+var_h7)/4
+                    med_proc=(var_d2+var_d7)/2
                     DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
                                 {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
-                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "PROCEDURE", "Peso Area": med_proc},
                                 {"taste": "RISULTATI", "Peso Area": var_f3},
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                     graph_pes(DATA)
@@ -398,11 +399,11 @@ if authentication_status:
                 elif var_b1=="SI":
                     med_accoglienza=(var_c1+var_c2)/2
                     med_sito=(var_b2+var_b3)/2
-                    med_experience=(var_h1+var_h2+var_h5+var_h7+var_h9)/5
+                    med_experience=(var_h1+var_h2+var_h5+var_h7)/4
                     DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
                                 {"taste": "SITO WEB", "Peso Area": med_sito},
                                 {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
-                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "PROCEDURE", "Peso Area": med_proc},
                                 {"taste": "RISULTATI", "Peso Area": var_f3},
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                     graph_pes(DATA)
@@ -436,7 +437,7 @@ if authentication_status:
                             var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object)]])
+                            str(datetime_object),  "Form_medio"]])
                 else:
                     #Storing data
                     datetime_object = datetime.datetime.now()
@@ -451,7 +452,7 @@ if authentication_status:
                             var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object)]])
+                            str(datetime_object),  "Form_medio"]])
         
         # ###FORM 3
         if slider>7:
@@ -543,9 +544,10 @@ if authentication_status:
                 if var_b1=="NO":
                     med_accoglienza=(var_c1+var_c2+var_c3)/2
                     med_experience=(var_h1+var_h2+var_h3+var_h4+var_h5+var_h6+var_h7)/7
+                    med_proc=(var_d2+var_d7)/2
                     DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
                                 {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
-                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "PROCEDURE", "Peso Area": med_proc},
                                 {"taste": "TEMPO ATTESA RISULTATI", "Peso Area": var_g3},
                                 {"taste": "RISULTATI", "Peso Area": var_f3},
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
@@ -558,7 +560,7 @@ if authentication_status:
                     DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
                                 {"taste": "SITO WEB", "Peso Area": med_sito},
                                 {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
-                                {"taste": "PROCEDURE", "Peso Area": var_d2},
+                                {"taste": "PROCEDURE", "Peso Area": med_proc},
                                 {"taste": "TEMPO ATTESA RISULTATI", "Peso Area": var_g3},
                                 {"taste": "RISULTATI", "Peso Area": var_f3},
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
@@ -578,26 +580,42 @@ if authentication_status:
             if submitted==True:
                 st.success("Successfully")
                 st.balloons()
-                #Storing data
-                datetime_object = datetime.datetime.now()
-                add_row_to_gsheet(
-                df, [[var_a1, var_a2, var_a3,
-                        var_b1, var_b2, var_b3,
-                        var_c1, var_c2, var_c3,
-                        var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
-                        var_e1,  var_e2,  
-                        var_f1, var_f2, var_f3,
-                        var_g1, var_g2, var_g3, var_g4,var_g5,
-                        var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
-                        var_i1, var_i2, 
-                        feedback_gen, 
-                        str(datetime_object)]])
+                if var_b1=="SI":
+                    #Storing data
+                    datetime_object = datetime.datetime.now()
+                    add_row_to_gsheet(
+                    df, [[var_a1, var_a2, var_a3,
+                            var_b1, var_b2, var_b3,
+                            var_c1, var_c2, var_c3,
+                            var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
+                            var_e1,  var_e2,  
+                            var_f1, var_f2, var_f3,
+                            var_g1, var_g2, var_g3, var_g4,var_g5,
+                            var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
+                            var_i1, var_i2, 
+                            feedback_gen, 
+                            str(datetime_object),  "Form_lungo"]])
+                else:
+                    #Storing data
+                    datetime_object = datetime.datetime.now()
+                    add_row_to_gsheet(
+                    df, [[var_a1, var_a2, var_a3,
+                            var_b1, "", "",
+                            var_c1, var_c2, var_c3,
+                            var_d1, var_d2, var_d3, var_d4, var_d5, var_d6, var_d7,
+                            var_e1,  var_e2,  
+                            var_f1, var_f2, var_f3,
+                            var_g1, var_g2, var_g3, var_g4,var_g5,
+                            var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
+                            var_i1, var_i2, 
+                            feedback_gen, 
+                            str(datetime_object),  "Form_lungo"]])
                     
                 
     if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
         page_names_to_funcs = {
-            "Form Patient Satisfaction": form_pazienti,
             "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
+            "Form Patient Satisfaction": form_pazienti,
             "Info Framework":landing_page}
     elif name=="Gentile paziente":
         page_names_to_funcs = {

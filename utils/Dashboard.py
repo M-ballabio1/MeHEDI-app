@@ -1,26 +1,29 @@
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
+import numpy as np
 import streamlit as st  # pip install streamlit
 #import altair as alt
 from htbuilder import div, big, h2, styles
 from htbuilder.units import rem
 from datetime import date
 from datetime import timedelta
+import time
 
-#from streamlit_elements import elements, mui, html, sync, lazy
-#from streamlit_elements import nivo
+from streamlit_elements import elements, mui
+from streamlit_elements import nivo
 
 from wordcloud import WordCloud,  STOPWORDS
 import matplotlib.pyplot as plt
 from PIL import Image
 
+from utils.addition.graphs import graph_pes
 
 def dashboard_patient_satisf():
     img = Image.open('images/dashboard1_logo.png')
     st.image(img) 
     image3 = Image.open('images/Mehedi_logo2.png')
     
-    color1 = "#1919e6"
+    color1 = "#6082B6"
     color2 = "#89CFF0"
     
     #serve per allargare margini da block-container
@@ -43,7 +46,7 @@ def dashboard_patient_satisf():
         '''
     st.markdown(hide_img_fs, unsafe_allow_html=True)
    
-    def display_dial(title, value, color):
+    def display_dial(title, value,  color):
      st.markdown(
          div(
              style=styles(
@@ -52,13 +55,11 @@ def dashboard_patient_satisf():
                  padding=(rem(0.8), 0, rem(3), 0),
              )
          )(
-             h2(style=styles(font_size=rem(0.8), font_weight=600, padding=0))(title),
-             big(style=styles(font_size=rem(3), font_weight=800, line_height=1))(
-                 value
-             ),
+             h2(style=styles(font_size=rem(1.0), font_weight=600, padding=0))(title),
+             big(style=styles(font_size=rem(3), font_weight=800, line_height=1))(value),
          ),
          unsafe_allow_html=True,
-     )
+    )
     
     with open('style.css') as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -102,9 +103,10 @@ def dashboard_patient_satisf():
     '''
     st.markdown(f'<style>{css}</style>',unsafe_allow_html=True)
     
-    expander = st.expander("In questa sezione puoi verificare come sono state calcolate le differenti metriche")
-    with expander:
-        st.write("In questa sezione dovrà esserci la dashbaord con i KPI riferiti all'ambito Patient Satisfaction-Healthcare")
+    
+    #expander = st.expander("In questa sezione puoi verificare come sono state calcolate le differenti metriche")
+    #with expander:
+    #    st.write("In questa sezione dovrà esserci la dashbaord con i KPI riferiti all'ambito Patient Satisfaction-Healthcare")
     
     df_selection = df.query(
         "Tipo_procedura == @Proced_Fil & Sesso == @Sesso_Fil & Range_Età == @Eta_Fil")
@@ -174,40 +176,169 @@ def dashboard_patient_satisf():
         #Settimana attuale dig
         df2_medie_valori_dig_week=df2_att_scorsa_settimana[["Info_sito","Facili_sito"]].mean()
         dig_this_week=round(df2_medie_valori_dig_week[0].mean(), 2)
-        dig_score_att=(dig_this_week+sit_ema_score)/2
+        dig_score_att=round((dig_this_week+sit_ema_score)/2, 2)
         #Settimana precedente alla sett scorsa dig
         df2_medie_valori_prec_dig_week=df2_prima_scorsa_settimana[["Info_sito","Facili_sito"]].mean()
         dig_prima_last_week=round(df2_medie_valori_prec_dig_week[0].mean(), 2)
         dig_score_last=(dig_prima_last_week+sit_ema_score)/2
-        #differenza tra i STRU
+        #differenza tra i DIG
         delta_dig=round(float(sit_ema_score)-float(dig_score_last), 2)
         st.metric("DIG Index",  value=str(dig_score_att)+"/7", delta=str(delta_dig),  help="Digitalization Index (permette di calcolare una media ponderata di grado di digitalizzazione della struttura rispetto ad una baseline)")
     
-    a, b = st.columns(2)
+    #First row 
+    a, b, c, d, e = st.columns([0.42, 0.01, 0.14, 0.01, 0.42])
     with a:
-        st.header("Revenue dai trattamenti ambulatorio")
+        #appuntamento
+        appunt_media=round(df_selection["Sodd_fac_appun"].mean(), 2)
+        #sito
+        df['Visitato_Sito'] = np.where(df['Visita_sito'] == "SI", -0.5, 0.5)
+        visita_sito_right=df['Visitato_Sito'].sum()
+        visita_sito_right=visita_sito_right/len(df['Visitato_Sito'])
+        sito_web_media=round(df_selection[['Info_sito', "Facili_sito"]].mean(), 2)
+        sito_web_media=((sito_web_media[0]+sito_web_media[1])/2)+visita_sito_right
+        #accoglienza
+        accog_media=round(df_selection[["Sodd_acc_rep", "Sodd_tempo_attesa_rec", "Sodd_indica_area_visi"]].mean(), 2)
+        accog_media=(accog_media[0]+accog_media[1]+accog_media[2])/len(accog_media)
+        #procedure
+        proc_media=round(df_selection[["Sodd-tempo_attes_reparto_pre", "Soddisf_procedura"]].mean(), 2)
+        proc_media=(proc_media[0]+proc_media[1])/len(proc_media)
+        #attesa risultati
+        att_ris_media=round(df_selection["Soddisf_Tempo_Attesa_Risult"].mean(), 2)
+        #risultati
+        ris_media=round(df_selection["Soddisf_Spiegaz_Radiologo"].mean(), 2)
+        st.header("Radar Chart Macro-Aree")
+        #esperienza
+        esp_media=round(df_selection[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Ambiente", "Soddisf_Privacy"]].mean(), 2)
+        esp_media=(esp_media[0]+esp_media[1]+esp_media[2]+esp_media[3]+esp_media[4]+esp_media[5])/len(esp_media)
+        st.subheader("")
+        DATA = [{"taste": "APPUNTAMENTO", "Peso Area": appunt_media},
+                    {"taste": "SITO WEB", "Peso Area": sito_web_media},
+                    {"taste": "ACCOGLIENZA", "Peso Area": accog_media},
+                    {"taste": "PROCEDURE", "Peso Area": proc_media},
+                    {"taste": "TEMPO ATTESA RISULTATI", "Peso Area": att_ris_media},
+                    {"taste": "RISULTATI", "Peso Area": ris_media},
+                    {"taste": "ESPERIENZA", "Peso Area": esp_media}]
+        graph_pes(DATA)
+        st.write("")
+        st.text("")
+        with st.expander("ℹ️ Informazioni grafico", expanded=False):
+                st.markdown(
+                    """
+                    #### Radar Chart
+                    Questo framework serve alla struttura sanitaria per raccogliere il feedback riguardo i servizi erogati ai suoi pazienti. """)
+                    
     with b:
-       # Count frequency visite ambulatorio filtered by TYPE
-       st.header("Visite ambulatorio per tipologia")
+        st.text("")
+    with c:
+        st.subheader("")
+        st.subheader("")
+        st.metric("Spiegazione KPIs",  value="", help="PEI=Indicatore per misurare il grado di soddisfazione medio delle procedure || CKI=Indicatore per misurare il grado di cordialità dello staff Medi || PSafy=Indicatore per misurare il grado di soddisfazione della privacy e sicurezza percepita")
+        st.write("")
+        perc_proc_media=round((proc_media/7)*100, 2)
+        display_dial("Procedure Evaluation Index",  str(perc_proc_media)+"%",   color1)
+        #st.metric("PEI ",  value="45%",  delta="-5%",  help="Procedure Evaluation Index Var_d2, var_d7")
+        st.write("")
+        st.write("")
+        cki_1=round(df_selection[["Sodd_acc_rep", "Sodd_tempo_attesa_rec", "Soddisf_Cordialità_staff"]].mean(), 2)
+        cki_media=round((cki_1[0]+cki_1[1]+cki_1[2])/3, 2)
+        cki_1_media_per=round((cki_media/7)*100, 2)
+        #st.metric("CKI ",  value="75%",  delta="+5%",  help="Cordiality & Kindness Index c1, c2, h5, ")
+        display_dial("Cordiality & Kindness Index",  str(cki_1_media_per)+"%",  color1)
+        st.write("")
+        st.write("")
+        #st.metric("PSafI ",  value="85%",  delta="+5%",  help="Privacy and Safety Index d4, d6, h7")
+        display_dial("Privacy and Safety Index",  "77%",  color1)
+    with d:
+        st.text("")
+    with e:
+        st.header("Metodologia Appuntamento")
+        fig = px.pie(df_selection, values='Sodd_fac_appun', names='Tipo_appun')
+        fig.show()
+        st.plotly_chart(fig, use_container_width=True)
+        
+        st.subheader("")
+        with st.expander("ℹ️ Informazioni grafico", expanded=False):
+            st.markdown(
+                    """
+                    #### Radar Chart
+                    Questo framework serve alla struttura sanitaria per raccogliere il feedback riguardo i servizi erogati ai suoi pazienti. """)
+       
+    df3=df.copy()
+    #st.write(df3)
+    df3["FCorto"]=df3["Type_Form"]=="Form_corto"
+    df3["FMedio"]=df3["Type_Form"]=="Form_medio"
+    df3["FLungo"]=df3["Type_Form"]=="Form_lungo"
+       #df3= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1D')).count()
+       #df3.reset_index(inplace=True)
+    
+       #chart_data = pd.DataFrame(df3, columns=['Fcorto', 'Fmedio', 'Flungo'])
+       #st.area_chart(chart_data,  width=450, height=400)
+    """
+    col1, col2, col3=st.columns([1, 1, 1])
+    with col1:
+        # define standard scaler
+        df_selection.dropna(axis=0)
+        df_selection.drop(columns=['Tipo_appun'])
+        #scaler = StandardScaler()
+        # transform data
+        #df_selection_stand = scaler.fit_transform(df_selection)
+        fig = px.imshow(df_selection)
+        st.plotly_chart(fig, use_container_width=True)
+    with col2:
+        fig = px.bar(df_selection, x="Type_Form", y="Type_Form")
+        st.plotly_chart(fig, use_container_width=True)
        #fig = go.Figure()
        #fig.add_trace(go.Bar(x=Categ_Visita_Fil, y=df["Categoria_Visita"].value_counts()))
        #b.plotly_chart(fig, use_container_width=True)
+    #st.write(chart_data)
+    """
+    #st.write(df_selection)
     
+
+    st.write("")
+    my_bar = st.progress(100, text="")
+    st.write("")
+    # Second Row
+    st.subheader("")
+    col1,col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        coment=len(df)
+        comment_full=df['Comment_Text'].isna().sum()
+        form_with_comment=round(((coment-comment_full)/coment)*100, 2)
+        st.metric("% Form con commenti",  value=str(form_with_comment)+"%",  help="% Persone che hanno fatto un commento ")
+    with col2:
+        parole_positive = ["professionalità", "competenza", "efficacia", "precisione", "attenzione", "impegno"]
+        parole_negative = [ "bruttissime", "bruttissimo", "antipatia", "dispetto", "mancanza", "abbandonato", "scarso"]
+        
+        commenttext_merged_withcomma= df['Comment_Text'].str.cat(sep=' ')
+        text_lowercase=commenttext_merged_withcomma.lower()
+        
+        risultato_pos = 0
+        # Counter parole negative
+        for elemento in parole_positive:
+            if elemento in text_lowercase:
+                risultato_pos += 1
+            
+        risultato_neg = 0
+        # Counter parole negative
+        for elemento in parole_negative:
+            if elemento in text_lowercase:
+                risultato_neg += 1
+                
+        perc_ris_neg=round((risultato_neg/(risultato_pos+risultato_neg))*100, 2)
+        st.metric("% Risultati Negativi",  value=str(perc_ris_neg)+"%",  help="Percentuale Negativi sul totale c")
+    with col3:
+        ris_neg=round((risultato_pos/risultato_neg), 2)
+        st.metric("Sentiment Analysis Score", value=ris_neg,  help="Rapporto Positivi-Negativi")
     
-    
-    col1, col2 = st.columns(2)
+    col1,col2, col3,  col4,  col5= st.columns([2,0.05, 0.8, 0.02, 1.1 ])
     with col1:
         st.header("Word Cloud Patient Form")
-        text = """Healthcare, hospital, sanità, monitoraggio, empatia, relazioni, sanità, pulizia,
-                goals, health, sanità pubblica, esperienza, bene, healthcare, sanità, ambiente,
-                pulito, sicuro, ospedale, ambulatorio, ambulatorio, healthcare, healthcare, sanità,
-                dottori, professionisti, settore in crescita, medicina generale, cardiologia,
-                radiologia, sanità, sanitario, health, health"""
-        commenttext_merged= df['Comment_Text'].str.cat(sep=',')
+        commenttext_merged= df['Comment_Text'].str.cat(sep=' , ')
 
         # Create and generate a word cloud image:
         stopwords = set(STOPWORDS)
-        wordcloud = WordCloud(stopwords=stopwords, background_color="#E4E3E3", width=400, height=400, colormap="Blues").generate(commenttext_merged)
+        wordcloud = WordCloud(stopwords=stopwords, background_color="#E4E3E3", width=800, height=300, colormap="Blues").generate(commenttext_merged)
 
         # Display the generated image:
         fig, ax = plt.subplots(facecolor="#E4E3E3")
@@ -216,12 +347,49 @@ def dashboard_patient_satisf():
         plt.subplots_adjust(left=-5, right=-2, top=-2, bottom=-5)
         plt.show()
         st.pyplot(fig)
-   
     with col2:
-        st.header("Health data")
-        st.image("https://www.slideteam.net/media/catalog/product/cache/1280x720/p/a/patient_satisfaction_measurement_dashboard_service_ppt_show_vector_slide01.jpg")
+        st.text("")
+    with col3:
+        st.header("Dataframe Key-Words")
     
-    st.write(df_selection)
+
+        def word_count(str):
+            counts = dict()
+            words = str.split()
+
+            for word in words:
+                if word in counts:
+                    counts[word] += 1
+                else:
+                    counts[word] = 1
+
+            return counts
+        
+        commenttext_merged_withoutcomma= df['Comment_Text'].str.cat(sep=' , ')
+        text_propercase=commenttext_merged_withoutcomma.title()
+        
+        #remove articles and preposition
+        char_remov = ["La ", "Non ", "Mi ", "E ", "Il ", "Dei ", "Di ", "Degli ", "Lo ",  "Della ", "C'Era ", ", "]
+        for char in char_remov:
+            # replace() "returns" an altered string
+            text_propercase = text_propercase.replace(char, "")
+        
+        counter_words=word_count(text_propercase)
+        df_word_mode=pd.DataFrame.from_dict(counter_words, orient='index').reset_index()
+        df_word_mode.columns = ["Key-Words", "Frequency"]
+        df_word_mode.sort_values(by="Frequency", inplace=True, ascending=False)
+        st.write(df_word_mode)
+        
+    with col4:
+        st.text("")
+    with col5:
+        st.subheader("Top 5 Key-Words")
+        fig = px.pie(df_word_mode.head(5), values='Frequency', names='Key-Words')
+        st.plotly_chart(fig, use_container_width=True)
+    
+    st.subheader("Dataframe Filtrato tramite query")
+    st.write(df_selection) 
+    
     """
     #processi - strutture
     quality_str_m=df["Qualità struttura"].mean()
