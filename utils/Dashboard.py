@@ -27,7 +27,7 @@ def dashboard_patient_satisf():
     st.markdown("""
     <style>
            .css-k1ih3n {
-                padding-top: 2rem;
+                padding-top: 0rem;
                 padding-bottom: 4rem;
                 padding-left: 4em;
                 padding-right: 4rem;
