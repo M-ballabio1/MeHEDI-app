@@ -400,6 +400,7 @@ if authentication_status:
                     med_accoglienza=(var_c1+var_c2)/2
                     med_sito=(var_b2+var_b3)/2
                     med_experience=(var_h1+var_h2+var_h5+var_h7)/4
+                    med_proc=(var_d2+var_d7)/2
                     DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
                                 {"taste": "SITO WEB", "Peso Area": med_sito},
                                 {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
@@ -557,6 +558,7 @@ if authentication_status:
                     med_accoglienza=(var_c1+var_c2)/2
                     med_sito=(var_b2+var_b3)/2
                     med_experience=(var_h1+var_h2+var_h3+var_h4+var_h5+var_h6+var_h7)/7
+                    med_proc=(var_d2+var_d7)/2
                     DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
                                 {"taste": "SITO WEB", "Peso Area": med_sito},
                                 {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
