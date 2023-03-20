@@ -1,34 +1,33 @@
 # MeHEDI-app | A Data-Driven Healthcare
 
-## MEHEDI è una web-app sviluppata con Streamlit un framework open-source (Python-based library) per lo sviluppo di app che vogliono sfruttare la tecnologia di machine learning e data science. 
+## MEHEDI is a web-app developed with Streamlit an open-source framework (Python-based library) for developing apps which leverage on machine learning and data science technology. 
 
-## 0. La web-app si compone delle seguenti interfacce:
+## 0. The web-app consists of the following interfaces:
 
 ## 1.Landing page
 ![landing-page](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/landing-page.png)
-### Interfaccia di log-in
-#### 1. Log-in struttura sanitaria
-#### 2. Log-in pazienti
+### Log-in interface:
+#### 1. Log-in for the management of the heathcare facility
+#### 2. Log-in for patients
 ![login](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/login.png)
 
-## 2.| Interfaccia dei vari users:
+## 2.| UX/UI interfaces 
 ### Users: 
-#### A) Pazienti
-##### Company/Patient interaction interface: Form di Patient Satisfaction interamente digitalizzato, interattivo e customizzabile in base al grado di disponibilità del Paziente
-##### Compilazione guidata, facilitata ed adattabile al tempo a disposizione da parte del paziente
-Introduzione del framework e customizzazione del form sulla base del tempo a disposizione del Paziente.
+#### A) Patients 
+##### Patients interface: fully digitized, interactive and customizable Patient Satisfaction form based on the degree of patient time and contribution availability
+Framework introduction and availaible time selection
 ![istruzioni-tempo](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/Istruzioni-tempo.png)
-Scrollable scala Likert (1-7) per la valutazione
+Scrollbar evaluation based on Likert scale (1-7) 
 ![Experience form](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/Experience_form.png)
-Visualizzazione real-time della propria valutazione
+Real-time interactive visual evaluation of the report
 ![grafico-realtime](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/grafico-realtime.png)
-Report finale delle valutazioni del paziente con possibilità per il paziente di lasciare commenti (open-text) che verranno analizzati sulla dashboard della struttura ed integrati con gli altri dati del form
+Final report of patient evaluations with the possibility for the patient to leave comments (open-text) that will be analysed on the facility dashboard and integrated with the other data in the form
 ![comments](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/comments.png)
 
-#### B)Struttura Sanitaria
-Dashboards A  (focus su Patient Satisfaction) :
-Reportistica aggregata relativa alla Patient Satisfaction misurata attraverso questionari ad-hoc
-Elaborazione insights ed integrazione con (Dashboard B e Dashboard C relative a Operations e Economics)
+#### B) Healthcare Facility:
+Dashboards A (focus on Patient Satisfaction) 
+Aggregate reporting related to Patient Satisfaction measured through ad-hoc questionnaires.
+Dashboard B and C (relative to Operations and Economics)
 
 
 
