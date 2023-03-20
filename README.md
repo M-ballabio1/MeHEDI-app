@@ -6,9 +6,11 @@ Let's introduce ourselves,
 
 We are
 
-Matteo Ballabio, Biomedical and Management Engineer, PwC Consultant
-Luca Alessandro Cappellini, Medical Doctor, Radiology Resident, MBA fellow.
-Federico Facoetti, Engineering and Management for Health.
+- Matteo Ballabio, Biomedical and Management Engineer, PwC Consultant
+
+- Luca Alessandro Cappellini, Medical Doctor, Radiology Resident, MBA fellow
+
+- Federico Facoetti, Engineering and Management for Health
 
 Thank you for visiting our project!
 
@@ -24,7 +26,7 @@ Process flowchart
 
 1) Data Entry - 2) Data Storage and Fetch - 3) Web application analysis - 4) Dashboard
 
-This process represents the management of an information flow in a healthcare company with the aim of real-time monitoring of certain KPIs. These KPIs are made available at any time to the healthcare management and management, who can make decisions supported by real-time knowledge of the performance of the healthcare facility 
+This process represents the management of an information flow in a healthcare company with the aim of real-time monitoring of certain KPIs. These KPIs are made available at any time to the healthcare management and management, who can make decisions supported by real-time knowledge of the performance of the healthcare facility.
 
 ## 0. The web-app consists of the following interfaces:
 
