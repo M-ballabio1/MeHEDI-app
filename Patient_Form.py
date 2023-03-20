@@ -298,6 +298,10 @@ if authentication_status:
                 cols_text = st.columns((0.2, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
+            elif media_tot>5 and media_tot<=7:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza sembra essere andata bene, se ti interessa raccontaci la tua esperienza continueremo a migliorare")
             else:
                 feedback_gen=""
             submitted = st.button(label="Submit")
@@ -418,6 +422,10 @@ if authentication_status:
                 cols_text = st.columns((0.2, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
+            elif media_tot>5 and media_tot<=7:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza sembra essere andata bene, se ti interessa raccontaci la tua esperienza continueremo a migliorare")
             else:
                 feedback_gen=""
             submitted = st.button(label="Submit")
@@ -576,6 +584,10 @@ if authentication_status:
                 cols_text = st.columns((0.2, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
+            elif media_tot>5 and media_tot<=7:
+                cols_text = st.columns((0.2, 1))
+                cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
+                feedback_gen=cols_text[1].text_area("La tua esperienza sembra essere andata bene, se ti interessa raccontaci la tua esperienza continueremo a migliorare")
             else:
                 feedback_gen=""
             submitted = st.button(label="Submit")

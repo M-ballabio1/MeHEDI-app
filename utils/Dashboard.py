@@ -129,40 +129,47 @@ def dashboard_patient_satisf():
         len_report_sett_now=df1['Sesso'].iloc[-1]
         len_report_sett_last_week=df1['Sesso'].iloc[-2]
         delta_report=int(len_report_sett_now) - int(len_report_sett_last_week)
-        st.metric("Numero Report Inviati questa settimana",  value= str(int(len_report_sett_now))+" rep", delta=str(delta_report),  help="Numero totale di report inviati questa settimana rispetto a settimana scorsa")
+        st.metric("Report Inviati In Settimana",  value= str(int(len_report_sett_now))+" rep", delta=str(delta_report),  help="Numero totale di report inviati questa settimana rispetto a settimana scorsa")
     with col2:
         #Settimana attuale psi
         df2_att_scorsa_settimana=df.loc[(df['Timestamp'] >= date_last_week)]
-        df2_medie_valori_week=df2_att_scorsa_settimana.mean()
-        psi_this_week=round(df2_medie_valori_week[0].mean(), 2)
+        df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
+        df2_medie_valori_week.columns = ['variables', 'count']
+        psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
         psi_perc=round((psi_this_week/7)*100,2)
         #Settimana precedente alla sett scorsa psi
         df2_prima_scorsa_settimana=df.loc[(df['Timestamp'] <= date_last_week)]
-        df2_medie_valori_prec_week=df2_prima_scorsa_settimana.mean()
-        psi_prima_last_week=round(df2_medie_valori_prec_week[0].mean(), 2)
+        df2_medie_valori_prec_week=df2_prima_scorsa_settimana.mean().reset_index()
+        df2_medie_valori_prec_week.columns = ['variables', 'count']
+        psi_prima_last_week=round(df2_medie_valori_prec_week['count'].mean(), 4)
         #differenza tra i PSI
         delta_psi=round(((float(psi_this_week)-float(psi_prima_last_week))/7)*100, 2)
         st.metric("PSI Index",  value=str(psi_perc)+" %", delta=str(delta_psi)+" %", help="Patient Satisfaction Index (misura complessiva di grado di soddisfazione dei pazienti)")
     with col3:
         #Settimana attuale tws MEAN
-        df2_medie_valori_tws_week=df2_att_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].mean()
-        tws_this_week=round(df2_medie_valori_tws_week[0].mean(), 2)
+        df2_medie_valori_tws_week=df2_att_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].mean().reset_index()
+        df2_medie_valori_tws_week.columns = ['variables', 'count']
+        tws_this_week=round(df2_medie_valori_tws_week["count"].mean(), 2)
         #Settimana attuale tws STD
-        df2_dev_stand_valori_tws_week=df2_att_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].std()
-        tws_this_week_std=round(df2_dev_stand_valori_tws_week[0].mean(), 2)
+        df2_dev_stand_valori_tws_week=df2_att_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].std().reset_index()
+        df2_dev_stand_valori_tws_week.columns = ['variables', 'std']
+        tws_this_week_std=round(df2_dev_stand_valori_tws_week["std"].mean(), 2)
         #Settimana precedente alla sett scorsa tws
-        df2_medie_valori_prec_tws_week=df2_prima_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].mean()
-        tws_prima_last_week=round(df2_medie_valori_prec_tws_week[0].mean(), 2)
+        df2_medie_valori_prec_tws_week=df2_prima_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].mean().reset_index()
+        df2_medie_valori_prec_tws_week.columns = ['variables', 'count']
+        tws_prima_last_week=round(df2_medie_valori_prec_tws_week['count'].mean(), 2)
         #differenza tra i TWS
         delta_tws=round(float(tws_this_week)-float(tws_prima_last_week), 2)
         st.metric("TWS Index",  value=(str(tws_this_week)+"/7"+" ±"+str(tws_this_week_std)), delta=delta_tws,  help="Time Waiting Satisfaction Index (misura che elabora una media del grado di soddifazione del paziente legate al tempo d'attesa)")
     with col4:
         #Settimana attuale stru
-        df2_medie_valori_stru_week=df2_att_scorsa_settimana[["Soddisf_Servizi_Igenici","Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere"]].mean()
-        stru_this_week=round(df2_medie_valori_stru_week[0].mean(), 2)
+        df2_medie_valori_stru_week=df2_att_scorsa_settimana[["Soddisf_Servizi_Igenici","Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere"]].mean().reset_index()
+        df2_medie_valori_stru_week.columns = ['variables', 'count']
+        stru_this_week=round(df2_medie_valori_stru_week["count"].mean(), 2)
         #Settimana precedente alla sett scorsa stru
-        df2_medie_valori_prec_stru_week=df2_prima_scorsa_settimana[["Soddisf_Servizi_Igenici","Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere"]].mean()
-        stru_prima_last_week=round(df2_medie_valori_prec_stru_week[0].mean(), 2)
+        df2_medie_valori_prec_stru_week=df2_prima_scorsa_settimana[["Soddisf_Servizi_Igenici","Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere"]].mean().reset_index()
+        df2_medie_valori_prec_stru_week.columns = ['variables', 'count']
+        stru_prima_last_week=round(df2_medie_valori_prec_stru_week["count"].mean(), 2)
         #differenza tra i STRU
         delta_stru=round(float(stru_this_week)-float(stru_prima_last_week), 2)
         st.metric("Structural Index",  value=str(stru_this_week)+"/7", delta=delta_stru,  help="Structural Index (permette di calcolare una media della soddisfazione dei pazienti riguardo l'ambiente della struttura (servizi, posti a sedere ecc...)")
@@ -174,12 +181,14 @@ def dashboard_patient_satisf():
         sit_ema_score=round(((sito_pren+email_pren)*7)/len(df), 2)
         
         #Settimana attuale dig
-        df2_medie_valori_dig_week=df2_att_scorsa_settimana[["Info_sito","Facili_sito"]].mean()
-        dig_this_week=round(df2_medie_valori_dig_week[0].mean(), 2)
+        df2_medie_valori_dig_week=df2_att_scorsa_settimana[["Info_sito","Facili_sito"]].mean().reset_index()
+        df2_medie_valori_dig_week.columns = ['variables', 'count']
+        dig_this_week=round(df2_medie_valori_dig_week["count"].mean(), 2)
         dig_score_att=round((dig_this_week+sit_ema_score)/2, 2)
         #Settimana precedente alla sett scorsa dig
-        df2_medie_valori_prec_dig_week=df2_prima_scorsa_settimana[["Info_sito","Facili_sito"]].mean()
-        dig_prima_last_week=round(df2_medie_valori_prec_dig_week[0].mean(), 2)
+        df2_medie_valori_prec_dig_week=df2_prima_scorsa_settimana[["Info_sito","Facili_sito"]].mean().reset_index()
+        df2_medie_valori_prec_dig_week.columns = ['variables', 'count']
+        dig_prima_last_week=round(df2_medie_valori_prec_dig_week["count"].mean(), 2)
         dig_score_last=(dig_prima_last_week+sit_ema_score)/2
         #differenza tra i DIG
         delta_dig=round(float(sit_ema_score)-float(dig_score_last), 2)
@@ -224,8 +233,12 @@ def dashboard_patient_satisf():
         with st.expander("ℹ️ Informazioni grafico", expanded=False):
                 st.markdown(
                     """
-                    #### Radar Chart
-                    Questo framework serve alla struttura sanitaria per raccogliere il feedback riguardo i servizi erogati ai suoi pazienti. """)
+                    #### Explaination Plot
+                    A radar chart is an informative visual tool in which multiple variables (three or more) and compared on a two-dimensional plane.
+                    
+                    #### Radar chart
+                    This plot is used by the healthcare facility to understand the result of the various macro-areas.
+                    With the filters in the right area, you can understand how age, gender and types of procedure influence the survey result.""")
                     
     with b:
         st.text("")
@@ -247,21 +260,31 @@ def dashboard_patient_satisf():
         st.write("")
         st.write("")
         #st.metric("PSafI ",  value="85%",  delta="+5%",  help="Privacy and Safety Index d4, d6, h7")
-        display_dial("Privacy and Safety Index",  "77%",  color1)
+        psafi_1=round(df_selection["Soddisf_Privacy"].mean(), 2)
+        psafi_1_media_per=round((psafi_1/7)*100, 2)
+        #calcolo safety
+        safy_si_pren=df['Sicur_visita'].value_counts()["SI"]
+        
+        # ho portato da percentuale centesimi a settesimi
+        sit_safy_score=round(((safy_si_pren))/len(df['Sicur_visita']), 2)
+        safety_score=psafi_1_media_per+sit_safy_score
+        display_dial("Privacy and Safety Index",  str(safety_score)+"%",  color1)
     with d:
         st.text("")
     with e:
         st.header("Metodologia Appuntamento")
-        fig = px.pie(df_selection, values='Sodd_fac_appun', names='Tipo_appun')
+        fig = px.pie(df_selection, values='Sodd_fac_appun', names='Tipo_appun', color_discrete_sequence=px.colors.sequential.RdBu)
         fig.show()
         st.plotly_chart(fig, use_container_width=True)
         
         st.subheader("")
         with st.expander("ℹ️ Informazioni grafico", expanded=False):
-            st.markdown(
+                st.markdown(
                     """
-                    #### Radar Chart
-                    Questo framework serve alla struttura sanitaria per raccogliere il feedback riguardo i servizi erogati ai suoi pazienti. """)
+                    #### Pie chart
+                    This graph is used to understand which is the most used method of booking visits.
+                    In particular, the DIG index makes it possible to discriminate between patients who are more inclined to 
+                    technology as they book via website or e-mail. This aspect could be highlighted perhaps during the application of the filters on the left.""")
        
     df3=df.copy()
     #st.write(df3)
@@ -307,8 +330,11 @@ def dashboard_patient_satisf():
         form_with_comment=round(((coment-comment_full)/coment)*100, 2)
         st.metric("% Form con commenti",  value=str(form_with_comment)+"%",  help="% Persone che hanno fatto un commento ")
     with col2:
-        parole_positive = ["professionalità", "competenza", "efficacia", "precisione", "attenzione", "impegno"]
-        parole_negative = [ "bruttissime", "bruttissimo", "antipatia", "dispetto", "mancanza", "abbandonato", "scarso"]
+        parole_positive = ["professionalità", "competenza", "efficacia", "precisione", "attenzione", "impegno",  "professionalità", "competenza", "efficacia","precisione", 
+                                    "attenzione", "impegno", "cura", "comprensione", "empatia", "discrezione", 
+                                    "riservatezza", "rispetto", "gentilezza", "cordialità", "cortesia", "umanità", "dolcezza", "disponibilità", "agio", "dedizione", "positiva", "ritornerò", "pulito", "eccellente", "fiducia"]
+        parole_negative = [ "bruttissime", "bruttissimo", "antipatia", "dispetto", "mancanza", "abbandonato", "scarso", "mancanza", "abbandonato", "scarso", "scandalosi", "scandaloso", "incapaci", "furto", "ignorato", "delusa", "delusione", "sgarbato", 
+                                "scorbutico", "negativa", "lentezza", "disagio", "ritardo", "incompetenza", "discutibile", "imbarazzante", "arrabbiato", "sporco", "indecente", "trasandato", "pessimo"]
         
         commenttext_merged_withcomma= df['Comment_Text'].str.cat(sep=' ')
         text_lowercase=commenttext_merged_withcomma.lower()
@@ -325,20 +351,21 @@ def dashboard_patient_satisf():
             if elemento in text_lowercase:
                 risultato_neg += 1
                 
-        perc_ris_neg=round((risultato_neg/(risultato_pos+risultato_neg))*100, 2)
-        st.metric("% Risultati Negativi",  value=str(perc_ris_neg)+"%",  help="Percentuale Negativi sul totale c")
+        perc_ris_neg=round((risultato_neg/(len(text_lowercase)))*100, 2)
+        st.metric("% Risultati Negativi",  value=str(perc_ris_neg)+"%",  help="Percentuale Key-Words Negative sul totale parole inserite nei form e filtrate")
     with col3:
-        ris_neg=round((risultato_pos/risultato_neg), 2)
-        st.metric("Sentiment Analysis Score", value=ris_neg,  help="Rapporto Positivi-Negativi")
+        ris_neg=round(((risultato_pos/risultato_neg)), 2)
+        st.metric("Sentiment Analysis Score", value=ris_neg, delta=(ris_neg-1) ,  help="Rapporto Positivi-Negativi. Calcola qual è il rapporto tra Key-words positive e negative se > 0 allora sono più quelle positive.")
     
     col1,col2, col3,  col4,  col5= st.columns([2,0.05, 0.8, 0.02, 1.1 ])
     with col1:
         st.header("Word Cloud Patient Form")
         commenttext_merged= df['Comment_Text'].str.cat(sep=' , ')
-
+        text_propercase=commenttext_merged.title()
         # Create and generate a word cloud image:
-        stopwords = set(STOPWORDS)
-        wordcloud = WordCloud(stopwords=stopwords, background_color="#E4E3E3", width=800, height=300, colormap="Blues").generate(commenttext_merged)
+        stop_words =STOPWORDS.update(["La ", "Non ", "Mi ", "E ", "Il ", "Dei ", "Di ", "Degli ", "Lo ",  "Della ", "C'Era ", ", ",  "Del ",  "Per ", "Sotto ", "Alcuni", "Alcune ", "Ok "
+                                , "Rispetto!","Degli ",  "Ho ", "E' ",  "Da ",  "Un ",  "In ",  "Una ", "Dalla ", "Stata ", "Mia ", "Che ",  "Ma ",  "Tutto ",  "Sono "])
+        wordcloud = WordCloud(stopwords = stop_words,background_color="#E4E3E3", width=800, height=500, colormap="Blues").generate(text_propercase)
 
         # Display the generated image:
         fig, ax = plt.subplots(facecolor="#E4E3E3")
@@ -369,10 +396,11 @@ def dashboard_patient_satisf():
         text_propercase=commenttext_merged_withoutcomma.title()
         
         #remove articles and preposition
-        char_remov = ["La ", "Non ", "Mi ", "E ", "Il ", "Dei ", "Di ", "Degli ", "Lo ",  "Della ", "C'Era ", ", "]
+        char_remov = ["La ", "Non ", "Mi ", "E ", "Il ", "Dei ", "Di ", "Degli ", "Lo ",  "Della ", "C'Era ", ", ",  "Del ",  "Per ", "Sotto ", "Alcuni", "Alcune ", "Ok "
+                                , "Rispetto!","Degli ",  "Ho ", "E' ",  "Da ",  "Un ",  "In ",  "Una ", "Dalla ", "Stata ", "Mia ", "Che ",  "Ma ",  "Tutto ",  "Sono "]
         for char in char_remov:
             # replace() "returns" an altered string
-            text_propercase = text_propercase.replace(char, "")
+            text_propercase = text_propercase.replace(char, " ")
         
         counter_words=word_count(text_propercase)
         df_word_mode=pd.DataFrame.from_dict(counter_words, orient='index').reset_index()
@@ -384,7 +412,7 @@ def dashboard_patient_satisf():
         st.text("")
     with col5:
         st.subheader("Top 5 Key-Words")
-        fig = px.pie(df_word_mode.head(5), values='Frequency', names='Key-Words')
+        fig = px.pie(df_word_mode.head(5), values='Frequency', names='Key-Words', color_discrete_sequence=px.colors.sequential.RdBu)
         st.plotly_chart(fig, use_container_width=True)
     
     st.subheader("Dataframe Filtrato tramite query")
