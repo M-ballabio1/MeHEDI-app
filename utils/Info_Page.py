@@ -83,6 +83,7 @@ def landing_page():
                 
                 If you want to read the full document (POC) you can click on this [**link**](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit#), otherwise if you prefer to see to our 
                 solution click the Go Next button.
+                Instead, if you want to see the raw dataset, you can click here [**link dataset**](https://docs.google.com/spreadsheets/d/1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8/edit#gid=0).
                 """
             )
         with b:
@@ -109,6 +110,7 @@ def landing_page():
                 
                 If you want to read the full document (POC) you can click on this [**link**](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit#), otherwise if you prefer to see to our 
                 solution click the Go Next button.
+                Instead, if you want to see the raw dataset, you can click here [**link dataset**](https://docs.google.com/spreadsheets/d/1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8/edit#gid=0).
                 """
             )
         with b:
@@ -161,6 +163,7 @@ def landing_page():
                 
                 If you want to read the full document (POC) you can click on this [**link**](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit#), otherwise if you prefer to see to our 
                 solution click the Go Next button.
+                Instead, if you want to see the raw dataset, you can click here [**link dataset**](https://docs.google.com/spreadsheets/d/1OBEMIUloci4WV80D-yLhhoLMVQymy-TYlh7jwGXmND8/edit#gid=0).
                 """
             )
         with b:
