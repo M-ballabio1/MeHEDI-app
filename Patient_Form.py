@@ -62,7 +62,7 @@ def connect_to_gsheet():
     gsheet_connector = service.spreadsheets()
     return gsheet_connector
 
-@st.cache_data(ttl=600)
+@st.cache_data()
 def get_data(gsheet_connector) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
