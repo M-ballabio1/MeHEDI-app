@@ -330,7 +330,7 @@ def dashboard_patient_satisf():
         form_with_comment=round(((coment-comment_full)/coment)*100, 2)
         st.metric("% Form con commenti",  value=str(form_with_comment)+"%",  help="% Persone che hanno fatto un commento ")
     with col2:
-        parole_positive = ["professionalità", "competenza", "efficacia", "precisione", "attenzione", "impegno",  "professionalità", "competenza", "efficacia","precisione", 
+        parole_positive = ["professionalità", "competenza", "efficacia", "precisione", "attenzione", "impegno", "competenza", "efficacia","precisione", 
                                     "attenzione", "impegno", "cura", "comprensione", "empatia", "discrezione", 
                                     "riservatezza", "rispetto", "gentilezza", "cordialità", "cortesia", "umanità", "dolcezza", "disponibilità", "agio", "dedizione", "positiva", "ritornerò", "pulito", "eccellente", "fiducia"]
         parole_negative = [ "bruttissime", "bruttissimo", "antipatia", "dispetto", "mancanza", "abbandonato", "scarso", "mancanza", "abbandonato", "scarso", "scandalosi", "scandaloso", "incapaci", "furto", "ignorato", "delusa", "delusione", "sgarbato", 
