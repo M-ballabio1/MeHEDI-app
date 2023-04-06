@@ -261,7 +261,7 @@ if authentication_status:
             cols3 = st.columns((1, 1, 1))
             var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
             var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 7, 1)
-            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita? (minuti)", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
             
             #SPIEGAZIONE RISULTATI
             st.info("➡️ 4. Spiegazioni risultati del dipartimento")
@@ -366,7 +366,7 @@ if authentication_status:
             cols3 = st.columns((1.3,  1.7,  1,  1,  1,  1,  1.6))
             var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
             var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 7, 1)
-            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita? (minuti)", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
             var_d4 = cols3[3].selectbox("Si è sentito sicuro durante la procedura?", ["SI", "NO", "Indifferente"])
             var_d5 = cols3[4].selectbox("Ha provato dolore a causa della procedura?", ["SI", "NO", "Indifferente"])
             var_d6 = cols3[5].selectbox("Ha provato ansia durante la procedura?", ["SI", "NO", "Indifferente"])
@@ -506,7 +506,7 @@ if authentication_status:
             cols3 = st.columns((1.3,  1.7,  1,  1,  1,  1,  1.6))
             var_d1 = cols3[0].selectbox("A quale procedura di imaging medico si è sottoposto?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
             var_d2 = cols3[1].slider("Quanto è soddisfatto del tempo di attesa nel reparto prima dell'inizio della procedura?", 1, 7, 1)
-            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita?", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
+            var_d3 = cols3[2].selectbox("Quanto tempo è durata la visita? (minuti)", options=[1, 2, 3, 4,5,10,15,20,25,30,35,40,45,50,55,60,70,80,90])
             var_d4 = cols3[3].selectbox("Si è sentito sicuro durante la procedura?", ["SI", "NO", "Indifferente"])
             var_d5 = cols3[4].selectbox("Ha provato dolore a causa della procedura?", ["SI", "NO", "Indifferente"])
             var_d6 = cols3[5].selectbox("Ha provato ansia durante la procedura?", ["SI", "NO", "Indifferente"])
