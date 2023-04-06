@@ -83,7 +83,7 @@ def dashboard_patient_satisf():
         Eta_Fil=st.multiselect("Fasce di età", df["Range_Età"].unique(),  default=["18-30anni"])
         st.image(image3, width=170)
         st.markdown("""
-        <div align=right><small>
+        <div align=center><small>
         Page views interaction: <img src="https://www.cutercounter.com/hits.php?id=hxndpfn&nd=6&style=52" border="0" alt="hit counter"><br>
         GitHub <a href="https://github.com/M-ballabio1/MeHEDI-app"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/M-ballabio1/MeHEDI-app?style=social"></a>
         </small></div>
