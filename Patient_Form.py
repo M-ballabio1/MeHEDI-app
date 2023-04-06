@@ -187,6 +187,12 @@ if authentication_status:
             st.write("")
         with b:
             st.image(image3, width=170)
+            st.markdown("""
+            <div align=center><small>
+            Page views interaction: <img src="https://www.cutercounter.com/hits.php?id=hxndpfn&nd=6&style=52" border="0" alt="hit counter"><br>
+            GitHub <a href="https://github.com/M-ballabio1/MeHEDI-app"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/M-ballabio1/MeHEDI-app?style=social"></a>
+            </small></div>
+            """, unsafe_allow_html=True)
         with c:
             st.write("")
         
