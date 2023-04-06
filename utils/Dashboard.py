@@ -82,6 +82,12 @@ def dashboard_patient_satisf():
         Sesso_Fil=st.multiselect("Sesso", df["Sesso"].unique(),  default=["Maschio", "Femmina", "Non Specificato"])
         Eta_Fil=st.multiselect("Fasce di età", df["Range_Età"].unique(),  default=["18-30anni"])
         st.image(image3, width=170)
+        st.markdown("""
+        <div align=right><small>
+        Page views interaction: <img src="https://www.cutercounter.com/hits.php?id=hxndpfn&nd=6&style=52" border="0" alt="hit counter"><br>
+        GitHub <a href="https://github.com/M-ballabio1/MeHEDI-app"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/M-ballabio1/MeHEDI-app?style=social"></a>
+        </small></div>
+        """, unsafe_allow_html=True)
     with c:
         st.write("")
     
@@ -378,14 +384,7 @@ def dashboard_patient_satisf():
         st.text("")
     with col3:
         st.header("Dataframe Key-Words")
-        st.markdown("""
-        <div align=right><small>
-        Page views interaction: <img src="https://www.cutercounter.com/hits.php?id=hxndpfn&nd=6&style=52" border="0" alt="hit counter"><br>
-        GitHub <a href="https://github.com/M-ballabio1/MeHEDI-app"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/M-ballabio1/MeHEDI-app?style=social"></a>
-        </small></div>
-        """, unsafe_allow_html=True)
-    
-
+        
         def word_count(str):
             counts = dict()
             words = str.split()
