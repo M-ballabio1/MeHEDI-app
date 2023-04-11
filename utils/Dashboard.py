@@ -118,7 +118,7 @@ def dashboard_patient_satisf():
         "Tipo_procedura == @Proced_Fil & Sesso == @Sesso_Fil & Range_Età == @Eta_Fil")
     
     #lettura dataset column and groupby weekly
-    df['Timestamp'] = pd.to_datetime(df['Timestamp'], format='%Y-%m-%d')
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'], format='%Y-%m-%d', exact=False)
     df1= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).count()
     df1.reset_index(inplace=True)
 
@@ -126,8 +126,8 @@ def dashboard_patient_satisf():
     today = date.today()
     # Yesterday date
     last_week = today - timedelta(days = 6)
-    date_oggi = today.strftime('%Y-%m-%d')
-    date_last_week = last_week.strftime('%Y-%m-%d')
+    date_oggi = today.strftime('%Y-%m-%d', exact=False)
+    date_last_week = last_week.strftime('%Y-%m-%d', exact=False)
     #df1 = df1.loc[(df1['Timestamp'] <= date_oggi)]
     
     col1, col2, col3, col4, col5 = st.columns(5)
