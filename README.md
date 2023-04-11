@@ -32,6 +32,8 @@ We want to create a digital infrastructure where Patient Satisfaction data from 
 
 Here's MeHEDI-webapp. MEHEDI is a web-app developed with Streamlit an open-source framework (Python-based library) for developing apps which leverage on machine learning and data science technology.
 
+<div align="left">
+
 Process flowchart
 
 ![process-flowchart](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/Process%20flow-chart.png)
