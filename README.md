@@ -1,6 +1,7 @@
 <div align="center">
+# MeHEDI-app | A Data-Driven Healthcare
 
-![MeHEDI-app | A Data-Driven Healthcare](![ICON](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/ICON_res.png)
+![MeHEDI-app](![ICON](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/ICON_res.png)
 )
 
 [![POC project](⭐)](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit)
