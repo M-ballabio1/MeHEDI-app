@@ -1,4 +1,14 @@
-# MeHEDI-app | A Data-Driven Healthcare
+<div align="center">
+
+![MeHEDI-app | A Data-Driven Healthcare](![ICON](https://user-images.githubusercontent.com/78934727/231251880-c459c68c-e9c3-4104-938f-c22bd0657916.png)
+)
+
+[![POC project](⭐)](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit)
+[![Python Version](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue.svg)](#supported-python-versions)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://mehedi-framework-patientsatisfaction-form.streamlit.app/)
+[![License](https://img.shields.io/badge/License-MIT-informational.svg)]()
+
+## ⭐  Quick Start  ⭐
 
 Hello!!!
 
@@ -6,11 +16,13 @@ Let's introduce ourselves,
 
 We are
 
+```bash
 - Matteo Ballabio, Biomedical and Management Engineer, PwC Consultant
 
 - Luca Alessandro Cappellini, Medical Doctor, Radiology Resident, MBA fellow
 
 - Federico Facoetti, Engineering and Management for Health
+```
 
 Thank you for visiting our project!
 
