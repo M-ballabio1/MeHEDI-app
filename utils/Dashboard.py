@@ -132,9 +132,10 @@ def dashboard_patient_satisf():
     today = date.today()
     # Yesterday date
     last_week = today - timedelta(days = 6)
+    last_month = today - timedelta(days = 45)
     date_oggi = today.strftime('%Y-%m-%d')
     date_last_week = last_week.strftime('%Y-%m-%d')
-    #df1 = df1.loc[(df1['Timestamp'] <= date_oggi)]
+    date_last_month = last_month.strftime('%Y-%m-%d')
     
     st.subheader("KPI per la settimana corrente delle principali macro-aree")
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -151,7 +152,7 @@ def dashboard_patient_satisf():
         psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
         psi_perc=round((psi_this_week/7)*100,2)
         #Settimana precedente alla sett scorsa psi
-        df2_att_scorsa_settimana=df.loc[date_last_week:date_oggi]
+        df2_prima_scorsa_settimana=df.loc[date_last_month:date_oggi]
         df2_medie_valori_prec_week=df2_prima_scorsa_settimana.mean().reset_index()
         df2_medie_valori_prec_week.columns = ['variables', 'count']
         psi_prima_last_week=round(df2_medie_valori_prec_week['count'].mean(), 4)
