@@ -1,6 +1,6 @@
 <div align="center">
 
-![MeHEDI-app | A Data-Driven Healthcare](![ICON](images/ICON.png)
+![MeHEDI-app | A Data-Driven Healthcare](![ICON](images/ICON_res.png)
 )
 
 [![POC project](⭐)](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit)
