@@ -1,8 +1,8 @@
 <div align="center">
+
 # MeHEDI-app | A Data-Driven Healthcare
 
 ![MeHEDI-app](![ICON](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/ICON_res.jpg)
-)
 
 [![POC project](⭐)](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit)
 [![Python Version](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue.svg)](#supported-python-versions)
