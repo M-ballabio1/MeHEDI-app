@@ -212,104 +212,102 @@ def dashboard_patient_satisf():
     if len(df_selection)==0:
         st.header("Business Rule Exception")
         st.warning("Non posso fare nessuna query se non è presente almeno un campo per ciascun selectbox")
-    else:
-        pass
-    
-    a, b, c, d, e = st.columns([0.42, 0.01, 0.14, 0.01, 0.42])
-    with a:
-        #appuntamento
-        appunt_media=round(df_selection["Sodd_fac_appun"].mean(), 2)
-        #sito
-        df['Visitato_Sito'] = np.where(df['Visita_sito'] == "SI", -0.5, 0.5)
-        visita_sito_right=df['Visitato_Sito'].sum()
-        visita_sito_right=visita_sito_right/len(df['Visitato_Sito'])
-        sito_web_media=round(df_selection[['Info_sito', "Facili_sito"]].mean(), 2)
-        sito_web_media=((sito_web_media[0]+sito_web_media[1])/2)+visita_sito_right
-        #accoglienza
-        accog_media=round(df_selection[["Sodd_acc_rep", "Sodd_tempo_attesa_rec", "Sodd_indica_area_visi"]].mean(), 2)
-        accog_media=(accog_media[0]+accog_media[1]+accog_media[2])/len(accog_media)
-        #procedure
-        proc_media=round(df_selection[["Sodd-tempo_attes_reparto_pre", "Soddisf_procedura"]].mean(), 2)
-        proc_media=(proc_media[0]+proc_media[1])/len(proc_media)
-        #attesa risultati
-        att_ris_media=round(df_selection["Soddisf_Tempo_Attesa_Risult"].mean(), 2)
-        #risultati
-        ris_media=round(df_selection["Soddisf_Spiegaz_Radiologo"].mean(), 2)
-        st.header("Radar Chart Macro-Aree")
-        #esperienza
-        esp_media=round(df_selection[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Ambiente", "Soddisf_Privacy"]].mean(), 2)
-        esp_media=(esp_media[0]+esp_media[1]+esp_media[2]+esp_media[3]+esp_media[4]+esp_media[5])/len(esp_media)
-        st.subheader("")
-        DATA = [{"taste": "APPUNTAMENTO", "Peso Area": appunt_media},
-                    {"taste": "SITO WEB", "Peso Area": sito_web_media},
-                    {"taste": "ACCOGLIENZA", "Peso Area": accog_media},
-                    {"taste": "PROCEDURE", "Peso Area": proc_media},
-                    {"taste": "TEMPO ATTESA RISULTATI", "Peso Area": att_ris_media},
-                    {"taste": "RISULTATI", "Peso Area": ris_media},
-                    {"taste": "ESPERIENZA", "Peso Area": esp_media}]
-        graph_pes(DATA)
-        st.write("")
-        st.text("")
-        with st.expander("ℹ️ Informazioni grafico", expanded=False):
-                st.markdown(
-                    """
-                    #### Explaination Plot
-                    A radar chart is an informative visual tool in which multiple variables (three or more) and compared on a two-dimensional plane.
-                    
-                    #### Radar chart
-                    This plot is used by the healthcare facility to understand the result of the various macro-areas.
-                    With the filters in the right area, you can understand how age, gender and types of procedure influence the survey result.""")
-                    
-    with b:
-        st.text("")
-    with c:
-        st.subheader("")
-        st.subheader("")
-        st.metric("Spiegazione KPIs",  value="", help="PEI=Indicatore per misurare il grado di soddisfazione medio delle procedure || CKI=Indicatore per misurare il grado di cordialità dello staff Medi || PSafy=Indicatore per misurare il grado di soddisfazione della privacy e sicurezza percepita")
-        st.write("")
-        perc_proc_media=round((proc_media/7)*100, 2)
-        display_dial("Procedure Evaluation Index",  str(perc_proc_media)+"%",   color1)
-        #st.metric("PEI ",  value="45%",  delta="-5%",  help="Procedure Evaluation Index Var_d2, var_d7")
-        st.write("")
-        st.write("")
-        cki_1=round(df_selection[["Sodd_acc_rep", "Sodd_tempo_attesa_rec", "Soddisf_Cordialità_staff"]].mean(), 2)
-        cki_media=round((cki_1[0]+cki_1[1]+cki_1[2])/3, 2)
-        cki_1_media_per=round((cki_media/7)*100, 2)
-        #st.metric("CKI ",  value="75%",  delta="+5%",  help="Cordiality & Kindness Index c1, c2, h5, ")
-        display_dial("Cordiality & Kindness Index",  str(cki_1_media_per)+"%",  color1)
-        st.write("")
-        st.write("")
-        #st.metric("PSafI ",  value="85%",  delta="+5%",  help="Privacy and Safety Index d4, d6, h7")
-        psafi_1=round(df_selection["Soddisf_Privacy"].mean(), 2)
-        psafi_1_media_per=round((psafi_1/7)*100, 2)
-        #calcolo safety
-        safy_si_pren=df['Sicur_visita'].value_counts()["SI"]
-        
-        # ho portato da percentuale centesimi a settesimi
-        sit_safy_score=round(((safy_si_pren))/len(df['Sicur_visita']), 2)
-        display_dial("Privacy and Safety Index",  str(psafi_1_media_per)+"%",  color1)
-    with d:
-        st.text("")
-    with e:
-        st.header("Metodologia Appuntamento")
-        fig = px.pie(df_selection, values='Sodd_fac_appun', names='Tipo_appun', color_discrete_sequence=px.colors.sequential.RdBu)
-        fig.show()
-        st.plotly_chart(fig, use_container_width=True)
-        
-        st.subheader("")
-        with st.expander("ℹ️ Informazioni grafico", expanded=False):
-                st.markdown(
-                    """
-                    #### Pie chart
-                    This graph is used to understand which is the most used method of booking visits.
-                    In particular, the DIG index makes it possible to discriminate between patients who are more inclined to 
-                    technology as they book via website or e-mail. This aspect could be highlighted perhaps during the application of the filters on the left.""")
-       
-    df3=df.copy()
-    #st.write(df3)
-    df3["FCorto"]=df3["Type_Form"]=="Form_corto"
-    df3["FMedio"]=df3["Type_Form"]=="Form_medio"
-    df3["FLungo"]=df3["Type_Form"]=="Form_lungo"
+    else: 
+        a, b, c, d, e = st.columns([0.42, 0.01, 0.14, 0.01, 0.42])
+        with a:
+            #appuntamento
+            appunt_media=round(df_selection["Sodd_fac_appun"].mean(), 2)
+            #sito
+            df['Visitato_Sito'] = np.where(df['Visita_sito'] == "SI", -0.5, 0.5)
+            visita_sito_right=df['Visitato_Sito'].sum()
+            visita_sito_right=visita_sito_right/len(df['Visitato_Sito'])
+            sito_web_media=round(df_selection[['Info_sito', "Facili_sito"]].mean(), 2)
+            sito_web_media=((sito_web_media[0]+sito_web_media[1])/2)+visita_sito_right
+            #accoglienza
+            accog_media=round(df_selection[["Sodd_acc_rep", "Sodd_tempo_attesa_rec", "Sodd_indica_area_visi"]].mean(), 2)
+            accog_media=(accog_media[0]+accog_media[1]+accog_media[2])/len(accog_media)
+            #procedure
+            proc_media=round(df_selection[["Sodd-tempo_attes_reparto_pre", "Soddisf_procedura"]].mean(), 2)
+            proc_media=(proc_media[0]+proc_media[1])/len(proc_media)
+            #attesa risultati
+            att_ris_media=round(df_selection["Soddisf_Tempo_Attesa_Risult"].mean(), 2)
+            #risultati
+            ris_media=round(df_selection["Soddisf_Spiegaz_Radiologo"].mean(), 2)
+            st.header("Radar Chart Macro-Aree")
+            #esperienza
+            esp_media=round(df_selection[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Ambiente", "Soddisf_Privacy"]].mean(), 2)
+            esp_media=(esp_media[0]+esp_media[1]+esp_media[2]+esp_media[3]+esp_media[4]+esp_media[5])/len(esp_media)
+            st.subheader("")
+            DATA = [{"taste": "APPUNTAMENTO", "Peso Area": appunt_media},
+                        {"taste": "SITO WEB", "Peso Area": sito_web_media},
+                        {"taste": "ACCOGLIENZA", "Peso Area": accog_media},
+                        {"taste": "PROCEDURE", "Peso Area": proc_media},
+                        {"taste": "TEMPO ATTESA RISULTATI", "Peso Area": att_ris_media},
+                        {"taste": "RISULTATI", "Peso Area": ris_media},
+                        {"taste": "ESPERIENZA", "Peso Area": esp_media}]
+            graph_pes(DATA)
+            st.write("")
+            st.text("")
+            with st.expander("ℹ️ Informazioni grafico", expanded=False):
+                    st.markdown(
+                        """
+                        #### Explaination Plot
+                        A radar chart is an informative visual tool in which multiple variables (three or more) and compared on a two-dimensional plane.
+
+                        #### Radar chart
+                        This plot is used by the healthcare facility to understand the result of the various macro-areas.
+                        With the filters in the right area, you can understand how age, gender and types of procedure influence the survey result.""")
+
+        with b:
+            st.text("")
+        with c:
+            st.subheader("")
+            st.subheader("")
+            st.metric("Spiegazione KPIs",  value="", help="PEI=Indicatore per misurare il grado di soddisfazione medio delle procedure || CKI=Indicatore per misurare il grado di cordialità dello staff Medi || PSafy=Indicatore per misurare il grado di soddisfazione della privacy e sicurezza percepita")
+            st.write("")
+            perc_proc_media=round((proc_media/7)*100, 2)
+            display_dial("Procedure Evaluation Index",  str(perc_proc_media)+"%",   color1)
+            #st.metric("PEI ",  value="45%",  delta="-5%",  help="Procedure Evaluation Index Var_d2, var_d7")
+            st.write("")
+            st.write("")
+            cki_1=round(df_selection[["Sodd_acc_rep", "Sodd_tempo_attesa_rec", "Soddisf_Cordialità_staff"]].mean(), 2)
+            cki_media=round((cki_1[0]+cki_1[1]+cki_1[2])/3, 2)
+            cki_1_media_per=round((cki_media/7)*100, 2)
+            #st.metric("CKI ",  value="75%",  delta="+5%",  help="Cordiality & Kindness Index c1, c2, h5, ")
+            display_dial("Cordiality & Kindness Index",  str(cki_1_media_per)+"%",  color1)
+            st.write("")
+            st.write("")
+            #st.metric("PSafI ",  value="85%",  delta="+5%",  help="Privacy and Safety Index d4, d6, h7")
+            psafi_1=round(df_selection["Soddisf_Privacy"].mean(), 2)
+            psafi_1_media_per=round((psafi_1/7)*100, 2)
+            #calcolo safety
+            safy_si_pren=df['Sicur_visita'].value_counts()["SI"]
+
+            # ho portato da percentuale centesimi a settesimi
+            sit_safy_score=round(((safy_si_pren))/len(df['Sicur_visita']), 2)
+            display_dial("Privacy and Safety Index",  str(psafi_1_media_per)+"%",  color1)
+        with d:
+            st.text("")
+        with e:
+            st.header("Metodologia Appuntamento")
+            fig = px.pie(df_selection, values='Sodd_fac_appun', names='Tipo_appun', color_discrete_sequence=px.colors.sequential.RdBu)
+            fig.show()
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.subheader("")
+            with st.expander("ℹ️ Informazioni grafico", expanded=False):
+                    st.markdown(
+                        """
+                        #### Pie chart
+                        This graph is used to understand which is the most used method of booking visits.
+                        In particular, the DIG index makes it possible to discriminate between patients who are more inclined to 
+                        technology as they book via website or e-mail. This aspect could be highlighted perhaps during the application of the filters on the left.""")
+
+        df3=df.copy()
+        #st.write(df3)
+        df3["FCorto"]=df3["Type_Form"]=="Form_corto"
+        df3["FMedio"]=df3["Type_Form"]=="Form_medio"
+        df3["FLungo"]=df3["Type_Form"]=="Form_lungo"
     
     st.write("")
     st.progress(100, text="")
