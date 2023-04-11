@@ -2,8 +2,8 @@
 
 ![MeHEDI-app](![ICON](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/ICON.png)
 
-[![POC project](⭐)](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit)
-[![Python Version](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue.svg)](#supported-python-versions)
+[![⭐ POC project]](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit)
+[![Python Version](https://img.shields.io/badge/python-3.10-blue.svg)](#supported-python-versions)
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://mehedi-framework-patientsatisfaction-form.streamlit.app/)
 [![License](https://img.shields.io/badge/License-MIT-informational.svg)]()
 
