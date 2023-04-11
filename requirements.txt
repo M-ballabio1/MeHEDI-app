@@ -11,3 +11,4 @@ deta
 htbuilder
 streamlit-elements
 wordcloud
+scikit-learn
