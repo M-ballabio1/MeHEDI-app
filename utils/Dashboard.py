@@ -145,16 +145,16 @@ def dashboard_patient_satisf():
         delta_report=int(len_report_sett_now) - int(len_report_sett_last_week)
         st.metric("Report Inviati In Settimana",  value= str(int(len_report_sett_now))+" rep", delta=str(delta_report),  help="Numero totale di report inviati questa settimana rispetto a settimana scorsa")
     with col2:
-        df2_att_scorsa_settimana=df
-        df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
         #Settimana attuale psi
-        df2_medie_valori_week=df_meann.mean().reset_index()
+        df2_att_scorsa_settimana=df.loc[(df['Timestamp'] >= str(date_last_week))]
+        df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
         df2_medie_valori_week.columns = ['variables', 'count']
         st.write(df2_medie_valori_week)
         psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
         psi_perc=round((psi_this_week/7)*100,2)
         #Settimana precedente alla sett scorsa psi
-        df2_prima_scorsa_settimana=df
+        df2_att_scorsa_settimana=df.loc[(df['Timestamp'] >= str(date_last_week))]
+        df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
         df2_medie_valori_prec_week=df2_prima_scorsa_settimana.mean().reset_index()
         df2_medie_valori_prec_week.columns = ['variables', 'count']
         psi_prima_last_week=round(df2_medie_valori_prec_week['count'].mean(), 4)
