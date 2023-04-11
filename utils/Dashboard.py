@@ -1,5 +1,6 @@
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
+import plotly.graph_objects as go
 import numpy as np
 import streamlit as st  # pip install streamlit
 #import altair as alt
@@ -22,6 +23,11 @@ def dashboard_patient_satisf():
     img = Image.open('images/dashboard1_logo.png')
     st.image(img) 
     image3 = Image.open('images/Mehedi_logo2.png')
+    
+    #good, neutral, bad
+    img_bad = Image.open('images/px_bad.png')
+    img_neu = Image.open('images/px_neutral.png')
+    img_good = Image.open('images/px_good.png')
     
     color1 = "#6082B6"
     color2 = "#89CFF0"
@@ -130,6 +136,7 @@ def dashboard_patient_satisf():
     date_last_week = last_week.strftime('%Y-%m-%d')
     #df1 = df1.loc[(df1['Timestamp'] <= date_oggi)]
     
+    st.subheader("KPI per la settimana corrente delle principali macro-aree")
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         len_report_sett_now=df1['Sesso'].iloc[-1]
@@ -273,8 +280,7 @@ def dashboard_patient_satisf():
         
         # ho portato da percentuale centesimi a settesimi
         sit_safy_score=round(((safy_si_pren))/len(df['Sicur_visita']), 2)
-        safety_score=psafi_1_media_per+sit_safy_score
-        display_dial("Privacy and Safety Index",  str(safety_score)+"%",  color1)
+        display_dial("Privacy and Safety Index",  str(psafi_1_media_per)+"%",  color1)
     with d:
         st.text("")
     with e:
@@ -297,37 +303,110 @@ def dashboard_patient_satisf():
     df3["FCorto"]=df3["Type_Form"]=="Form_corto"
     df3["FMedio"]=df3["Type_Form"]=="Form_medio"
     df3["FLungo"]=df3["Type_Form"]=="Form_lungo"
-       #df3= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1D')).count()
-       #df3.reset_index(inplace=True)
     
-       #chart_data = pd.DataFrame(df3, columns=['Fcorto', 'Fmedio', 'Flungo'])
-       #st.area_chart(chart_data,  width=450, height=400)
-    """
-    col1, col2, col3=st.columns([1, 1, 1])
+    st.write("")
+    st.progress(100, text="")
+    st.write("")
+    
+    # Second row
+    #calcolo Patient Experience ogni 1 week
+    df4= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).mean().reset_index()
+    df4["PX"]=round(df4[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
+    
+    #media mobile e target
+    df4["MA_PX"]=df4["PX"].rolling(2).mean()
+    df4["target_sicurezza_PX"]=4
+    
+    col0, col1,col2, col3 = st.columns([0.2, 1, 0.05, 0.25])
+    with col0:
+        st.write("")
+        st.write("")
+        if df4["PX"].index[-1] >5.5:
+            st.write("")
+            st.subheader("✅ Continua così")
+            st.success("Come puoi vedere il livello di Patient Satisfaction della nostra struttura è abbastanza alto. Tieni alta l'attenzione e cerca di concentrarti sulle aree più carenti!")
+        elif df4["PX"].index[-1] < 5.5 and df4["PX"].index[-1] > 4:
+            st.write("")
+            st.subheader("🤖 Si potrebbe migliorare")
+            st.warning("Sicuramente si potrebbero rivedere alcuni aspetti perchè il livello di Patient Satisfaction è ancora accettbile, ma dobbiamo fare di più. Come noti hai un Patient Satisfaction index di "+str(psi_perc)+"%. Non è sufficiente bisogna fare di più.")
+        else:
+            st.write("")
+            st.subheader("⚠ Attenzione bisogna intervenire!")
+            st.error("Bisogna intervenire immediatamente per invertire questo trend negativo di Patient Satisfaction. Non è più ancora accettbile.")
     with col1:
-        # define standard scaler
-        df_selection.dropna(axis=0)
-        df_selection.drop(columns=['Tipo_appun'])
-        #scaler = StandardScaler()
-        # transform data
-        #df_selection_stand = scaler.fit_transform(df_selection)
-        fig = px.imshow(df_selection)
+        st.header("Line Chart Patient Experienece per settimana")
+        fig = go.Figure([go.Scatter(x=df4['Timestamp'], y=df4['PX'], name='Patient Satisfaction')])
+        fig.update_layout(yaxis_range=[1, 7])
+        fig.add_trace(go.Scatter(x=df4['Timestamp'], y=df4["MA_PX"],mode='lines', line=dict(color="orange"), name='Media Mobile a 2 week'))
+        fig.add_trace(go.Scatter(x=df4['Timestamp'], y=df4["target_sicurezza_PX"],mode='lines', line=dict(color="blue"), name='Safety Target'))
+        fig.update_layout(legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="left",
+            x=0.01))
         st.plotly_chart(fig, use_container_width=True)
     with col2:
-        fig = px.bar(df_selection, x="Type_Form", y="Type_Form")
-        st.plotly_chart(fig, use_container_width=True)
-       #fig = go.Figure()
-       #fig.add_trace(go.Bar(x=Categ_Visita_Fil, y=df["Categoria_Visita"].value_counts()))
-       #b.plotly_chart(fig, use_container_width=True)
-    #st.write(chart_data)
-    """
-    #st.write(df_selection)
+        st.write("")
+    with col3:
+        st.write("")
+        st.write("")
+        st.write("")
+        if df4["PX"].index[-1] >5.5:
+            st.image(img_good, width=350) 
+        elif df4["PX"].index[-1] < 5.5 and df4["PX"].index[-1] > 4:
+            st.image(img_neu, width=350)
+        else:
+            st.image(img_bad, width=350)
+    
+    # Third row
+    from sklearn.linear_model import LinearRegression
+    from sklearn.preprocessing import PolynomialFeatures
+
+    def format_coefs(coefs):
+        equation_list = [f"{coef}x^{i}" for i, coef in enumerate(coefs)]
+        equation = "$" +  " + ".join(equation_list) + "$"
+
+        replace_map = {"x^0": "", "x^1": "x", '+ -': '- '}
+        for old, new in replace_map.items():
+            equation = equation.replace(old, new)
+
+        return equation
+
+    #df_new = px.data.tips()
+    #calcolo Patient Experience ogni 1 day
+    df5= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='D')).mean().reset_index()
+    df5["PX"]=round(df5[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
+    #mean_px_daily=round(df5[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(), 2)
+    
+    df5["PX"].fillna(value=3.5, inplace=True)
+    df5["Sodd_tempo_attesa_rec"].fillna(value=3.5, inplace=True)
+    
+    X = df5.Sodd_tempo_attesa_rec.values.reshape(-1, 1)
+    x_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
+    
+    st.header("Polynomial Regression using basic ML per capire la relazione tra PSI e Soddisfazione Tempo d'attesa Reception")
+    fig = px.scatter(df5, x='Sodd_tempo_attesa_rec', y='PX', opacity=0.65)
+    for degree in [1, 2, 3, 4]:
+        poly = PolynomialFeatures(degree)
+        poly.fit(X)
+        X_poly = poly.transform(X)
+        x_range_poly = poly.transform(x_range)
+
+        model = LinearRegression(fit_intercept=False)
+        model.fit(X_poly, df5.PX)
+        y_poly = model.predict(x_range_poly)
+
+        equation = format_coefs(model.coef_.round(2))
+        fig.add_traces(go.Scatter(x=x_range.squeeze(), y=y_poly, name=equation))
+    st.plotly_chart(fig, use_container_width=True)
     
 
     st.write("")
-    my_bar = st.progress(100, text="")
+    st.progress(100, text="")
     st.write("")
-    # Second Row
+    
+    
+    # Fourth Row
     st.subheader("")
     col1,col2, col3 = st.columns([1, 1, 1])
     with col1:
@@ -361,7 +440,8 @@ def dashboard_patient_satisf():
         st.metric("% Risultati Negativi",  value=str(perc_ris_neg)+"%",  help="Percentuale Key-Words Negative sul totale parole inserite nei form e filtrate")
     with col3:
         ris_neg=round(((risultato_pos/risultato_neg)), 2)
-        st.metric("Sentiment Analysis Score", value=ris_neg, delta=(ris_neg-1) ,  help="Rapporto Positivi-Negativi. Calcola qual è il rapporto tra Key-words positive e negative se > 0 allora sono più quelle positive.")
+        delta_ris_neg=round((ris_neg-1), 2)
+        st.metric("Sentiment Analysis Score", value=ris_neg, delta=str(delta_ris_neg) ,  help="Rapporto Positivi-Negativi. Calcola qual è il rapporto tra Key-words positive e negative se > 0 allora sono più quelle positive.")
     
     col1,col2, col3,  col4,  col5= st.columns([2,0.05, 0.8, 0.02, 1.1 ])
     with col1:
@@ -421,7 +501,9 @@ def dashboard_patient_satisf():
         st.plotly_chart(fig, use_container_width=True)
     
     st.subheader("Dataframe Filtrato tramite query")
-    st.write(df_selection) 
+    st.write(df_selection)
+    st.subheader("Dataframe completo")
+    st.write(df)
     
     """
     #processi - strutture
