@@ -158,7 +158,7 @@ def dashboard_patient_satisf():
         psi_prima_last_week=round(df2_medie_valori_prec_week['count'].mean(), 4)
         #differenza tra i PSI
         delta_psi=round(((float(psi_this_week)-float(psi_prima_last_week))/7)*100, 2)
-        st.metric("PSI Index",  value=str(psi_perc)+" %", delta=str(delta_psi)+" %", help="Patient Satisfaction Index (misura complessiva di grado di soddisfazione dei pazienti)")
+        st.metric("PSI Index",  value=psi_perc, delta=str(delta_psi)+" %", help="Patient Satisfaction Index (misura complessiva di grado di soddisfazione dei pazienti)")
     with col3:
         #Settimana attuale tws MEAN
         df2_medie_valori_tws_week=df2_att_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].mean().reset_index()
