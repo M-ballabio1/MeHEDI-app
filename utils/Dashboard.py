@@ -125,7 +125,7 @@ def dashboard_patient_satisf():
     
     #lettura dataset column and groupby weekly
     df['Timestamp'] = pd.to_datetime(df['Timestamp'], format='%Y-%m-%d', exact=False).fillna(3)
-    df1= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).count().fillna(0)
+    df1= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).count().fillna(3)
     df1.reset_index(inplace=True)
 
     #filter dataset only to date < to today (dd/mm/YY)
@@ -145,13 +145,12 @@ def dashboard_patient_satisf():
         delta_report=int(len_report_sett_now) - int(len_report_sett_last_week)
         st.metric("Report Inviati In Settimana",  value= str(int(len_report_sett_now))+" rep", delta=str(delta_report),  help="Numero totale di report inviati questa settimana rispetto a settimana scorsa")
     with col2:
+        df_meann= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).mean().fillna(0)
+        df_meann.reset_index(inplace=True)
         #Settimana attuale psi
-        df2_att_scorsa_settimana=df.loc[date_last_week:date_oggi]
-        df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
-        st.write(df2_medie_valori_week)
-        st.write(df1)
-        st.write(df)
+        df2_medie_valori_week=df_meann.mean().reset_index()
         df2_medie_valori_week.columns = ['variables', 'count']
+        st.write(df2_medie_valori_week)
         psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
         psi_perc=round((psi_this_week/7)*100,2)
         #Settimana precedente alla sett scorsa psi
