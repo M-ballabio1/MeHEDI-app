@@ -353,11 +353,11 @@ def dashboard_patient_satisf():
         st.write("")
         st.write("")
         if df4["PX"].iat[-1] >5.5:
-            st.image(img_good, width=350) 
+            st.image(img_good, width=300) 
         elif df4["PX"].iat[-1] < 5.5 and df4["PX"].iat[-1] > 4:
-            st.image(img_neu, width=350)
+            st.image(img_neu, width=300)
         else:
-            st.image(img_bad, width=350)
+            st.image(img_bad, width=300)
     
     # Third row
     from sklearn.linear_model import LinearRegression
