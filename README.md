@@ -1,6 +1,6 @@
 <div align="center">
 
-![MeHEDI-app](![ICON](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/ICON.png)
+(![ICON](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/ICON.png)
 
 [![⭐ POC project]](https://docs.google.com/document/d/1qZtcUX0fqJVSSDIQqjuxeVHOiQLSsaUabji72NJYdMM/edit)
 [![Python Version](https://img.shields.io/badge/python-3.10-blue.svg)](#supported-python-versions)
