@@ -148,6 +148,8 @@ def dashboard_patient_satisf():
         #Settimana attuale psi
         df2_att_scorsa_settimana=df.loc[date_last_week:date_oggi]
         df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
+        st.write(df2_medie_valori_week)
+        st.write(df1)
         df2_medie_valori_week.columns = ['variables', 'count']
         psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
         psi_perc=round((psi_this_week/7)*100,2)
