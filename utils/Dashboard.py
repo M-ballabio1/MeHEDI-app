@@ -144,10 +144,12 @@ def dashboard_patient_satisf():
         delta_report=int(len_report_sett_now) - int(len_report_sett_last_week)
         st.metric("Report Inviati In Settimana",  value= str(int(len_report_sett_now))+" rep", delta=str(delta_report),  help="Numero totale di report inviati questa settimana rispetto a settimana scorsa")
     with col2:
+        st.write(df)
         #Settimana attuale psi
-        df["index"]=pd.DatetimeIndex(df['Timestamp'])
-        df.set_index('index')
-        df2_att_scorsa_settimana=df.last('6D')
+        df2_att_scorsa_settimana=df.loc[(df['Timestamp'] >= str(date_last_week))]
+        #df["index"]=pd.DatetimeIndex(df['Timestamp'])
+        #df.set_index('index')
+        #df2_att_scorsa_settimana=df.last('6D')
         df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
         df2_medie_valori_week.columns = ['variables', 'count']
         psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
