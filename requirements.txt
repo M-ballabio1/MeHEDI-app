@@ -1,6 +1,6 @@
-pandas
+pandas==1.5.3
 google_api_python_client
-streamlit==1.19.0
+streamlit==1.21.0
 plotly
 openpyxl
 pillow
