@@ -209,9 +209,11 @@ def dashboard_patient_satisf():
         st.metric("DIG Index",  value=str(dig_score_att)+"/7", delta=str(delta_dig),  help="Digitalization Index (permette di calcolare una media ponderata di grado di digitalizzazione della struttura rispetto ad una baseline)")
     
     #First row
-    if Proced_Fil or Sesso_Fil or Eta_Fil == None:
+    if len(Proced_Fil) or len(Sesso_Fil)or len(Eta_Fil) == 0:
         st.header("Business Rule Exception")
         st.warning("Non posso fare nessuna query se non è presente almeno un campo per ciascun selectbox")
+    else:
+        pass
     
     a, b, c, d, e = st.columns([0.42, 0.01, 0.14, 0.01, 0.42])
     with a:
