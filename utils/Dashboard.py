@@ -146,9 +146,6 @@ def dashboard_patient_satisf():
     with col2:
         #Settimana attuale psi
         df2_att_scorsa_settimana=df
-        #df["index"]=pd.DatetimeIndex(df['Timestamp'])
-        #df.set_index('index')
-        #df2_att_scorsa_settimana=df.last('6D')
         df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
         df2_medie_valori_week.columns = ['variables', 'count']
         psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
