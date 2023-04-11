@@ -26,15 +26,17 @@ We are
 
 Thank you for visiting our project!
 
+ <div align="left">
+  
 We joined our forces and competences to created MeHEDI-app. 
 Our aim is foster digital transformation, in small-to-medium healthcare facilities in Italy leveraging on real-time analytics and a data-driven approach.
 We want to create a digital infrastructure where Patient Satisfaction data from one side, Operation and economics data from the other, are blanded together to provide actionable insights. As to now, we have worked strongly on the Patient Satisfaction side as you will see. 
 
 Here's MeHEDI-webapp. MEHEDI is a web-app developed with Streamlit an open-source framework (Python-based library) for developing apps which leverage on machine learning and data science technology.
 
-<div align="left">
 
-Process flowchart
+
+### Process flowchart
 
 ![process-flowchart](https://github.com/M-ballabio1/MeHEDI-app/blob/main/images/Process%20flow-chart.png)
 
