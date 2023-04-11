@@ -324,11 +324,11 @@ def dashboard_patient_satisf():
     with col0:
         st.write("")
         st.write("")
-        if df4["PX"].index[-1] >5.5:
+        if df4["PX"].iat[-1] >5.5:
             st.write("")
             st.subheader("✅ Continua così")
             st.success("Come puoi vedere il livello di Patient Satisfaction della nostra struttura è abbastanza alto. Tieni alta l'attenzione e cerca di concentrarti sulle aree più carenti!")
-        elif df4["PX"].index[-1] < 5.5 and df4["PX"].index[-1] > 4:
+        elif df4["PX"].iat[-1]< 5.5 and df4["PX"].iat[-1] > 4:
             st.write("")
             st.subheader("🤖 Si potrebbe migliorare")
             st.warning("Sicuramente si potrebbero rivedere alcuni aspetti perchè il livello di Patient Satisfaction è ancora accettbile, ma dobbiamo fare di più. Come noti hai un Patient Satisfaction index di "+str(psi_perc)+"%. Non è sufficiente bisogna fare di più.")
@@ -354,9 +354,9 @@ def dashboard_patient_satisf():
         st.write("")
         st.write("")
         st.write("")
-        if df4["PX"].index[-1] >5.5:
+        if df4["PX"].iat[-1] >5.5:
             st.image(img_good, width=350) 
-        elif df4["PX"].index[-1] < 5.5 and df4["PX"].index[-1] > 4:
+        elif df4["PX"].iat[-1] < 5.5 and df4["PX"].iat[-1] > 4:
             st.image(img_neu, width=350)
         else:
             st.image(img_bad, width=350)
