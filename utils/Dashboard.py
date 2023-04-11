@@ -126,8 +126,8 @@ def dashboard_patient_satisf():
     today = date.today()
     # Yesterday date
     last_week = today - timedelta(days = 6)
-    date_oggi = today.strftime('%Y-%m-%d', exact=False)
-    date_last_week = last_week.strftime('%Y-%m-%d', exact=False)
+    date_oggi = today.strftime('%Y-%m-%d')
+    date_last_week = last_week.strftime('%Y-%m-%d')
     #df1 = df1.loc[(df1['Timestamp'] <= date_oggi)]
     
     col1, col2, col3, col4, col5 = st.columns(5)
