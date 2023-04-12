@@ -388,9 +388,11 @@ def dashboard_patient_satisf():
         
         mse = mean_squared_error(y_test, pred)
         print("The mean squared error (MSE) on test set: {:.4f}".format(mse))
-        return float(pred)
+        #take the first prediction
+        return pred[-1]
     
     pred = training_ml(X,  y)
+    #st.write(pred)
     
     #media mobile e target
     df4["MA_PX"]=df4["PX"].rolling(2).mean()
