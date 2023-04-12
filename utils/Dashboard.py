@@ -17,6 +17,13 @@ from wordcloud import WordCloud,  STOPWORDS
 import matplotlib.pyplot as plt
 from PIL import Image
 
+from sklearn import datasets, ensemble
+from sklearn.inspection import permutation_importance
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+
 from utils.addition.graphs import graph_pes
 
 def dashboard_patient_satisf():
@@ -318,11 +325,78 @@ def dashboard_patient_satisf():
     df4= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).mean().reset_index()
     df4["PX"]=round(df4[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
     
+    ml_df=df4
+    X = ml_df.drop(columns=['PX',  "Timestamp"]).fillna(df4.mean())
+    y = ml_df["PX"]
+    
+    col0, col1, col2 = st.columns([1.1, 0.01, 1])
+    with col0:
+        st.subheader("Feature Importance to predict PSI")
+        ##features importance
+        X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.1, random_state=13)
+
+        params = {
+        "n_estimators": 500,
+        "max_depth": 4,
+        "min_samples_split": 5,
+        "learning_rate": 0.01,
+        "loss": "squared_error"}
+        
+        reg = ensemble.GradientBoostingRegressor(**params)
+        reg.fit(X_train, y_train)
+        
+        feature_importance = reg.feature_importances_
+        sorted_idx = np.argsort(feature_importance)
+        pos = np.arange(sorted_idx.shape[0]) + 0.5
+        fig, ax = plt.subplots(facecolor="#E4E3E3")
+        plt.barh(pos, feature_importance[sorted_idx], align="center")
+        plt.yticks(pos, np.array(ml_df.columns.values)[sorted_idx])
+        st.pyplot(fig)
+        plt.show()
+    with col1:
+        st.write("")
+    with col2:
+        st.subheader("Correlation Matrix")
+        # Correlation Matrix in Content
+        st.write("")
+        df_corr = df.corr()
+        fig_corr = go.Figure([go.Heatmap(z=df_corr.values,
+                                         x=df_corr.index.values,
+                                         y=df_corr.columns.values)])
+        fig_corr.update_layout(height=580,
+                               width=1000,
+                               margin={'l': 20, 'r': 20, 't': 0, 'b': 0})
+        st.plotly_chart(fig_corr, use_container_width=True)
+    
+    #algorithms
+    def training_ml(x,  y):
+        X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.1, random_state=13)
+
+        params = {
+        "n_estimators": 500,
+        "max_depth": 4,
+        "min_samples_split": 5,
+        "learning_rate": 0.01,
+        "loss": "squared_error"}
+        
+        reg = ensemble.GradientBoostingRegressor(**params)
+        reg.fit(X_train, y_train)
+
+        pred=reg.predict(X_test)
+        
+        mse = mean_squared_error(y_test, pred)
+        print("The mean squared error (MSE) on test set: {:.4f}".format(mse))
+        return float(pred)
+    
+    pred = training_ml(X,  y)
+    
     #media mobile e target
     df4["MA_PX"]=df4["PX"].rolling(2).mean()
     df4["target_sicurezza_PX"]=4
     
-    col0, col1,col2, col3 = st.columns([0.2, 1, 0.05, 0.25])
+    col0, col01,  col1,col2, col3 = st.columns([0.2,0.05,  1, 0.05, 0.25])
     with col0:
         st.write("")
         st.write("")
@@ -338,8 +412,10 @@ def dashboard_patient_satisf():
             st.write("")
             st.subheader("⚠ Attenzione bisogna intervenire!")
             st.error("Bisogna intervenire immediatamente per invertire questo trend negativo di Patient Satisfaction. Non è più ancora accettbile.")
+    with col01:
+        st.write("")
     with col1:
-        st.header("Line Chart Patient Experienece per settimana")
+        st.header("Line Chart Patient Experience per settimana")
         fig = go.Figure([go.Scatter(x=df4['Timestamp'], y=df4['PX'], name='Patient Satisfaction')])
         fig.update_layout(yaxis_range=[1, 7])
         fig.add_trace(go.Scatter(x=df4['Timestamp'], y=df4["MA_PX"],mode='lines', line=dict(color="orange"), name='Media Mobile a 2 week'))
@@ -354,7 +430,10 @@ def dashboard_patient_satisf():
         st.write("")
     with col3:
         st.write("")
-        st.write("")
+        delta_psiprev=pred-df4["PX"].iat[-1]
+        delta_psiprev=round(float(delta_psiprev), 2)
+        preds=round(float(pred), 3)
+        st.metric("Prevedo che settimna prossima PSI", str(preds),  str(delta_psiprev)+"/7", help="Patient Satisfaction Index stimata sulla base di algoritmo di ML (Gradient Boosting) che considera tutte le varibaili del dataset")
         st.write("")
         if df4["PX"].iat[-1] >5.5:
             st.image(img_good, width=300) 
@@ -364,8 +443,6 @@ def dashboard_patient_satisf():
             st.image(img_bad, width=300)
     
     # Third row
-    from sklearn.linear_model import LinearRegression
-    from sklearn.preprocessing import PolynomialFeatures
 
     def format_coefs(coefs):
         equation_list = [f"{coef}x^{i}" for i, coef in enumerate(coefs)]
