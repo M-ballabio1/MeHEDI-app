@@ -296,20 +296,56 @@ if authentication_status:
                 graph_pes(DATA)
                 media_tot=round(((med_accoglienza+med_experience+var_a2+var_d2+var_f3)/5), 1)
             
-            if media_tot<=4:
-                cols_text = st.columns((0.2, 1))
+            if media_tot ==1:
+                pass
+            elif media_tot<=4:
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza può essere migliorata, raccontaci cosa ne pensi e miglioreremo sicuramente")
             elif media_tot>4 and media_tot<=5:
-                cols_text = st.columns((0.2, 1))
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
             elif media_tot>5 and media_tot<=7:
-                cols_text = st.columns((0.2, 1))
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza sembra essere andata bene, se ti interessa raccontaci la tua esperienza continueremo a migliorare")
             else:
                 feedback_gen=""
+            
+            if media_tot ==1:
+                pass
+            elif media_tot < 4.5:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("La tua ESPERIENZA COMPLESSIVA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(media_tot)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                colss[1].write("")
+                colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            elif var_a2 < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("L'area APPUNTAMENTO è molto carente con un risultato di "+str(var_a2)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                colss[1].write("")
+                colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            elif med_accoglienza < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("L'area ACCOGLIENZA PAZIENTE è molto carente con un risultato di "+str(med_accoglienza)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura. Essendo una delle aree più importanti per noi ci piacerebbe avere il tuo parere.", icon="🚨")
+                colss[1].write("")
+                colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            elif var_d2 < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("L'area PROCEDURE è molto carente con un risultato di "+str(var_d2)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                colss[1].write("")
+                colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            elif var_f3 < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("L'area RISULTATI è molto carente con un risultato di "+str(var_f3)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                colss[1].write("")
+                colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            elif med_experience < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                colss[1].write("")
+                colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            
             submitted = st.button(label="Submit")
             if submitted==True:
                 st.success("Successfully")
@@ -420,20 +456,96 @@ if authentication_status:
                     graph_pes(DATA)
                     media_tot=round(((med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3)/6), 1)
             
-            if media_tot<=4:
-                cols_text = st.columns((0.2, 1))
+            if media_tot ==1:
+                    pass
+            elif media_tot<=4:
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza può essere migliorata, raccontaci cosa ne pensi e miglioreremo sicuramente")
             elif media_tot>4 and media_tot<=5:
-                cols_text = st.columns((0.2, 1))
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
             elif media_tot>5 and media_tot<=7:
-                cols_text = st.columns((0.2, 1))
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza sembra essere andata bene, se ti interessa raccontaci la tua esperienza continueremo a migliorare")
             else:
                 feedback_gen=""
+            
+            if var_b1=="NO":
+                if media_tot ==1:
+                    pass
+                elif media_tot < 4.5:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("La tua ESPERIENZA COMPLESSIVA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(media_tot)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_a2 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area APPUNTAMENTO è molto carente con un risultato di "+str(var_a2)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_accoglienza < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area ACCOGLIENZA PAZIENTE è molto carente con un risultato di "+str(med_accoglienza)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura. Essendo una delle aree più importanti per noi ci piacerebbe avere il tuo parere.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_proc < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area PROCEDURE è molto carente con un risultato di "+str(med_proc)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_f3 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area RISULTATI è molto carente con un risultato di "+str(var_f3)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_experience < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            
+            elif var_b1=="SI":
+                if media_tot ==1:
+                    pass
+                elif media_tot < 4.5:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("La tua ESPERIENZA COMPLESSIVA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(media_tot)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_a2 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area APPUNTAMENTO è molto carente con un risultato di "+str(var_a2)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_sito < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area SITO WEB è molto carente con un risultato di "+str(med_sito)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_accoglienza < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area ACCOGLIENZA PAZIENTE è molto carente con un risultato di "+str(med_accoglienza)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura. Essendo una delle aree più importanti per noi ci piacerebbe avere il tuo parere.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_proc < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area PROCEDURE è molto carente con un risultato di "+str(med_proc)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_f3 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area RISULTATI è molto carente con un risultato di "+str(var_f3)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_experience < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            
             submitted = st.button(label="Submit")
             if submitted==True:
                 st.success("Successfully")
@@ -582,20 +694,106 @@ if authentication_status:
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                     graph_pes(DATA)
                     media_tot=round(((med_accoglienza+med_sito+med_experience+var_a2+var_d2+var_f3+ var_g3)/7), 1)
-            if media_tot<=4:
-                cols_text = st.columns((0.2, 1))
+            
+            if media_tot ==1:
+                    pass
+            elif media_tot<=4:
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza può essere migliorata, raccontaci cosa ne pensi e miglioreremo sicuramente")
             elif media_tot>4 and media_tot<=5:
-                cols_text = st.columns((0.2, 1))
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
             elif media_tot>5 and media_tot<=7:
-                cols_text = st.columns((0.2, 1))
+                cols_text = st.columns((0.25, 1))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza sembra essere andata bene, se ti interessa raccontaci la tua esperienza continueremo a migliorare")
             else:
                 feedback_gen=""
+            
+            if var_b1=="NO":
+                if media_tot ==1:
+                    pass
+                elif media_tot < 4.5:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("La tua ESPERIENZA COMPLESSIVA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(media_tot)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_a2 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area APPUNTAMENTO è molto carente con un risultato di "+str(var_a2)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_accoglienza < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area ACCOGLIENZA PAZIENTE è molto carente con un risultato di "+str(med_accoglienza)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura. Essendo una delle aree più importanti per noi ci piacerebbe avere il tuo parere.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_proc < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area PROCEDURE è molto carente con un risultato di "+str(med_proc)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_g3 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area TEMPO ATTESA RISULTATI è molto carente con un risultato di "+str(var_g3)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_f3 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area RISULTATI è molto carente con un risultato di "+str(var_f3)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_experience < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            elif var_b1=="SI":
+                if media_tot ==1:
+                    pass
+                elif media_tot < 4.5:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("La tua ESPERIENZA COMPLESSIVA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(media_tot)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_a2 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area APPUNTAMENTO è molto carente con un risultato di "+str(var_a2)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_sito < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area SITO WEB è molto carente con un risultato di "+str(med_sito)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_accoglienza < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area ACCOGLIENZA PAZIENTE è molto carente con un risultato di "+str(med_accoglienza)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura. Essendo una delle aree più importanti per noi ci piacerebbe avere il tuo parere.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_proc < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area PROCEDURE è molto carente con un risultato di "+str(med_proc)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_g3 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area TEMPO ATTESA RISULTATI è molto carente con un risultato di "+str(var_g3)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif var_f3 < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area RISULTATI è molto carente con un risultato di "+str(var_f3)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                elif med_experience < 4:
+                    colss = st.columns([0.23, 0.02, 1])
+                    colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
+                    colss[1].write("")
+                    colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            
             submitted = st.button(label="Submit")
             if submitted==True:
                 st.success("Successfully")
