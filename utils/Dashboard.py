@@ -296,12 +296,35 @@ def dashboard_patient_satisf():
         with d:
             st.text("")
         with e:
-            st.header("Metodologia Appuntamento")
-            fig = px.pie(df_selection, values='Sodd_fac_appun', names='Tipo_appun', color_discrete_sequence=px.colors.sequential.RdBu)
+            df_cat=df_selection[['Sodd_fac_appun',"Tipo_appun", "Tipo_procedura", "Tempo_segn_medic_app",  "Dolore_visita", "Sesso", "Range_Età"]]
+            df_fin=df_cat.rename(columns={'Sodd_fac_appun':"Soddisfazione fac appuntamento","Tipo_appun": "Tipologia Appuntamento", "Tipo_procedura": "Tipologia Procedure", "Tempo_segn_medic_app": "Tempo tra segnalazione medico e visita", "Dolore_visita": "Dolore nelle procedure", "Sesso": "Sesso pazienti", "Range_Età": "Range Età pazienti"}, errors="raise")
+            pie_filter=st.selectbox("", ["Tipologia Appuntamento", "Tipologia Procedure", "Tempo tra segnalazione medico e visita", "Sesso pazienti", "Range Età pazienti"])
+            if pie_filter=="Tipologia Appuntamento":
+                st.header("Metodologia Appuntamento")
+                fig = px.pie(df_fin, values='Soddisfazione fac appuntamento', names='Tipologia Appuntamento', color_discrete_sequence=px.colors.sequential.RdBu)
+            elif pie_filter=="Tipologia Procedure":
+                st.header("Tipologie visite effettuate")
+                val_0=df_fin['Tipologia Procedure'].value_counts()
+                fig = px.pie(df_fin, values=val_0.values, names=val_0.index,  color_discrete_sequence=px.colors.sequential.RdBu)
+            elif pie_filter=="Tempo tra segnalazione medico e visita":
+                st.header("Tempistiche Segnalazione medico-visita")
+                val_1=df_fin['Tempo tra segnalazione medico e visita'].value_counts()
+                fig = px.pie(df_fin, values=val_1.values, names=val_1.index,  color_discrete_sequence=px.colors.sequential.RdBu)
+            elif pie_filter=="Dolore nelle procedure":
+                st.header("Dolore nelle procedure")
+                val_2=df_fin['Dolore nelle procedure'].value_counts()
+                fig = px.pie(df_fin, values=val_2.values, names=val_2.index,  color_discrete_sequence=px.colors.sequential.RdBu)
+            elif pie_filter=="Sesso pazienti":
+                st.header("Sesso pazienti")
+                val_3=df_fin['Sesso pazienti'].value_counts()
+                fig = px.pie(df_fin, values=val_3.values, names=val_3.index, color_discrete_sequence=px.colors.sequential.RdBu)
+            else:
+                st.header("Range Età pazienti")
+                val_4=df_fin['Range Età pazienti'].value_counts()
+                fig = px.pie(df_fin, values=val_4.values, names=val_4.index, color_discrete_sequence=px.colors.sequential.RdBu)
             fig.show()
             st.plotly_chart(fig, use_container_width=True)
 
-            st.subheader("")
             with st.expander("ℹ️ Informazioni grafico", expanded=False):
                     st.markdown(
                         """
@@ -320,14 +343,38 @@ def dashboard_patient_satisf():
     st.progress(100, text="")
     st.write("")
     
-    # Second row
-    #calcolo Patient Experience ogni 1 week
+    #first-sec row
     df4= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).mean().reset_index()
     df4["PX"]=round(df4[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
+    df4["target"]=10
+    df4["MA_PX"]=df4["PX"].rolling(2).mean()
     
     ml_df=df4
     X = ml_df.drop(columns=['PX',  "Timestamp"]).fillna(df4.mean())
     y = ml_df["PX"]
+    
+    col0, col1, col2 = st.columns([0.02, 1, 0.02])
+    with col0:
+        st.write("")
+    with col1:
+        df42= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).count().reset_index()
+        df42["target"]=10
+        df42["MA_REPORT"]=df42["Sesso"].rolling(2).mean()
+        st.header("Bar Chart Numero report inviati per settimana")
+        fig=px.bar(df42, x ="Timestamp", y='Sesso', color='Sesso',template = 'ggplot2',width=800, height=400)
+        fig.add_trace(go.Scatter(x=df42['Timestamp'], y=df42["target"],mode='lines', line=dict(color="blue"), name='Safety Target'))
+        fig.add_trace(go.Scatter(x=df42['Timestamp'], y=df42["MA_REPORT"],mode='lines', line=dict(color="orange"), name='Media mobile'))
+        fig.update_layout(legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="left",
+            x=0.01))
+        st.plotly_chart(fig, use_container_width=True)
+    with col2:
+        st.write("")
+    
+    # Second row
+    #calcolo Patient Experience ogni 1 week
     
     col0, col1, col2 = st.columns([1.1, 0.01, 1])
     with col0:
@@ -354,6 +401,8 @@ def dashboard_patient_satisf():
         plt.yticks(pos, np.array(ml_df.columns.values)[sorted_idx])
         st.pyplot(fig)
         plt.show()
+        
+        label_best_features=(np.array(ml_df.columns.values)[sorted_idx][-1]) #aggiorna la feature più predittiva
     with col1:
         st.write("")
     with col2:
@@ -372,7 +421,7 @@ def dashboard_patient_satisf():
     #algorithms
     def training_ml(x,  y):
         X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.1, random_state=13)
+        X, y, test_size=0.05, random_state=13)
 
         params = {
         "n_estimators": 500,
@@ -391,8 +440,14 @@ def dashboard_patient_satisf():
         #take the first prediction
         return pred[-1]
     
+    #check preds (1 e 7)
     pred = training_ml(X,  y)
-    #st.write(pred)
+    if pred>7:
+        pred=7
+    elif pred<1:
+        pred=1
+    else:
+        pass
     
     #media mobile e target
     df4["MA_PX"]=df4["PX"].rolling(2).mean()
