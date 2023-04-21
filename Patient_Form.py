@@ -160,8 +160,12 @@ if authentication_status:
         #t1.markdown("### This section shows some information about MeHEDI - Tool of Patient Satisfaction")
         t2.write("")
 
-        #append pages
-        #st.sidebar.success("Select a page above.")
+        reduce_header_height_style = """
+            <style>
+                div.block-container {padding-top:1rem;}
+            </style>
+        """
+        st.markdown(reduce_header_height_style, unsafe_allow_html=True)
 
         # connect and append data
         df = connect_to_gsheet()
