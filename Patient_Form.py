@@ -270,8 +270,8 @@ if authentication_status:
             #SPIEGAZIONE RISULTATI
             st.info("➡️ 4. Spiegazioni risultati del dipartimento")
             cols3 = st.columns((1, 1, 1))
-            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
-            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
+            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
             var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  7,  1)
             
             #ESPERIENZA COME PAZIENTE
@@ -415,8 +415,8 @@ if authentication_status:
             #SPIEGAZIONE RISULTATI
             st.info("➡️ 5. Spiegazioni risultati del dipartimento")
             cols3 = st.columns((1, 1, 1))
-            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
-            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
+            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
             var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  7,  1)
             
             #ESPERIENZA COME PAZIENTE
@@ -637,8 +637,8 @@ if authentication_status:
             #SPIEGAZIONE RISULTATI
             st.info("➡️ 6. Spiegazioni risultati del dipartimento")
             cols3 = st.columns((1, 1, 1))
-            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
-            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, radiografo", "Altro specialista"])
+            var_f1 = cols3[0].selectbox("Si è rivolto a un operatore sanitario dopo la visita in reparto?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
+            var_f2 = cols3[1].selectbox("Ha consultato un professionista della salute per farsi spiegare i risultati?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
             var_f3 = cols3[2].slider("Quanto è soddisfatto della spiegazione fornita dal radiologo?", 1,  7,  1)
             
             #TEMPO ATTESA RISULTATI
