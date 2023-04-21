@@ -51,6 +51,13 @@ def dashboard_patient_satisf():
     </style>
     """, unsafe_allow_html=True)
     
+    reduce_header_height_style = """
+        <style>
+            div.block-container {padding-top:1rem;}
+        </style>
+    """
+    st.markdown(reduce_header_height_style, unsafe_allow_html=True)
+    
     hide_img_fs = '''
         <style>
         button[title="View fullscreen"]{
