@@ -1,12 +1,6 @@
 from streamlit_elements import elements, mui
 from streamlit_elements import nivo
 
-DATA = [{"taste": "RISULTATI", "Peso Area": 4},
-        {"taste": "CONSAPEVOLEZZA E FIDUCIA", "Peso Area": 3},
-        {"taste": "COINVOLGIMENTO", "Peso Area": 3.5},
-        {"taste": "DISTINTIVITA'", "Peso Area": 4},
-        {"taste": "COMPORTAMENTI", "Peso Area": 4.3}]
-
 def graph_pes(DATA):
         with elements("nivo_charts"):        
             with mui.Box(sx={"height": 400}):
