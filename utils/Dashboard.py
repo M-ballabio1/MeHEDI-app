@@ -388,7 +388,7 @@ def dashboard_patient_satisf():
         st.subheader("Feature Importance to predict PSI")
         ##features importance
         X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.1, random_state=13)
+        X, y, test_size=0.05, random_state=13)
 
         params = {
         "n_estimators": 500,
