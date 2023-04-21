@@ -1,14 +1,7 @@
 /* Move block container higher */
-div.block-container.css-z5fcl4.egzxvld4.css-z5fcl4 {
-    width: 100%;
-    padding: 0rem 3rem 10rem;
-    min-width: auto;
-    max-width: initial )
-
-
-
-div.css-147i1ru.e8zbici2 {
-  height: 0 rem;
+div.block-container.css-z5fcl4 {
+  padding-top: 0 rem;
+  margin-top: -15m;
 }
 
 /* Adjustments for the logo image*/
