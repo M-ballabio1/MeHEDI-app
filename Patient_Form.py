@@ -318,32 +318,6 @@ if authentication_status:
             else:
                 feedback_gen=""
             
-            @st.cache_resource()
-            def classif_nlp(str):
-                # str to classify
-                emotion_classifier = EmotionClassifier()
-                resp1=emotion_classifier.predict([str])
-                sentiment_classifier = SentimentClassifier()
-                resp2=sentiment_classifier.predict([str])
-                return resp1, resp2
-            
-            cols_text[0].subheader("Test the sentiment of your comment")
-            cols_text[0].write("")
-            but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
-            if but:
-                if feedback_gen=="":
-                    cols_text[1].write("")
-                    cols_text[1].write("")
-                    cols_text[1].write("")
-                    cols_text[1].write("Inserisci un commento")
-                else:
-                    resp1, resp2 = classif_nlp(feedback_gen)
-                    cols_text[1].write("")
-                    cols_text[1].write("")
-                    cols_text[1].write("")
-                    cols_text[1].write("")
-                    cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
-                    cols_text[1].subheader("Sentiment analysis: "+resp2[0])
             
             if media_tot ==1:
                 pass
@@ -377,6 +351,34 @@ if authentication_status:
                 colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
                 colss[1].write("")
                 colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+                     
+            @st.cache_resource()
+            def classif_nlp(str):
+                # str to classify
+                emotion_classifier = EmotionClassifier()
+                resp1=emotion_classifier.predict([str])
+                sentiment_classifier = SentimentClassifier()
+                resp2=sentiment_classifier.predict([str])
+                return resp1, resp2
+            
+            cols_text=st.columns([0.5,1])
+            cols_text[0].subheader("Test the sentiment of your comment")
+            cols_text[0].write("")
+            cols_text[0].write("")
+            but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
+            if but:
+                if feedback_gen=="":
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("Inserisci un commento")
+                else:
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                    sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
             
             submitted = st.button(label="Submit")
             if submitted==True:
@@ -642,6 +644,25 @@ if authentication_status:
                     colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
                     colss[1].write("")
                     colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            
+            cols_text=st.columns([0.5,1])
+            cols_text[0].subheader("Test the sentiment of your comment")
+            cols_text[0].write("")
+            cols_text[0].write("")
+            but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
+            if but:
+                if feedback_gen=="":
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("Inserisci un commento")
+                else:
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                    sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
             
             submitted = st.button(label="Submit")
             if submitted==True:
@@ -956,6 +977,25 @@ if authentication_status:
                     colss[0].error("L'area dell'ESPERIENZA VISSUTA NELLA NOSTRA STRUTTURA è molto carente con un risultato di "+str(med_experience)+"/7. Vorremmo chiedere quali sono state le problematiche riscontrate nella nostra struttura.", icon="🚨")
                     colss[1].write("")
                     colss[2].text_area("Scrivici cosa non ha funzionato. Miglioreremo grazie ai tuoi feedback. Il tuo parere è fondamentale per noi.")
+            
+            cols_text=st.columns([0.5,1])
+            cols_text[0].subheader("Test the sentiment of your comment")
+            cols_text[0].write("")
+            cols_text[0].write("")
+            but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
+            if but:
+                if feedback_gen=="":
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("Inserisci un commento")
+                else:
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                    sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
             
             submitted = st.button(label="Submit")
             if submitted==True:
