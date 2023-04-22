@@ -364,7 +364,6 @@ if authentication_status:
             cols_text=st.columns([0.5,1])
             cols_text[0].subheader("Test the sentiment of your comment")
             cols_text[0].write("")
-            cols_text[0].write("")
             but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
             if but:
                 if feedback_gen=="":
@@ -399,7 +398,7 @@ if authentication_status:
                         var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                         var_i1, var_i2, 
                         feedback_gen, 
-                        str(datetime_object),  "Form_breve", emozione, sentiment]])
+                        str(datetime_object),  "Form_breve"]])
         
         # ###FORM 2
         if slider>3 and slider<8:
@@ -587,7 +586,6 @@ if authentication_status:
             cols_text=st.columns([0.5,1])
             cols_text[0].subheader("Test the sentiment of your comment")
             cols_text[0].write("")
-            cols_text[0].write("")
             but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
             if but:
                 if feedback_gen=="":
@@ -623,7 +621,7 @@ if authentication_status:
                             var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_medio", emozione, sentiment]])
+                            str(datetime_object),  "Form_medio"]])
                 else:
                     #Storing data
                     datetime_object = datetime.datetime.now()
@@ -638,7 +636,7 @@ if authentication_status:
                             var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_medio", emozione, sentiment]])
+                            str(datetime_object),  "Form_medio"]])
         
         # ###FORM 3
         if slider>7:
@@ -859,7 +857,6 @@ if authentication_status:
             cols_text=st.columns([0.5,1])
             cols_text[0].subheader("Test the sentiment of your comment")
             cols_text[0].write("")
-            cols_text[0].write("")
             but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
             if but:
                 if feedback_gen=="":
@@ -895,7 +892,7 @@ if authentication_status:
                             var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_lungo", emozione, sentiment]])
+                            str(datetime_object),  "Form_lungo"]])
                 else:
                     #Storing data
                     datetime_object = datetime.datetime.now()
@@ -910,7 +907,7 @@ if authentication_status:
                             var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_lungo", emozione, sentiment]])
+                            str(datetime_object),  "Form_lungo"]])
                     
                 
     if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
