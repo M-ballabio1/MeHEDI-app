@@ -372,6 +372,8 @@ if authentication_status:
                     cols_text[1].write("")
                     cols_text[1].write("")
                     cols_text[1].write("Inserisci un commento")
+                    emozione=""
+                    sentiment=""
                 else:
                     resp1, resp2 = classif_nlp(feedback_gen)
                     cols_text[1].write("")
@@ -382,12 +384,6 @@ if authentication_status:
             
             submitted = st.button(label="Submit")  
             if submitted==True:
-                if emozione=="":
-                    emozione="N/A"
-                elif sentiment=="":
-                    emozione="N/A"
-                else:
-                    pass
                 st.success("Successfully")
                 st.balloons()
                 #Storing data
@@ -599,6 +595,8 @@ if authentication_status:
                     cols_text[1].write("")
                     cols_text[1].write("")
                     cols_text[1].write("Inserisci un commento")
+                    emozione=""
+                    sentiment=""
                 else:
                     resp1, resp2 = classif_nlp(feedback_gen)
                     cols_text[1].write("")
@@ -609,12 +607,6 @@ if authentication_status:
             
             submitted = st.button(label="Submit")
             if submitted==True:
-                if emozione=="":
-                    emozione="N/A"
-                elif sentiment=="":
-                    emozione="N/A"
-                else:
-                    pass
                 st.success("Successfully")
                 st.balloons()
                 if var_b1=="SI":
@@ -633,12 +625,6 @@ if authentication_status:
                             feedback_gen, 
                             str(datetime_object),  "Form_medio", emozione, sentiment]])
                 else:
-                    if emozione=="":
-                        emozione="N/A"
-                    elif sentiment=="":
-                        emozione="N/A"
-                    else:
-                        pass
                     #Storing data
                     datetime_object = datetime.datetime.now()
                     add_row_to_gsheet(
@@ -881,6 +867,8 @@ if authentication_status:
                     cols_text[1].write("")
                     cols_text[1].write("")
                     cols_text[1].write("Inserisci un commento")
+                    emozione=""
+                    sentiment=""
                 else:
                     resp1, resp2 = classif_nlp(feedback_gen)
                     cols_text[1].write("")
@@ -891,12 +879,6 @@ if authentication_status:
             
             submitted = st.button(label="Submit")
             if submitted==True:
-                if emozione=="":
-                    emozione="N/A"
-                elif sentiment=="":
-                    emozione="N/A"
-                else:
-                    pass
                 st.success("Successfully")
                 st.balloons()
                 if var_b1=="SI":
@@ -915,12 +897,6 @@ if authentication_status:
                             feedback_gen, 
                             str(datetime_object),  "Form_lungo", emozione, sentiment]])
                 else:
-                    if emozione=="":
-                        emozione="N/A"
-                    elif sentiment=="":
-                        emozione="N/A"
-                    else:
-                        pass
                     #Storing data
                     datetime_object = datetime.datetime.now()
                     add_row_to_gsheet(
