@@ -301,87 +301,49 @@ if authentication_status:
                 graph_pes(DATA)
                 media_tot=round(((med_accoglienza+med_experience+var_a2+var_d2+var_f3)/5), 1)
             
+            cols_text = st.columns((0.20, 1))
             if media_tot ==1:
                 pass
             elif media_tot<=4:
-                cols_text = st.columns((0.20, 0.5, 0.02, 0.12, 0.02, 0.4))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza può essere migliorata, raccontaci cosa ne pensi e miglioreremo sicuramente")
-                cols_text[2].write("")
-                cols_text[3].write("")
-                cols_text[3].subheader("")
-                but= cols_text[3].button("Test Sentiment 🔝 😐 👎")
-                if but:
-                    if feedback_gen=="":
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("Inserisci un commento")
-                    else:
-                        emotion_classifier = EmotionClassifier()
-                        resp1=emotion_classifier.predict([feedback_gen])
-                        sentiment_classifier = SentimentClassifier()
-                        resp2=sentiment_classifier.predict([feedback_gen])
-                        cols_text[4].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].subheader("Emozione trasmessa: "+resp1[0])
-                        cols_text[5].subheader("Sentiment analysis: "+resp2[0])
                         
             elif media_tot>4 and media_tot<=5:
-                cols_text = st.columns((0.20, 0.5, 0.02, 0.12, 0.02, 0.4))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza non è andata al massimo, se ti interessa raccontaci la tua esperienza e miglioreremo sicuramente i punti deboli della nostra struttura")
-                cols_text[2].write("")
-                cols_text[3].write("")
-                cols_text[3].subheader("")
-                but= cols_text[3].button("Test Sentiment 🔝 😐 👎")
-                if but:
-                    if feedback_gen=="":
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("Inserisci un commento")
-                    else:
-                        emotion_classifier = EmotionClassifier()
-                        resp1=emotion_classifier.predict([feedback_gen])
-                        sentiment_classifier = SentimentClassifier()
-                        resp2=sentiment_classifier.predict([feedback_gen])
-                        cols_text[4].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].subheader("Emozione trasmessa: "+resp1[0])
-                        cols_text[5].subheader("Sentiment analysis: "+resp2[0])
                         
             elif media_tot>5 and media_tot<=7:
-                cols_text = st.columns((0.20, 0.5, 0.02, 0.12, 0.02, 0.4))
                 cols_text[0].metric("Risultato della tua survey:", value=str(media_tot)+"/7")
                 feedback_gen=cols_text[1].text_area("La tua esperienza sembra essere andata bene, se ti interessa raccontaci la tua esperienza continueremo a migliorare")
-                cols_text[2].write("")
-                cols_text[3].write("")
-                cols_text[3].subheader("")
-                but= cols_text[3].button("Test Sentiment 🔝 😐 👎")
-                if but:
-                    if feedback_gen=="":
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("Inserisci un commento")
-                    else:
-                        emotion_classifier = EmotionClassifier()
-                        resp1=emotion_classifier.predict([feedback_gen])
-                        sentiment_classifier = SentimentClassifier()
-                        resp2=sentiment_classifier.predict([feedback_gen])
-                        cols_text[4].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].write("")
-                        cols_text[5].subheader("Emozione trasmessa: "+resp1[0])
-                        cols_text[5].subheader("Sentiment analysis: "+resp2[0])
             else:
                 feedback_gen=""
+            
+            @st.cache_resource()
+            def classif_nlp(str):
+                # str to classify
+                emotion_classifier = EmotionClassifier()
+                resp1=emotion_classifier.predict([str])
+                sentiment_classifier = SentimentClassifier()
+                resp2=sentiment_classifier.predict([str])
+                return resp1, resp2
+            
+            cols_text[0].subheader("Test the sentiment of your comment")
+            cols_text[0].write("")
+            but= cols_text[0].button("Test Sentiment 🔝 😐 👎")
+            if but:
+                if feedback_gen=="":
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("Inserisci un commento")
+                else:
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                    cols_text[1].subheader("Sentiment analysis: "+resp2[0])
             
             if media_tot ==1:
                 pass
