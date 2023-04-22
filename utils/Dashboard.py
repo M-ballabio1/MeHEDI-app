@@ -365,6 +365,7 @@ def dashboard_patient_satisf():
         st.write("")
     with col1:
         df42= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).count().reset_index()
+        st.write(df42)
         df42["target"]=10
         df42["MA_REPORT"]=df42["Sesso"].rolling(2).mean()
         st.header("Bar Chart Numero report inviati per settimana")
