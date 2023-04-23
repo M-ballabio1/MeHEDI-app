@@ -532,7 +532,7 @@ def dashboard_patient_satisf():
     X = df5.Soddisf_Tempo_Attesa_Risult.values.reshape(-1, 1)
     x_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
     
-    a,b,c=st.columns([1,1,1)]
+    a,b,c=st.columns([1,1,1])
     with a:
         st.header("OLS Regression PSI e Soddisfazione Tempo d'attesa Risultati")
         fig = px.scatter(df5, x='Soddisf_Tempo_Attesa_Risult', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
