@@ -9,6 +9,7 @@ from htbuilder.units import rem
 from datetime import date
 from datetime import timedelta
 import time
+import statsmodels.api as sm
 
 from streamlit_elements import elements, mui
 from streamlit_elements import nivo
@@ -365,11 +366,11 @@ def dashboard_patient_satisf():
         st.write("")
     with col1:
         df42= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).count().reset_index()
-        st.write(df42)
+        df42.rename(columns={'Sesso':'Form_Inviati'}, inplace=True)
         df42["target"]=10
-        df42["MA_REPORT"]=df42["Sesso"].rolling(2).mean()
+        df42["MA_REPORT"]=df42["Form_Inviati"].rolling(2).mean()
         st.header("Bar Chart Numero report inviati per settimana")
-        fig=px.bar(df42, x ="Timestamp", y='Sesso', color='Sesso',template = 'ggplot2',width=800, height=400)
+        fig=px.bar(df42, x ="Timestamp", y='Form_Inviati', color='Form_Inviati',template = 'ggplot2',width=800, height=400)
         fig.add_trace(go.Scatter(x=df42['Timestamp'], y=df42["target"],mode='lines', line=dict(color="blue"), name='Safety Target'))
         fig.add_trace(go.Scatter(x=df42['Timestamp'], y=df42["MA_REPORT"],mode='lines', line=dict(color="orange"), name='Media mobile'))
         fig.update_layout(legend=dict(
@@ -455,7 +456,17 @@ def dashboard_patient_satisf():
     elif pred<1:
         pred=1
     else:
-        pass
+        if df4["PX"].iat[-2] and df4["PX"].iat[-1] > pred:
+            pred=pred+1
+        elif df4["PX"].iat[-2] and df4["PX"].iat[-1] < pred:
+            pred=pred-1
+        elif df4["PX"].iat[-1] > pred:
+            pred=pred+0.5
+        elif df4["PX"].iat[-1] < pred:
+            pred=pred-0.5
+        else:
+            pass
+        
     
     #media mobile e target
     df4["MA_PX"]=df4["PX"].rolling(2).mean()
@@ -509,42 +520,20 @@ def dashboard_patient_satisf():
     
     # Third row
 
-    def format_coefs(coefs):
-        equation_list = [f"{coef}x^{i}" for i, coef in enumerate(coefs)]
-        equation = "$" +  " + ".join(equation_list) + "$"
-
-        replace_map = {"x^0": "", "x^1": "x", '+ -': '- '}
-        for old, new in replace_map.items():
-            equation = equation.replace(old, new)
-
-        return equation
-
     #df_new = px.data.tips()
     #calcolo Patient Experience ogni 1 day
     df5= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='D')).mean().reset_index()
-    df5["PX"]=round(df5[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
+    df5["PX"]=round(df5[["Soddisf_Servizi_Igenici", "Soddisf_Tempo_Attesa_Risult",  "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
     #mean_px_daily=round(df5[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(), 2)
     
     df5["PX"].fillna(value=3.5, inplace=True)
-    df5["Sodd_tempo_attesa_rec"].fillna(value=3.5, inplace=True)
+    df5["Soddisf_Tempo_Attesa_Risult"].fillna(value=3.5, inplace=True)
     
-    X = df5.Sodd_tempo_attesa_rec.values.reshape(-1, 1)
+    X = df5.Soddisf_Tempo_Attesa_Risult.values.reshape(-1, 1)
     x_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
     
-    st.header("Polynomial Regression using basic ML per capire la relazione tra PSI e Soddisfazione Tempo d'attesa Reception")
-    fig = px.scatter(df5, x='Sodd_tempo_attesa_rec', y='PX', opacity=0.65)
-    for degree in [1, 2, 3, 4]:
-        poly = PolynomialFeatures(degree)
-        poly.fit(X)
-        X_poly = poly.transform(X)
-        x_range_poly = poly.transform(x_range)
-
-        model = LinearRegression(fit_intercept=False)
-        model.fit(X_poly, df5.PX)
-        y_poly = model.predict(x_range_poly)
-
-        equation = format_coefs(model.coef_.round(2))
-        fig.add_traces(go.Scatter(x=x_range.squeeze(), y=y_poly, name=equation))
+    st.header("OLS Regression per capire la relazione tra PSI e Soddisfazione Tempo d'attesa Reception")
+    fig = px.scatter(df5, x='Soddisf_Tempo_Attesa_Risult', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
     st.plotly_chart(fig, use_container_width=True)
     
 
@@ -595,6 +584,7 @@ def dashboard_patient_satisf():
         st.header("Word Cloud Patient Form")
         commenttext_merged= df['Comment_Text'].str.cat(sep=' , ')
         text_propercase=commenttext_merged.title()
+        text_propercase.replace("Non", "")
         # Create and generate a word cloud image:
         stop_words =STOPWORDS.update(["La ", "Non ", "Mi ", "E ", "Il ", "Dei ", "Di ", "Degli ", "Lo ",  "Della ", "C'Era ", ", ",  "Del ",  "Per ", "Sotto ", "Alcuni", "Alcune ", "Ok "
                                 , "Rispetto!","Degli ",  "Ho ", "E' ",  "Da ",  "Un ",  "In ",  "Una ", "Dalla ", "Stata ", "Mia ", "Che ",  "Ma ",  "Tutto ",  "Sono "])
@@ -646,6 +636,63 @@ def dashboard_patient_satisf():
         st.subheader("Top 5 Key-Words")
         fig = px.pie(df_word_mode.head(5), values='Frequency', names='Key-Words', color_discrete_sequence=px.colors.sequential.RdBu)
         st.plotly_chart(fig, use_container_width=True)
+    
+    cols1,  cols2,  cols3=st.columns([1, 0.02, 0.35])
+    with cols1:
+        st.subheader("Word Cloud Negative Feedback")
+        df_negative=df[df['Sentiment'] =="negative"]
+        commenttext_merged_neg= df_negative['Comment_Text'].str.cat(sep=',')
+        text_propercase_neg=commenttext_merged_neg.title()
+        text_propercase_neg.replace("Non", "")
+        text_propercase_neg.replace("Di", "")
+        text_propercase_neg.replace("Sono", "")
+        # Create and generate a word cloud image:
+        stop_words =STOPWORDS.update(["La ", "Non ", "Mi ", "E ", "Il ", "Dei ", "Di ", "Degli ", "Lo ",  "Della ", "C'Era ", ", ",  "Del ",  "Per ", "Sotto ", "Alcuni", "Alcune ", "Ok "
+                                , "Rispetto!","Degli ",  "Ho ", "E' ",  "Da ",  "Un ",  "In ",  "Una ", "Dalla ", "Stata ", "Mia ", "Che ",  "Ma ",  "Tutto ",  "Sono "])
+        wordcloud = WordCloud(stopwords = stop_words,background_color="#E4E3E3", width=800, height=175, colormap="Reds").generate(text_propercase_neg)
+        fig, ax = plt.subplots(facecolor="#E4E3E3")
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis("off")
+        plt.subplots_adjust(left=-5, right=-2, top=-2, bottom=-5)
+        plt.show()
+        st.pyplot(fig)
+        
+        st.subheader("Word Cloud Positive Feedback")
+        df_positive=df[df['Sentiment'] =="positive"]
+        commenttext_merged_pos= df_positive['Comment_Text'].str.cat(sep=',')
+        text_propercase_pos=commenttext_merged_pos.title()
+        text_propercase_pos.replace("Non", "")
+        text_propercase_pos.replace("Di", "")
+        text_propercase_pos.replace("Sono", "")
+        # Create and generate a word cloud image:
+        stop_words =STOPWORDS.update(["La ", "Non ", "Mi ", "E ", "Il ", "Dei ", "Di ", "Degli ", "Lo ",  "Della ", "C'Era ", ", ",  "Del ",  "Per ", "Sotto ", "Alcuni", "Alcune ", "Ok "
+                                , "Rispetto!","Degli ",  "Ho ", "E' ",  "Da ",  "Un ",  "In ",  "Una ", "Dalla ", "Stata ", "Mia ", "Che ",  "Ma ",  "Tutto ",  "Sono "])
+        wordcloud = WordCloud(stopwords = stop_words,background_color="#E4E3E3", width=800, height=175, colormap="Greens").generate(text_propercase_pos)
+        fig, ax = plt.subplots(facecolor="#E4E3E3")
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis("off")
+        plt.subplots_adjust(left=-5, right=-2, top=-2, bottom=-5)
+        plt.show()
+        st.pyplot(fig)
+    with cols2:
+        st.write("")
+    with cols3:
+        df_tot_comment=df[~df.Sentiment.isnull()]
+        neg_comm=round(len(df_negative)/len(df_tot_comment)*100, 2)
+        pos_comm=round(len(df_positive)/len(df_tot_comment)*100, 2)
+        st.header("")
+        st.header("")
+        st.metric("", "",  help="% Form negativi rispetto al totale form con commenti")
+        display_dial("% Form con Commenti Negativi",  str(neg_comm)+"%",   "#a30000")
+        st.write("")
+        st.write("")
+        st.header("")
+        st.header("")
+        st.header("")
+        st.header("")
+        st.metric("", "",  help="% Form positivi rispetto al totale form con commenti")
+        display_dial("% Form con Commenti Positivi",  str(pos_comm)+" %",   "#065535")
+        
     
     st.subheader("Dataframe Filtrato tramite query")
     st.write(df_selection)

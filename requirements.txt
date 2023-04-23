@@ -13,3 +13,4 @@ streamlit-elements
 wordcloud
 scikit-learn
 feel-it
+statsmodels
