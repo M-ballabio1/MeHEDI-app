@@ -534,15 +534,15 @@ def dashboard_patient_satisf():
     
     a,b,c=st.columns([1,1,1])
     with a:
-        st.header("OLS Regression PSI e Soddisfazione Tempo d'attesa Risultati")
+        st.header("OLS Regression - PSI e Soddisfazione Tempo d'attesa Risultati")
         fig = px.scatter(df5, x='Soddisf_Tempo_Attesa_Risult', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
         st.plotly_chart(fig, use_container_width=True)
     with b:
-        st.header("OLS Regression per capire la relazione tra PSI e Soddisfazione Pulizia")
+        st.header("OLS Regression - PSI e Soddisfazione Pulizia")
         fig = px.scatter(df5, x='Soddisf_Pulizia_Reparto', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
         st.plotly_chart(fig, use_container_width=True)
     with c:
-        st.header("OLS Regression per capire la relazione tra PSI e Soddisfazione Privacy")
+        st.header("OLS Regression - PSI e Soddisfazione Privacy")
         fig = px.scatter(df5, x='Soddisf_Privacy', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
         st.plotly_chart(fig, use_container_width=True)
 
