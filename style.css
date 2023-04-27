@@ -1,14 +1,14 @@
 /* Move block container higher */
 div.block-container.css-z5fcl4 {
-  padding-top: 5 rem;
-  margin-top: -12m;
+  padding-top: 0 rem;
+  margin-top: -15m;
 }
 
 /* Adjustments for the logo image*/
 
 img {
   display: block;
-  /*margin-top: 1.5em;*/
+  margin-top: 1.5em;
 }
 
 /* Centering text in each gray box */
