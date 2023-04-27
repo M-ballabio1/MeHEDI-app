@@ -89,37 +89,36 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
     ).execute()
 
 # --- USER AUTHENTICATION ---
-"""
-users = db.fetch_all_users()
 
-usernames = [user["key"] for user in users]
-names = [user["name"] for user in users]
-hashed_passwords = [user["password"] for user in users]
+#users = db.fetch_all_users()
 
-authenticator = stauth.Authenticate(names, usernames, hashed_passwords, 'some_cookie_name','some_signature_key',cookie_expiry_days=30)
-name, authentication_status, username = authenticator.login("Login - Web application MEHEDI Patient's satisfaction", "main")
+#usernames = [user["key"] for user in users]
+#names = [user["name"] for user in users]
+#hashed_passwords = [user["password"] for user in users]
 
-if st.session_state["authentication_status"] == False:
-    st.error("Username/password is incorrect")
+#authenticator = stauth.Authenticate(names, usernames, hashed_passwords, 'some_cookie_name','some_signature_key',cookie_expiry_days=30)
+#name, authentication_status, username = authenticator.login("Login - Web application MEHEDI Patient's satisfaction", "main")
 
-if st.session_state["authentication_status"] == None:
-    st.write('<base target="_blank">', unsafe_allow_html=True)
-    prev_time = [time.time()]
-    a, b, = st.columns([1, 1])
-    with a:
-        st.image(image2, width=300)      
-        hide_img_fs = '''
-        <style>
-        button[title="View fullscreen"]{
-            visibility: hidden;}
-        </style>
-        '''
-        st.markdown(hide_img_fs, unsafe_allow_html=True)
-    with b:
-        st.info(#Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.ACCESSO PAZIENTE - username: guest | password: paz123 ACCESSO MANAGEMENT - username: mballabio | password: mat123) 
+#if st.session_state["authentication_status"] == False:
+#    st.error("Username/password is incorrect")
+
+#if st.session_state["authentication_status"] == None:
+#    st.write('<base target="_blank">', unsafe_allow_html=True)
+#    prev_time = [time.time()]
+#    a, b, = st.columns([1, 1])
+#    with a:
+#        st.image(image2, width=300)      
+#        hide_img_fs = '''
+#        <style>
+#        button[title="View fullscreen"]{
+#            visibility: hidden;}
+#        </style>
+#        '''
+#        st.markdown(hide_img_fs, unsafe_allow_html=True)
+#    with b:
+#        st.info(#Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.ACCESSO PAZIENTE - username: guest | password: paz123 ACCESSO MANAGEMENT - username: mballabio | password: mat123) 
 
 #if st.session_state["authentication_status"]:
-"""
 
 senza_auth=True
 if senza_auth==True:
