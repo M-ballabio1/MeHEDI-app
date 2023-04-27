@@ -6,6 +6,7 @@ openpyxl==3.1.2
 pillow==9.5.0
 streamlit-authenticator==0.1.5
 matplotlib==3.7.1
+asyncio==3.4.3
 deta
 htbuilder
 streamlit-elements
