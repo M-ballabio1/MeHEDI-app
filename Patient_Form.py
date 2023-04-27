@@ -955,17 +955,6 @@ if senza_auth==True:
                             feedback_gen, 
                             str(datetime_object),  "Form_lungo",  add_comm,  emozione,  sentiment]])
                     
-    """            
-    if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
-        page_names_to_funcs = {
-            "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
-            "Form Patient Satisfaction": form_pazienti,
-            "Info Framework":landing_page}
-    elif name=="Gentile paziente":
-        page_names_to_funcs = {
-            "Form Patient Satisfaction": form_pazienti, 
-            "Info Framework":landing_page}
-    """
     page_names_to_funcs = {
             "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
             "Form Patient Satisfaction": form_pazienti,
