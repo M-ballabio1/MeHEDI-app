@@ -116,24 +116,17 @@ if st.session_state["authentication_status"] == None:
         '''
         st.markdown(hide_img_fs, unsafe_allow_html=True)
     with b:
-        st.info(
-        """
-        #Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.
-        
-        #ACCESSO PAZIENTE - username: guest | password: paz123
-        
-        #ACCESSO MANAGEMENT - username: mballabio | password: mat123
-        """
-    ) 
+        st.info(#Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.ACCESSO PAZIENTE - username: guest | password: paz123 ACCESSO MANAGEMENT - username: mballabio | password: mat123) 
 
-if st.session_state["authentication_status"]:
+#if st.session_state["authentication_status"]:
 """
+
 senza_auth=True
 if senza_auth==True:
     #placeholder.empty()
 
     # ---- SIDEBAR ----
-    authenticator.logout("Logout", "sidebar")
+    #authenticator.logout("Logout", "sidebar")
     st.sidebar.title("Welcome Guy")
     
     def form_pazienti():
