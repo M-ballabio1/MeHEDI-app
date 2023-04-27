@@ -89,7 +89,7 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
     ).execute()
 
 # --- USER AUTHENTICATION ---
-
+"""
 users = db.fetch_all_users()
 
 usernames = [user["key"] for user in users]
@@ -127,6 +127,9 @@ if st.session_state["authentication_status"] == None:
     ) 
 
 if st.session_state["authentication_status"]:
+"""
+senza_auth=True
+if senza_auth==True:
     #placeholder.empty()
 
     # ---- SIDEBAR ----
@@ -960,7 +963,7 @@ if st.session_state["authentication_status"]:
                             feedback_gen, 
                             str(datetime_object),  "Form_lungo",  add_comm,  emozione,  sentiment]])
                     
-                
+    """            
     if name=="Matteo Ballabio" or name=="Federico Facoetti" or name=="Luca Cappellini":
         page_names_to_funcs = {
             "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
@@ -970,6 +973,10 @@ if st.session_state["authentication_status"]:
         page_names_to_funcs = {
             "Form Patient Satisfaction": form_pazienti, 
             "Info Framework":landing_page}
-
+    """
+    page_names_to_funcs = {
+            "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
+            "Form Patient Satisfaction": form_pazienti,
+            "Info Framework":landing_page}
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
