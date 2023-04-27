@@ -7,6 +7,7 @@ pillow==9.5.0
 streamlit-authenticator==0.1.5
 matplotlib==3.7.1
 asyncio==3.4.3
+deta[async]==1.1.0a2
 deta
 htbuilder
 streamlit-elements
