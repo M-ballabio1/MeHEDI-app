@@ -118,11 +118,11 @@ if st.session_state["authentication_status"] == None:
     with b:
         st.info(
         """
-        Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.
+        #Questa è una webapp creata da che consente di valutare la Patient Satisfaction in un'azienda sanitaria di medie dimensioni.
         
-        ACCESSO PAZIENTE - username: guest | password: paz123
+        #ACCESSO PAZIENTE - username: guest | password: paz123
         
-        ACCESSO MANAGEMENT - username: mballabio | password: mat123
+        #ACCESSO MANAGEMENT - username: mballabio | password: mat123
         """
     ) 
 
