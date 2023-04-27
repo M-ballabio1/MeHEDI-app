@@ -131,7 +131,7 @@ if st.session_state["authentication_status"]:
 
     # ---- SIDEBAR ----
     authenticator.logout("Logout", "sidebar")
-    st.sidebar.title(f"Welcome *{st.session_state["name"]}*")
+    st.sidebar.title(f"Welcome {st.session_state["name"]}")
     
     def form_pazienti():
         
