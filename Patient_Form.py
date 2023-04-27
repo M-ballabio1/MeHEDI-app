@@ -99,10 +99,10 @@ hashed_passwords = [user["password"] for user in users]
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords, 'some_cookie_name','some_signature_key',cookie_expiry_days=30)
 name, authentication_status, username = authenticator.login("Login - Web application MEHEDI Patient's satisfaction", "main")
 
-if authentication_status == False:
+if st.session_state["authentication_status"] == False:
     st.error("Username/password is incorrect")
 
-if authentication_status == None:
+if st.session_state["authentication_status"] == None:
     st.write('<base target="_blank">', unsafe_allow_html=True)
     prev_time = [time.time()]
     a, b, = st.columns([1, 1])
@@ -126,12 +126,12 @@ if authentication_status == None:
         """
     ) 
 
-if authentication_status:
+if st.session_state["authentication_status"]:
     #placeholder.empty()
 
     # ---- SIDEBAR ----
     authenticator.logout("Logout", "sidebar")
-    st.sidebar.title(f"Welcome {name}")
+    st.sidebar.title(f"Welcome *{st.session_state["name"]}*")
     
     def form_pazienti():
         
