@@ -1,18 +1,17 @@
 import os
 from deta import Deta  # pip install deta
-import asyncio
 #from dotenv import load_dotenv  # pip install python-dotenv
 
 
 # Load the environment variables
 #load_dotenv(".env")
-DETA_KEY = "a0slxdit_WqXwNKB9MYqBfFLqeNVQyaBnbRwYs1Kr"
+DETA_KEY = "a0slxdit_FLgQbPkQLth8ER8yHCfjv3rdUu97qWps"
 
 # Initialize with a project key
 deta = Deta(DETA_KEY)
 
 # This is how to create/connect a database
-db = deta.AsyncBase("users_mehedi_db")
+db = deta.Base("users_mehedi_db")
 
 
 def insert_user(username, name, password):
@@ -20,15 +19,10 @@ def insert_user(username, name, password):
     return db.put({"key": username, "name": name, "password": password})
 
 
-async def fetch_all_users():
+def fetch_all_users():
     """Returns a dict of all users"""
-    res = await db.fetch()
+    res = db.fetch()
     return res.items
-    # close connection
-    await db.close()
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(fetch_items())
 
 
 def get_user(username):
