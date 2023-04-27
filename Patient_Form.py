@@ -386,9 +386,13 @@ if authentication_status:
             
             submitted = st.button(label="Submit")  
             if submitted==True:
-                resp1, resp2 = classif_nlp(feedback_gen)
-                emozione=resp1[0]
-                sentiment=resp2[0]
+                if feedback_gen=="":
+                    emozione=""
+                    sentiment=""
+                else:  
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    emozione=resp1[0]
+                    sentiment=resp2[0]
                 st.success("Successfully")
                 st.balloons()
                 #Storing data
@@ -626,9 +630,13 @@ if authentication_status:
             
             submitted = st.button(label="Submit")
             if submitted==True:
-                resp1, resp2 = classif_nlp(feedback_gen)
-                emozione=resp1[0]
-                sentiment=resp2[0]
+                if feedback_gen=="":
+                    emozione=""
+                    sentiment=""
+                else:  
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    emozione=resp1[0]
+                    sentiment=resp2[0]
                 st.success("Successfully")
                 st.balloons()
                 if var_b1=="SI":
@@ -913,9 +921,13 @@ if authentication_status:
             
             submitted = st.button(label="Submit")
             if submitted==True:
-                resp1, resp2 = classif_nlp(feedback_gen)
-                emozione=resp1[0]
-                sentiment=resp2[0]
+                if feedback_gen=="":
+                    emozione=""
+                    sentiment=""
+                else:  
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    emozione=resp1[0]
+                    sentiment=resp2[0]
                 st.success("Successfully")
                 st.balloons()
                 if var_b1=="SI":
