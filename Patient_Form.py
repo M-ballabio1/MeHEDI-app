@@ -1009,8 +1009,8 @@ if senza_auth==True:
     
                 
     page_names_to_funcs = {
-            "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
             "Form Patient Satisfaction": form_pazienti,
+            "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
             "Info Framework":landing_page}
     selected_page = st.sidebar.selectbox("Select a page", page_names_to_funcs.keys(), key ="value")
     page_names_to_funcs[selected_page]()
