@@ -11,6 +11,11 @@ img {
   margin-top: 2em;
 }
 
+/* remove header */
+div.css-147i1ru.e8zbici2 {
+  height: 0em
+}
+
 /* Centering text in each gray box */
 div.css-1ht1j8u.e16fv1kl0 {
   text-align: center;
