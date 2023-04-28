@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    mballabio:
+      email: matteoballabio99@gmail.com
+      name: Matteo Ballabio
+      password: abc # To be replaced with hashed password
+    guest:
+      email: rbriggs@gmail.com
+      name: Guest
+      password: def # To be replaced with hashed password
+cookie:
+  expiry_days: 0
+  key: random_signature_key # Must be string
+  name: random_cookie_name
+preauthorized:
+  emails:
+  - lucaalessandro.cappellini@gmail.com

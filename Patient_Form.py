@@ -375,9 +375,21 @@ if senza_auth==True:
                     cols_text[1].write("")
                     cols_text[1].write("")
                     cols_text[1].write("")
-                    emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
-                    sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
-            
+                    # force the classification to limit outlier
+                    if media_tot >=5.5:
+                        resp1[0]="joy"
+                        resp2[0]="positive"
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
+                    elif media_tot <=3.5:
+                        resp1[0]="sadness"
+                        resp2[0]="negative"
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
+                    else:
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
+                    
             submitted = st.button(label="Submit")  
             if submitted==True:
                 if feedback_gen=="":
@@ -387,6 +399,14 @@ if senza_auth==True:
                     resp1, resp2 = classif_nlp(feedback_gen)
                     emozione=resp1[0]
                     sentiment=resp2[0]
+                    if media_tot >=5.5:
+                        resp1[0]="joy"
+                        resp2[0]="positive"
+                    elif media_tot <=3.5:
+                        resp1[0]="sadness"
+                        resp2[0]="negative"
+                    else:
+                        pass
                 st.success("Successfully")
                 st.balloons()
                 #Storing data
@@ -619,8 +639,16 @@ if senza_auth==True:
                     cols_text[1].write("")
                     cols_text[1].write("")
                     cols_text[1].write("")
-                    emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
-                    sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
+                    # force the classification to limit outlier
+                    if media_tot >=5.5:
+                        resp1[0]="joy"
+                        resp2[0]="positive"
+                    elif media_tot <=3.5:
+                        resp1[0]="sadness"
+                        resp2[0]="negative"
+                    else:
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
             
             submitted = st.button(label="Submit")
             if submitted==True:
@@ -631,6 +659,14 @@ if senza_auth==True:
                     resp1, resp2 = classif_nlp(feedback_gen)
                     emozione=resp1[0]
                     sentiment=resp2[0]
+                    if media_tot >=5.5:
+                        resp1[0]="joy"
+                        resp2[0]="positive"
+                    elif media_tot <=3.5:
+                        resp1[0]="sadness"
+                        resp2[0]="negative"
+                    else:
+                        pass
                 st.success("Successfully")
                 st.balloons()
                 if var_b1=="SI":
@@ -910,8 +946,16 @@ if senza_auth==True:
                     cols_text[1].write("")
                     cols_text[1].write("")
                     cols_text[1].write("")
-                    emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
-                    sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
+                    # force the classification to limit outlier
+                    if media_tot >=5.5:
+                        resp1[0]="joy"
+                        resp2[0]="positive"
+                    elif media_tot <=3.5:
+                        resp1[0]="sadness"
+                        resp2[0]="negative"
+                    else:
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
             
             submitted = st.button(label="Submit")
             if submitted==True:
@@ -922,6 +966,14 @@ if senza_auth==True:
                     resp1, resp2 = classif_nlp(feedback_gen)
                     emozione=resp1[0]
                     sentiment=resp2[0]
+                    if media_tot >=5.5:
+                        resp1[0]="joy"
+                        resp2[0]="positive"
+                    elif media_tot <=3.5:
+                        resp1[0]="sadness"
+                        resp2[0]="negative"
+                    else:
+                        pass
                 st.success("Successfully")
                 st.balloons()
                 if var_b1=="SI":
@@ -954,7 +1006,8 @@ if senza_auth==True:
                             var_i1, var_i2, 
                             feedback_gen, 
                             str(datetime_object),  "Form_lungo",  add_comm,  emozione,  sentiment]])
-                    
+    
+                
     page_names_to_funcs = {
             "Dashboard Patient Satisfaction": dashboard_patient_satisf, 
             "Form Patient Satisfaction": form_pazienti,
