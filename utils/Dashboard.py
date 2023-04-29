@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
-from streamlit_keycloak import login
 
 #import altair as alt
 from sklearn import datasets, ensemble
