@@ -643,9 +643,13 @@ if senza_auth==True:
                     if media_tot >=5.5:
                         resp1[0]="joy"
                         resp2[0]="positive"
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
                     elif media_tot <=3.5:
                         resp1[0]="sadness"
                         resp2[0]="negative"
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
                     else:
                         emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
                         sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
@@ -950,9 +954,13 @@ if senza_auth==True:
                     if media_tot >=5.5:
                         resp1[0]="joy"
                         resp2[0]="positive"
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
                     elif media_tot <=3.5:
                         resp1[0]="sadness"
                         resp2[0]="negative"
+                        emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
+                        sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
                     else:
                         emozione=cols_text[1].subheader("Emozione trasmessa: "+resp1[0])
                         sentiment=cols_text[1].subheader("Sentiment analysis: "+resp2[0])
