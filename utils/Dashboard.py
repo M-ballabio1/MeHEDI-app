@@ -382,6 +382,7 @@ def dashboard_patient_satisf():
         
         #Before the second row
         st.title("Types of procedures - Theoretical time vs. estimated time")
+        st.subheader("Tempo stimato e il delta rappresenta differenza tra Tempo teorico medio - Tempo effettivo medio (stimato pazienti)")
         
         def calculate_mean_std(df):
             grouped_df = df.groupby("Tipo_procedura")["Tempo_stim_visita"]
