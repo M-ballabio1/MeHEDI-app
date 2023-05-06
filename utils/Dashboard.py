@@ -380,6 +380,49 @@ def dashboard_patient_satisf():
         with col2:
             st.write("")
         
+        #Before the second row
+        st.title("Types of procedures - Theoretical time vs. estimated time")
+        
+        def calculate_mean_std(df):
+            grouped_df = df.groupby("Tipo_procedura")["Tempo_stim_visita"]
+            mean = grouped_df.mean()
+            std = grouped_df.std()
+            return mean, std
+        
+        mean_time,  std_time = calculate_mean_std(df)
+        
+        # Theoretical exam time
+        rmn_theorical_time = 30
+        ct_theorical_time = 5
+        raggi_theorical_time = 2
+        mammografia_theorical_time = 5
+        ultrasuoni_theorical_time = 20
+        biopsie_theorical_time = 20
+        artografia_theorical_time = 20
+
+        # Define the procedure types
+        procedure_types = ["RMN", "CT", "Raggi X", "Mammografia", "Ultrasuoni",  "Interventi/Biopsie", "Artrografia/Mielografia"]
+
+        # Calculate the mean and standard deviation for each procedure type
+        mean_time, std_time = calculate_mean_std(df)
+
+        # Get the difference between theoretical and mean exam time
+        diff_time = [rmn_theorical_time - mean_time.loc["RMN"],
+                     ct_theorical_time - mean_time.loc["CT"],
+                     raggi_theorical_time - mean_time.loc["Raggi X"],
+                     mammografia_theorical_time - mean_time.loc["Mammografia"],
+                     ultrasuoni_theorical_time - mean_time.loc["Ultrasuoni"],
+                     biopsie_theorical_time - mean_time.loc["Interventi/Biopsie"],
+                     artografia_theorical_time - mean_time.loc["Artrografia/Mielografia"]]
+
+        # Divide the screen into 7 columns
+        columns = st.columns(7)
+
+        # Create a metric element for each procedure type and place it in a separate column
+        for i, procedure in enumerate(procedure_types):
+            columns[i].metric(label=procedure, value=f"{round(mean_time.loc[procedure], 2)} min", delta=round(diff_time[i], 2))
+
+
         # Second row
         #calcolo Patient Experience ogni 1 week
         
