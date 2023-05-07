@@ -222,6 +222,7 @@ def dashboard_patient_satisf():
             st.metric("DIG Index",  value=str(dig_score_att)+"/7", delta=str(delta_dig),  help="Digitalization Index (permette di calcolare una media ponderata di grado di digitalizzazione della struttura rispetto ad una baseline)")
         
         #First row
+        st.title("Area indicatori principali Health Patient Experience - filtrabile 🎯")
         if len(df_selection)==0:
             st.header("Business Rule Exception")
             st.warning("Non posso fare nessuna query se non è presente almeno un campo per ciascun selectbox")
@@ -259,6 +260,8 @@ def dashboard_patient_satisf():
                             {"taste": "RISULTATI", "Peso Area": ris_media},
                             {"taste": "ESPERIENZA", "Peso Area": esp_media}]
                 graph_pes(DATA)
+                st.write("")
+                st.write("")
                 st.write("")
                 st.text("")
                 with st.expander("ℹ️ Informazioni grafico", expanded=False):
@@ -345,10 +348,6 @@ def dashboard_patient_satisf():
             df3["FMedio"]=df3["Type_Form"]=="Form_medio"
             df3["FLungo"]=df3["Type_Form"]=="Form_lungo"
         
-        st.write("")
-        st.progress(100, text="")
-        st.write("")
-        
         #first-sec row
         df4= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).mean().reset_index()
         df4["PX"]=round(df4[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
@@ -363,6 +362,7 @@ def dashboard_patient_satisf():
         with col0:
             st.write("")
         with col1:
+            # first bar plot
             df42= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).count().reset_index()
             df42.rename(columns={'Sesso':'Form_Inviati'}, inplace=True)
             df42["target"]=10
@@ -380,9 +380,40 @@ def dashboard_patient_satisf():
         with col2:
             st.write("")
         
+        st.write("")
+        st.progress(100, text="")
+        st.write("")
+        
+        #TIME MANAGEMENT AREA
+        st.title("Time Management Area ⌛")
+        co1, s,  co2=st.columns([1, 0.05,  1])
+        with co1:
+            # second stacked bar chart
+            # group the data by week and Tempo_segn_medic_app, count the occurrences of each category, and reset the index
+            st.header("Tempo trascorso tra la segnalazione del medico e appuntamento")
+            df_grouped = df.groupby([pd.Grouper(key='Timestamp', freq='1W'), 'Tempo_segn_medic_app'])['Tempo_segn_medic_app'].count().reset_index(name='count')
+
+            # create a stacked bar chart using Plotly
+            fig = px.bar(df_grouped, x='Timestamp', y='count', color='Tempo_segn_medic_app', barmode='stack')
+            fig.show()
+            st.plotly_chart(fig)
+        with s:
+            st.write("")
+        with co2:
+            # third stacked bar chart
+            # group the data by week and Tempo_segn_medic_app, count the occurrences of each category, and reset the index
+            st.header("Tempo di attesa per ricevere risultati rispetto alla compilazione form")
+            df_grouped = df.groupby([pd.Grouper(key='Timestamp', freq='1W'), 'Tempo_attesa_per_risultati'])['Tempo_attesa_per_risultati'].count().reset_index(name='count')
+
+            # create a stacked bar chart using Plotly
+            fig = px.bar(df_grouped, x='Timestamp', y='count', color='Tempo_attesa_per_risultati', barmode='stack')
+            fig.show()
+            st.plotly_chart(fig)
+        
+        
         #Before the second row
-        st.title("Types of procedures - Theoretical time vs. estimated time")
-        st.subheader("Tempo stimato e il delta rappresenta differenza tra Tempo teorico medio - Tempo effettivo medio (stimato pazienti)")
+        st.header("Tempo teorico vs Tempo stimato")
+        st.write("Tempo stimato e il delta rappresenta differenza tra Tempo teorico medio - Tempo effettivo medio (stimato pazienti)")
         
         def calculate_mean_std(df):
             grouped_df = df.groupby("Tipo_procedura")["Tempo_stim_visita"]
@@ -422,10 +453,15 @@ def dashboard_patient_satisf():
         # Create a metric element for each procedure type and place it in a separate column
         for i, procedure in enumerate(procedure_types):
             columns[i].metric(label=procedure, value=f"{round(mean_time.loc[procedure], 2)} min", delta=round(diff_time[i], 2))
-
+        
+        
+        st.write("")
+        st.progress(100, text="")
+        st.write("")
 
         # Second row
         #calcolo Patient Experience ogni 1 week
+        st.title("Predictive Modeling e Data Analysis per Forecasting PX 📈")
         
         col0, col1, col2 = st.columns([1.1, 0.01, 1])
         with col0:
@@ -595,6 +631,7 @@ def dashboard_patient_satisf():
         
         
         # Fourth Row
+        st.title("Natural Language Processing Analysis based on comments 🗣️")
         st.subheader("")
         col1,col2, col3 = st.columns([1, 1, 1])
         with col1:
