@@ -784,38 +784,42 @@ def dashboard_patient_satisf():
         
         # Custom styling function
         def style_dataframe(row):
-            # style pandas table
-            th_props = [
-            ('font-size', '14px'),
-            ('text-align', 'center'),
-            ('font-weight', 'bold'),
-            ('color', '#hex color'),
-            ('background-color', '#8fc0eb')
-            ]
-
-            td_props = [
-            ('font-size', '12px')
-            ]
-
-            styles = [
-            dict(selector="th", props=th_props),
-            dict(selector="td", props=td_props)
-            ]
-            
             if row['Sentiment'] == 'positive':
                 return ['background-color: green'] * len(row)
             else:
                 return ['background-color: red'] * len(row)
 
-        # Apply custom styling
-        df_selection = df_selection.style.apply(style_dataframe, axis=1)
+        # Style pandas table
+        th_props = [
+            ('font-size', '14px'),
+            ('text-align', 'center'),
+            ('font-weight', 'bold'),
+            ('color', '#hex color'),
+            ('background-color', '#8fc0eb')
+        ]
+
+        td_props = [
+            ('font-size', '12px')
+        ]
+
+        styles = [
+            dict(selector="th", props=th_props),
+            dict(selector="td", props=td_props)
+        ]
+
+        # Apply custom styling - df filtrabile
+        styled_df = df_selection.style.apply(style_dataframe, axis=1)
         # Set additional styling options
-        df_selection.set_table_styles(styles)
+        styled_df.set_table_styles(styles)
         # Display the styled DataFrame in Streamlit
-        
-        
         st.subheader("Dataframe Filtrato tramite query")
-        st.dataframe(df_selection)
+        st.dataframe(styled_df)
+        
+        # Apply custom styling - df filtrabile
+        df = df.style.apply(style_dataframe, axis=1)
+        # Set additional styling options
+        df.set_table_styles(styles)
+        # display complete df
         st.subheader("Dataframe completo")
         st.write(df)
         
