@@ -450,14 +450,10 @@ def dashboard_patient_satisf():
         # Divide the screen into 7 columns
         columns = st.columns(7)
         
-        def metric_custom():
-            from streamlit_extras.metric_cards import style_metric_cards
-            # Create a metric element for each procedure type and place it in a separate column
-            for i, procedure in enumerate(procedure_types):
-                columns[i].metric(label=procedure, value=f"{round(mean_time.loc[procedure], 2)} min", delta=round(diff_time[i], 2)) 
-            style_metric_cards()
-          
-        metric_custom()
+        # Create a metric element for each procedure type and place it in a separate column
+        for i, procedure in enumerate(procedure_types):
+            columns[i].metric(label=procedure, value=f"{round(mean_time.loc[procedure], 2)} min", delta=round(diff_time[i], 2)) 
+        
         
         st.write("")
         st.progress(100, text="")
@@ -785,10 +781,41 @@ def dashboard_patient_satisf():
             st.header("")
             st.metric("", "",  help="% Form positivi rispetto al totale form con commenti")
             display_dial("% Form con Commenti Positivi",  str(pos_comm)+" %",   "#065535")
+        
+        # Custom styling function
+        def style_dataframe(row):
+            # style pandas table
+            th_props = [
+            ('font-size', '14px'),
+            ('text-align', 'center'),
+            ('font-weight', 'bold'),
+            ('color', '#hex color'),
+            ('background-color', '#8fc0eb')
+            ]
+
+            td_props = [
+            ('font-size', '12px')
+            ]
+
+            styles = [
+            dict(selector="th", props=th_props),
+            dict(selector="td", props=td_props)
+            ]
             
+            if row['Sentiment'] == 'positive':
+                return ['background-color: green'] * len(row)
+            else:
+                return ['background-color: red'] * len(row)
+
+        # Apply custom styling
+        df_selection = df_selection.style.apply(style_dataframe, axis=1)
+        # Set additional styling options
+        df_selection.set_table_styles(styles)
+        # Display the styled DataFrame in Streamlit
+        
         
         st.subheader("Dataframe Filtrato tramite query")
-        st.write(df_selection)
+        st.dataframe(df_selection)
         st.subheader("Dataframe completo")
         st.write(df)
         
