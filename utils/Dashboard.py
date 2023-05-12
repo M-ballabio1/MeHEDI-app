@@ -785,9 +785,11 @@ def dashboard_patient_satisf():
         # Custom styling function
         def style_dataframe(row):
             if row['Sentiment'] == 'positive':
-                return ['background-color: green'] * len(row)
+                return ['background-color: "#b6e8b0"'] * len(row)
+            elif row['Sentiment'] == 'negative':
+                return ['background-color: "#f2867e"'] * len(row)
             else:
-                return ['background-color: red'] * len(row)
+                return
 
         # Style pandas table
         th_props = [
