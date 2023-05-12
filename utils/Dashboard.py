@@ -22,6 +22,7 @@ from streamlit_elements import elements, mui
 from streamlit_elements import nivo
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
+from streamlit_extras.metric_cards import style_metric_cards
 
 from utils.addition.graphs import graph_pes
 
@@ -452,8 +453,8 @@ def dashboard_patient_satisf():
 
         # Create a metric element for each procedure type and place it in a separate column
         for i, procedure in enumerate(procedure_types):
-            columns[i].metric(label=procedure, value=f"{round(mean_time.loc[procedure], 2)} min", delta=round(diff_time[i], 2))
-        
+            columns[i].metric(label=procedure, value=f"{round(mean_time.loc[procedure], 2)} min", delta=round(diff_time[i], 2)) 
+        style_metric_cards()
         
         st.write("")
         st.progress(100, text="")
