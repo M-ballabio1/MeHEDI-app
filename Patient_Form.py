@@ -15,7 +15,6 @@ from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 from feel_it import EmotionClassifier, SentimentClassifier
 from streamlit_extras.metric_cards import style_metric_cards
-style_metric_cards()
 
 from utils.Dashboard_Operations import dashboard_operations
 from utils.Dashboard import dashboard_patient_satisf
@@ -37,6 +36,7 @@ GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
 # impostazione grafica iniziale
 st.set_page_config(page_title="MeHEDI", page_icon="🏥", layout="wide")
+style_metric_cards()
 
 @st.cache_resource()
 def connect_to_gsheet():
