@@ -802,7 +802,7 @@ def dashboard_patient_satisf():
             ('font-size', '12px')
         ]
 
-        styles = [
+        styles_df_css = [
             dict(selector="th", props=th_props),
             dict(selector="td", props=td_props)
         ]
@@ -810,7 +810,7 @@ def dashboard_patient_satisf():
         # Apply custom styling - df filtrabile
         styled_df = df_selection.style.apply(style_dataframe, axis=1)
         # Set additional styling options
-        styled_df.set_table_styles(styles)
+        styled_df.set_table_styles(styles_df_css)
         # Display the styled DataFrame in Streamlit
         st.subheader("Dataframe Filtrato tramite query")
         st.dataframe(styled_df)
@@ -818,7 +818,7 @@ def dashboard_patient_satisf():
         # Apply custom styling - df filtrabile
         df = df.style.apply(style_dataframe, axis=1)
         # Set additional styling options
-        df.set_table_styles(styles)
+        df.set_table_styles(styles_df_css)
         # display complete df
         st.subheader("Dataframe completo")
         st.write(df)
