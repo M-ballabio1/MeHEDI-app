@@ -51,6 +51,14 @@ div.css-1b2d4l5.e1tzin5v1 {
     border-radius: 25px;
 }
 
+/* Add a border to the specified <div> element */
+div[data-testid="metric-container"] {
+  background-color: rgb(189, 195, 199);
+  border: 2px solid rgba(200, 168, 211, 0.6);
+  padding: 0.5% 0.5% 0.5% 0.5%;
+  border-radius: 25px;
+}
+
 /* Hide hamburger menu and footer */
 div.css-r698ls.e8zbici2 {
   display: none;
