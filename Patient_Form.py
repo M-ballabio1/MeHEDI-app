@@ -130,6 +130,18 @@ if senza_auth==True:
     
     def form_pazienti():
         
+        # Add the markdown code to hide the header element
+        st.markdown(
+            """
+            <style>
+            header[data-testid="stHeader"] {
+                display: none;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+        
         #serve per allargare margini da block-container
         st.markdown("""
         <style>
