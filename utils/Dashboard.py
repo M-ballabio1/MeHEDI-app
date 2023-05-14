@@ -788,8 +788,6 @@ def dashboard_patient_satisf():
                 return ['background-color: #b6e8b0'] * len(row)
             elif row['Sentiment'] == 'negative':
                 return ['background-color: #f2867e'] * len(row)
-            elif row['Sentiment'] == '':
-                return ['background-color: #f5f7b5'] * len(row)
             else:
                 return [''] * len(row)
 
