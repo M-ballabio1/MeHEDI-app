@@ -171,6 +171,8 @@ def dashboard_patient_satisf():
             psi_prima_last_week=round(df2_medie_valori_prec_week['count'].mean(), 4)
             #differenza tra i PSI
             delta_psi=round(((float(psi_this_week)-float(psi_prima_last_week))/7)*100, 2)
+            if psi_perc>100:
+                psi_perc==100
             st.metric("PSI Index",  value=str(psi_perc)+" %", delta=str(delta_psi)+" %", help="Patient Satisfaction Index (misura complessiva di grado di soddisfazione dei pazienti)")
         with col3:
             #Settimana attuale tws MEAN
@@ -187,6 +189,8 @@ def dashboard_patient_satisf():
             tws_prima_last_week=round(df2_medie_valori_prec_tws_week['count'].mean(), 2)
             #differenza tra i TWS
             delta_tws=round(float(tws_this_week)-float(tws_prima_last_week), 2)
+            if tws_this_week>7:
+                tws_this_week==7
             st.metric("TWS Index",  value=(str(tws_this_week)+"/7"+" ±"+str(tws_this_week_std)), delta=delta_tws,  help="Time Waiting Satisfaction Index (misura che elabora una media del grado di soddifazione del paziente legate al tempo d'attesa)")
         with col4:
             #Settimana attuale stru
@@ -199,6 +203,8 @@ def dashboard_patient_satisf():
             stru_prima_last_week=round(df2_medie_valori_prec_stru_week["count"].mean(), 2)
             #differenza tra i STRU
             delta_stru=round(float(stru_this_week)-float(stru_prima_last_week), 2)
+            if stru_this_week>7:
+                stru_this_week==7
             st.metric("Structural Index",  value=str(stru_this_week)+"/7", delta=delta_stru,  help="Structural Index (permette di calcolare una media della soddisfazione dei pazienti riguardo l'ambiente della struttura (servizi, posti a sedere ecc...)")
         with col5:
             #calcolo di un nuovo coefficiente di Digitalization
@@ -219,6 +225,8 @@ def dashboard_patient_satisf():
             dig_score_last=(dig_prima_last_week+sit_ema_score)/2
             #differenza tra i DIG
             delta_dig=round(float(sit_ema_score)-float(dig_score_last), 2)
+            if dig_score_att>7:
+                dig_score_att==7
             st.metric("DIG Index",  value=str(dig_score_att)+"/7", delta=str(delta_dig),  help="Digitalization Index (permette di calcolare una media ponderata di grado di digitalizzazione della struttura rispetto ad una baseline)")
         
         #First row
@@ -282,6 +290,8 @@ def dashboard_patient_satisf():
                 st.metric("Spiegazione KPIs",  value="", help="PEI=Indicatore per misurare il grado di soddisfazione medio delle procedure || CKI=Indicatore per misurare il grado di cordialità dello staff Medi || PSafy=Indicatore per misurare il grado di soddisfazione della privacy e sicurezza percepita")
                 st.write("")
                 perc_proc_media=round((proc_media/7)*100, 2)
+                if perc_proc_media>100:
+                    perc_proc_media==100
                 display_dial("Procedure Evaluation Index",  str(perc_proc_media)+"%",   color1)
                 #st.metric("PEI ",  value="45%",  delta="-5%",  help="Procedure Evaluation Index Var_d2, var_d7")
                 st.write("")
@@ -290,6 +300,8 @@ def dashboard_patient_satisf():
                 cki_media=round((cki_1[0]+cki_1[1]+cki_1[2])/3, 2)
                 cki_1_media_per=round((cki_media/7)*100, 2)
                 #st.metric("CKI ",  value="75%",  delta="+5%",  help="Cordiality & Kindness Index c1, c2, h5, ")
+                if cki_1_media_per>100:
+                    cki_1_media_per==100
                 display_dial("Cordiality & Kindness Index",  str(cki_1_media_per)+"%",  color1)
                 st.write("")
                 st.write("")
@@ -301,6 +313,8 @@ def dashboard_patient_satisf():
 
                 # ho portato da percentuale centesimi a settesimi
                 sit_safy_score=round(((safy_si_pren))/len(df['Sicur_visita']), 2)
+                if psafi_1_media_per>100:
+                    psafi_1_media_per==100
                 display_dial("Privacy and Safety Index",  str(psafi_1_media_per)+"%",  color1)
             with d:
                 st.text("")
