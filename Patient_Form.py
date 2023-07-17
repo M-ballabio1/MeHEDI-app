@@ -126,7 +126,7 @@ if senza_auth==True:
 
     # ---- SIDEBAR ----
     #authenticator.logout("Logout", "sidebar")
-    st.sidebar.title("Welcome Guy 👋")
+    st.sidebar.title("Welcome 👋")
     
     def form_pazienti():
         
