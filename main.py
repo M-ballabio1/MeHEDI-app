@@ -433,7 +433,7 @@ if senza_auth==True:
                 st.balloons()
                 #Storing data
                 datetime_object = datetime.datetime.now()
-                """add_row_to_gsheet(
+                add_row_to_gsheet(
                 df, [[var_a1, var_a2, "",
                         "", "", "",
                         var_c1, var_c2, "",
@@ -444,7 +444,7 @@ if senza_auth==True:
                         var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                         var_i1, var_i2, 
                         feedback_gen, 
-                        str(datetime_object),  "Form_breve", add_comm,  emozione,  sentiment]])"""
+                        str(datetime_object),  "Form_breve", add_comm,  emozione,  sentiment]])
         
         # ###FORM 2
         if slider>3 and slider<8:
@@ -708,7 +708,7 @@ if senza_auth==True:
                 if var_b1=="SI":
                     #Storing data
                     datetime_object = datetime.datetime.now()
-                    """add_row_to_gsheet(
+                    add_row_to_gsheet(
                     df, [[var_a1, var_a2, var_a3,
                             var_b1, var_b2, var_b3,
                             var_c1, var_c2, var_c3,
@@ -719,11 +719,11 @@ if senza_auth==True:
                             var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_medio",  add_comm,  emozione,  sentiment]])"""
+                            str(datetime_object),  "Form_medio",  add_comm,  emozione,  sentiment]])
                 else:
                     #Storing data
                     datetime_object = datetime.datetime.now()
-                    """add_row_to_gsheet(
+                    add_row_to_gsheet(
                     df, [[var_a1, var_a2, var_a3,
                             var_b1, "", "",
                             var_c1, var_c2, var_c3,
@@ -734,7 +734,7 @@ if senza_auth==True:
                             var_h1, var_h2, "","", var_h5, "", var_h7,"", var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_medio",  add_comm,  emozione,  sentiment]])"""
+                            str(datetime_object),  "Form_medio",  add_comm,  emozione,  sentiment]])
         
         # ###FORM 3
         if slider>7:
@@ -844,7 +844,7 @@ if senza_auth==True:
                                 {"taste": "RISULTATI", "Peso Area": var_f3},
                                 {"taste": "ESPERIENZA", "Peso Area": med_experience}]
                     graph_pes(DATA)
-                    media_tot=(med_accoglienza+var_g3+med_experience+var_a2+var_d2+var_f3)/6
+                    media_tot=round(((med_accoglienza+var_g3+med_experience+var_a2+var_d2+var_f3)/6), 1)
                 elif var_b1=="SI":
                     med_accoglienza=(var_c1+var_c2)/2
                     med_sito=(var_b2+var_b3)/2
@@ -1029,7 +1029,7 @@ if senza_auth==True:
                 if var_b1=="SI":
                     #Storing data
                     datetime_object = datetime.datetime.now()
-                    """add_row_to_gsheet(
+                    add_row_to_gsheet(
                     df, [[var_a1, var_a2, var_a3,
                             var_b1, var_b2, var_b3,
                             var_c1, var_c2, var_c3,
@@ -1040,11 +1040,11 @@ if senza_auth==True:
                             var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_lungo",  add_comm,  emozione,  sentiment]])"""
+                            str(datetime_object),  "Form_lungo",  add_comm,  emozione,  sentiment]])
                 else:
                     #Storing data
                     datetime_object = datetime.datetime.now()
-                    """add_row_to_gsheet(
+                    add_row_to_gsheet(
                     df, [[var_a1, var_a2, var_a3,
                             var_b1, "", "",
                             var_c1, var_c2, var_c3,
@@ -1055,7 +1055,7 @@ if senza_auth==True:
                             var_h1, var_h2, var_h3,var_h4, var_h5, var_h6, var_h7,var_h8, var_h9, 
                             var_i1, var_i2, 
                             feedback_gen, 
-                            str(datetime_object),  "Form_lungo",  add_comm,  emozione,  sentiment]])"""
+                            str(datetime_object),  "Form_lungo",  add_comm,  emozione,  sentiment]])
     
                 
     page_names_to_funcs = {
