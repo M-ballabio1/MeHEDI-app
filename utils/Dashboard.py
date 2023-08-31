@@ -90,16 +90,16 @@ def dashboard_patient_satisf():
         
         #SIDEBAR FILTRI
         st.sidebar.markdown("""<hr style="height:5px;border:none;color:#bfbfbf;background-color:#bfbfbf;" /> """, unsafe_allow_html=True)
-        new_title = '<p style="font-size: 22px;">🔁 Filtra ciò che ti interessa</p>'
+        new_title = '<p style="font-size: 22px;">🔁 Filter What Interests You</p>'
         st.sidebar.markdown(new_title, unsafe_allow_html=True)
         st.sidebar.markdown("")
         a, b, c = st.sidebar.columns([0.05,1,0.05])
         with a:
             st.write("")
         with b:
-            Proced_Fil=st.multiselect("Tipo Procedura", df["Tipo_procedura"].unique(),  default=["RMN", "Raggi X", "CT"])
-            Sesso_Fil=st.multiselect("Sesso", df["Sesso"].unique(),  default=["Maschio", "Femmina", "Non Specificato"])
-            Eta_Fil=st.multiselect("Fasce di età", df["Range_Età"].unique(),  default=["18-30anni"])
+            Proced_Fil=st.multiselect("Procedure Type", df["Tipo_procedura"].unique(),  default=["RMN", "Raggi X", "CT"])
+            Sesso_Fil=st.multiselect("Gender", df["Sesso"].unique(),  default=["Maschio", "Femmina", "Non Specificato"])
+            Eta_Fil=st.multiselect("Age Range", df["Range_Età"].unique(),  default=["18-30anni"])
             st.image(image3, width=170)
             st.markdown("""
             <div align=center><small>
@@ -150,7 +150,7 @@ def dashboard_patient_satisf():
         date_last_week = last_week.strftime('%Y-%m-%d')
         date_last_month = last_month.strftime('%Y-%m-%d')
         
-        st.subheader("KPI per la settimana corrente delle principali macro-aree")
+        st.subheader("KPI for the current week of the main macro-areas")
         col1, col2, col3, col4, col5 = st.columns(5)
         with col1:
             len_report_sett_now=df1['Sesso'].iloc[-1]
@@ -230,10 +230,11 @@ def dashboard_patient_satisf():
             st.metric("DIG Index",  value=str(dig_score_att)+"/7", delta=str(delta_dig),  help="Digitalization Index (permette di calcolare una media ponderata di grado di digitalizzazione della struttura rispetto ad una baseline)")
         
         #First row
-        st.title("Area indicatori principali Health Patient Experience - filtrabile 🎯")
-        if len(df_selection)==0:
+        st.title("Health Patient Experience Main Indicators Area - Filterable 🎯")
+        if len(df_selection) == 0:
             st.header("Business Rule Exception")
-            st.warning("Non posso fare nessuna query se non è presente almeno un campo per ciascun selectbox")
+            st.warning("I can't perform any query if at least one field is present for each selectbox")
+
         else: 
             a, b, c, d, e = st.columns([0.42, 0.01, 0.14, 0.01, 0.42])
             with a:
@@ -323,7 +324,7 @@ def dashboard_patient_satisf():
                 df_fin=df_cat.rename(columns={'Sodd_fac_appun':"Soddisfazione fac appuntamento","Tipo_appun": "Tipologia Appuntamento", "Tipo_procedura": "Tipologia Procedure", "Tempo_segn_medic_app": "Tempo tra segnalazione medico e visita", "Dolore_visita": "Dolore nelle procedure", "Sesso": "Sesso pazienti", "Range_Età": "Range Età pazienti"}, errors="raise")
                 pie_filter=st.selectbox("", ["Tipologia Appuntamento", "Tipologia Procedure", "Tempo tra segnalazione medico e visita", "Sesso pazienti", "Range Età pazienti"])
                 if pie_filter=="Tipologia Appuntamento":
-                    st.header("Metodologia Appuntamento")
+                    st.header("Type of Appointment")
                     fig = px.pie(df_fin, values='Soddisfazione fac appuntamento', names='Tipologia Appuntamento', color_discrete_sequence=px.colors.sequential.RdBu)
                 elif pie_filter=="Tipologia Procedure":
                     st.header("Tipologie visite effettuate")
@@ -381,7 +382,7 @@ def dashboard_patient_satisf():
             df42.rename(columns={'Sesso':'Form_Inviati'}, inplace=True)
             df42["target"]=10
             df42["MA_REPORT"]=df42["Form_Inviati"].rolling(2).mean()
-            st.header("Bar Chart Numero report inviati per settimana")
+            st.header("Bar Chart Number of Reports Sent per Week")
             fig=px.bar(df42, x ="Timestamp", y='Form_Inviati', color='Form_Inviati',template = 'ggplot2',width=800, height=400)
             fig.add_trace(go.Scatter(x=df42['Timestamp'], y=df42["target"],mode='lines', line=dict(color="blue"), name='Safety Target'))
             fig.add_trace(go.Scatter(x=df42['Timestamp'], y=df42["MA_REPORT"],mode='lines', line=dict(color="orange"), name='Media mobile'))
@@ -404,7 +405,7 @@ def dashboard_patient_satisf():
         with co1:
             # second stacked bar chart
             # group the data by week and Tempo_segn_medic_app, count the occurrences of each category, and reset the index
-            st.header("Tempo trascorso tra la segnalazione del medico e appuntamento")
+            st.header("Time elapsed between doctor's report and appointment")
             df_grouped = df.groupby([pd.Grouper(key='Timestamp', freq='1W'), 'Tempo_segn_medic_app'])['Tempo_segn_medic_app'].count().reset_index(name='count')
 
             # create a stacked bar chart using Plotly
@@ -416,7 +417,7 @@ def dashboard_patient_satisf():
         with co2:
             # third stacked bar chart
             # group the data by week and Tempo_segn_medic_app, count the occurrences of each category, and reset the index
-            st.header("Tempo di attesa per ricevere risultati rispetto alla compilazione form")
+            st.header("Waiting time to receive results compared to form completion")
             df_grouped = df.groupby([pd.Grouper(key='Timestamp', freq='1W'), 'Tempo_attesa_per_risultati'])['Tempo_attesa_per_risultati'].count().reset_index(name='count')
 
             # create a stacked bar chart using Plotly
@@ -426,9 +427,9 @@ def dashboard_patient_satisf():
         
         
         #Before the second row
-        st.header("Tempo teorico vs Tempo stimato")
-        st.write("Tempo stimato e il delta rappresenta differenza tra Tempo teorico medio - Tempo effettivo medio (stimato pazienti)")
-        
+        st.header("Theoretical Time vs Estimated Time")
+        st.write("Estimated Time and Delta represent the difference between Average Theoretical Time - Average Actual Time (estimated for patients)")
+
         def calculate_mean_std(df):
             grouped_df = df.groupby("Tipo_procedura")["Tempo_stim_visita"]
             mean = grouped_df.mean()
@@ -564,26 +565,26 @@ def dashboard_patient_satisf():
         df4["MA_PX"]=df4["PX"].rolling(2).mean()
         df4["target_sicurezza_PX"]=4
         
-        col0, col01,  col1,col2, col3 = st.columns([0.2,0.05,  1, 0.05, 0.25])
+        col0, col01, col1, col2, col3 = st.columns([0.2, 0.05, 1, 0.05, 0.25])
         with col0:
             st.write("")
             st.write("")
-            if df4["PX"].iat[-1] >5.5:
+            if df4["PX"].iat[-1] > 5.5:
                 st.write("")
-                st.subheader("✅ Continua così")
-                st.success("Come puoi vedere il livello di Patient Satisfaction della nostra struttura è abbastanza alto. Tieni alta l'attenzione e cerca di concentrarti sulle aree più carenti!")
-            elif df4["PX"].iat[-1]< 5.5 and df4["PX"].iat[-1] > 4:
+                st.subheader("✅ Keep it up")
+                st.success("As you can see, the level of Patient Satisfaction in our facility is quite high. Keep up the good work and try to focus on the areas that need improvement the most!")
+            elif df4["PX"].iat[-1] < 5.5 and df4["PX"].iat[-1] > 4:
                 st.write("")
-                st.subheader("🤖 Si potrebbe migliorare")
-                st.warning("Sicuramente si potrebbero rivedere alcuni aspetti perchè il livello di Patient Satisfaction è ancora accettbile, ma dobbiamo fare di più. Come noti hai un Patient Satisfaction index di "+str(psi_perc)+"%. Non è sufficiente bisogna fare di più.")
+                st.subheader("🤖 There's room for improvement")
+                st.warning("Certainly, some aspects could be reviewed because the level of Patient Satisfaction is still acceptable, but we need to do more. As you've noticed, your Patient Satisfaction index is " + str(psi_perc) + "%. It's not enough; we need to do more.")
             else:
                 st.write("")
-                st.subheader("⚠ Attenzione bisogna intervenire!")
-                st.error("Bisogna intervenire immediatamente per invertire questo trend negativo di Patient Satisfaction. Non è più ancora accettbile.")
+                st.subheader("⚠ Attention, intervention is needed!")
+                st.error("Immediate intervention is needed to reverse this negative trend in Patient Satisfaction. It's no longer acceptable.")
         with col01:
             st.write("")
         with col1:
-            st.header("Line Chart Patient Experience per settimana")
+            st.header("Line Chart Patient Experience per week")
             fig = go.Figure([go.Scatter(x=df4['Timestamp'], y=df4['PX'], name='Patient Satisfaction')])
             fig.update_layout(yaxis_range=[1, 7])
             fig.add_trace(go.Scatter(x=df4['Timestamp'], y=df4["MA_PX"],mode='lines', line=dict(color="orange"), name='Media Mobile a 2 week'))
@@ -601,7 +602,7 @@ def dashboard_patient_satisf():
             delta_psiprev=pred-df4["PX"].iat[-1]
             delta_psiprev=round(float(delta_psiprev), 2)
             preds=round(float(pred), 3)
-            st.metric("Prevedo che settimna prossima PSI", str(preds),  str(delta_psiprev)+"/7", help="Patient Satisfaction Index stimata sulla base di algoritmo di ML (Gradient Boosting) che considera tutte le varibaili del dataset")
+            st.metric("Predicted Next Week PSI", str(preds), str(delta_psiprev)+"/7", help="Estimated Patient Satisfaction Index based on ML algorithm (Gradient Boosting) considering all dataset variables")
             st.write("")
             if df4["PX"].iat[-1] >5.5:
                 st.image(img_good, width=300) 
@@ -625,19 +626,22 @@ def dashboard_patient_satisf():
         x_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
         
         st.header("OLS Regression")
-        a,b,c=st.columns([1,1,1])
+        a, b, c = st.columns([1, 1, 1])
         with a:
-            st.subheader("PSI e Soddisfazione Tempo d'attesa Risultati")
+            st.subheader("PSI and Waiting Time Results Satisfaction")
             fig = px.scatter(df5, x='Soddisf_Tempo_Attesa_Risult', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
             st.plotly_chart(fig, use_container_width=True)
+        
         with b:
-            st.subheader("PSI e Soddisfazione Pulizia")
+            st.subheader("PSI and Cleanliness Satisfaction")
             fig = px.scatter(df5, x='Soddisf_Pulizia_Reparto', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
             st.plotly_chart(fig, use_container_width=True)
+        
         with c:
-            st.subheader("PSI e Soddisfazione Privacy")
+            st.subheader("PSI and Privacy Satisfaction")
             fig = px.scatter(df5, x='Soddisf_Privacy', y='PX', opacity=0.65, trendline="ols", trendline_color_override="red")
             st.plotly_chart(fig, use_container_width=True)
+
 
         st.write("")
         st.progress(100, text="")
@@ -652,7 +656,7 @@ def dashboard_patient_satisf():
             coment=len(df)
             comment_full=df['Comment_Text'].isna().sum()
             form_with_comment=round(((coment-comment_full)/coment)*100, 2)
-            st.metric("% Form con commenti",  value=str(form_with_comment)+"%",  help="% Persone che hanno fatto un commento ")
+            st.metric("% of Forms with Comments", value=str(form_with_comment)+"%", help="% of people who have left a comment")
         with col2:
             parole_positive = ["professionalità", "competenza", "efficacia", "precisione", "attenzione", "impegno", "competenza", "efficacia","precisione", 
                                         "attenzione", "impegno", "cura", "comprensione", "empatia", "discrezione", 
@@ -676,11 +680,11 @@ def dashboard_patient_satisf():
                     risultato_neg += 1
                     
             perc_ris_neg=round((risultato_neg/(len(text_lowercase)))*100, 2)
-            st.metric("% Risultati Negativi",  value=str(perc_ris_neg)+"%",  help="Percentuale Key-Words Negative sul totale parole inserite nei form e filtrate")
+            st.metric("% Negative Results", value=str(perc_ris_neg)+"%", help="Percentage of Negative Keywords on the total words entered in the forms and filtered")
         with col3:
             ris_neg=round(((risultato_pos/risultato_neg)), 2)
             delta_ris_neg=round((ris_neg-1), 2)
-            st.metric("Sentiment Analysis Score", value=ris_neg, delta=str(delta_ris_neg) ,  help="Rapporto Positivi-Negativi. Calcola qual è il rapporto tra Key-words positive e negative se > 0 allora sono più quelle positive.")
+            st.metric("Sentiment Analysis Score", value=ris_neg, delta=str(delta_ris_neg) ,  help="Positive-Negative Ratio. Calculates the ratio between positive and negative keywords. If > 0, there are more positive keywords.")
         
         col1,col2, col3,  col4,  col5= st.columns([2,0.05, 0.8, 0.02, 1.1 ])
         with col1:
@@ -780,21 +784,22 @@ def dashboard_patient_satisf():
         with cols2:
             st.write("")
         with cols3:
-            df_tot_comment=df[~df.Sentiment.isnull()]
-            neg_comm=round(len(df_negative)/len(df_tot_comment)*100, 2)
-            pos_comm=round(len(df_positive)/len(df_tot_comment)*100, 2)
+            df_tot_comment = df[~df.Sentiment.isnull()]
+            neg_comm = round(len(df_negative) / len(df_tot_comment) * 100, 2)
+            pos_comm = round(len(df_positive) / len(df_tot_comment) * 100, 2)
+            
             st.header("")
             st.header("")
-            st.metric("", "",  help="% Form negativi rispetto al totale form con commenti")
-            display_dial("% Form con Commenti Negativi",  str(neg_comm)+"%",   "#a30000")
+            st.metric("", "", help="% Negative comments compared to total forms with comments")
+            display_dial("Percentage of Negative Comment Forms", str(neg_comm) + "%", "#a30000")
             st.write("")
             st.write("")
             st.header("")
             st.header("")
             st.header("")
             st.header("")
-            st.metric("", "",  help="% Form positivi rispetto al totale form con commenti")
-            display_dial("% Form con Commenti Positivi",  str(pos_comm)+" %",   "#065535")
+            st.metric("", "", help="% Positive comments compared to total forms with comments")
+            display_dial("Percentage of Positive Comment Forms", str(pos_comm) + "%", "#065535")
         
         # Custom styling function
         def style_dataframe(row):
@@ -824,20 +829,20 @@ def dashboard_patient_satisf():
             dict(selector="td", props=td_props)
         ]
 
-        # Apply custom styling - df filtrabile
+        # Apply custom styling - filterable DataFrame
         styled_df = df_selection.style.apply(style_dataframe, axis=1)
         # Set additional styling options
         styled_df.set_table_styles(styles_df_css)
         # Display the styled DataFrame in Streamlit
-        st.subheader("Dataframe Filtrato tramite query")
+        st.subheader("Filtered DataFrame via Query")
         st.dataframe(styled_df)
         
-        # Apply custom styling - df filtrabile
+        # Apply custom styling - complete DataFrame
         df = df.style.apply(style_dataframe, axis=1)
         # Set additional styling options
         df.set_table_styles(styles_df_css)
-        # display complete df
-        st.subheader("Dataframe completo")
+        # Display complete DataFrame
+        st.subheader("Complete DataFrame")
         st.write(df)
         
         """
