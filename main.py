@@ -241,7 +241,7 @@ if senza_auth==True:
             new_title = '<b style="font-family:serif; color:#6082B6; font-size: 28px;">📌 How much time do you have to complete the form?</b>'
             st.markdown(new_title, unsafe_allow_html=True)
             st.write("")
-            slider = st.slider(label='Drag the slider (For English version set the slider to 0)', min_value=0,max_value=10, value=1, key='Form5')
+            slider = st.slider(label='Drag the slider (For English version set the slider to 0)', min_value=0,max_value=10, value=0, key='Form5')
         with b:
             st.write("")
         with c:
@@ -446,7 +446,7 @@ if senza_auth==True:
                          str(datetime_object), "Short Form", add_comm, emozione, sentiment]])
 
 
-        if slider>1 and slider<4:
+        if slider> 0 and slider<4:
             col1,  col2 = st.columns([1, 0.60])
             with col1:
                 new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
