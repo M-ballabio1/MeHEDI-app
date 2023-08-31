@@ -177,21 +177,21 @@ if senza_auth==True:
         # connect and append data
         df = connect_to_gsheet()
         
-        #SIDEBAR
+        # SIDEBAR
         st.sidebar.markdown("""<hr style="height:5px;border:none;color:#bfbfbf;background-color:#bfbfbf;" /> """, unsafe_allow_html=True)
         st.sidebar.info(
         """
-        Questa è una webapp creata da che consente di valutare la Patient Satisfaction
+        This is a webapp created by that allows you to evaluate Patient Satisfaction.
         
-        Web App URL: <https://xxx.streamlitapp.com>
+        Web App URL: <https://mehedi-framework-patientsatisfaction-form.streamlit.app/>
         """
         )
-    
+        
         st.sidebar.title("Support")
         st.sidebar.info(
-            """
-            Per eventuali problemi nell'utilizzo app rivolgersi a: matteoballabio99@gmail.com
-            """
+        """
+        For any issues with app usage, please contact: matteoballabio99@gmail.com
+        """
         )
         a, b, c = st.sidebar.columns([0.2,1,0.2])
         with a:
@@ -212,45 +212,241 @@ if senza_auth==True:
         with i:
             st.write("")
         with a:
-            with st.expander("ℹ️ Istruzioni generali compilazione form", expanded=False):
+            with st.expander("ℹ️ General Form Filling Instructions", expanded=False):
                 st.markdown(
                     """
-                    ### Framework Return on Experience of MeHEDI
-                    Questo framework serve alla struttura sanitaria per raccogliere il feedback riguardo i servizi erogati ai suoi pazienti. Per qualsiasi problematica alla fine della compilazione del form sarà possibile contattare la struttura tramite e-mail.
+                    ### MeHEDI's Return on Experience Framework
+                    This framework serves the healthcare facility to collect feedback regarding the services provided to its patients. For any issues upon completing the form, it will be possible to contact the facility via email.
                     """
                 )
                 st.markdown(
                     """
-                    ### Istruzioni alla compilazione del Form
-                    Gentile paziente,
+                    ### Instructions for Form Filling
+                    Dear patient,
                     
-                    Il suo medico l'ha indirizzata al reparto di Radiologia per alcuni esami. Ora, al termine degli esami e mentre lascia il nostro reparto, vorremmo farle alcune domande sul nostro reparto e sulla sua esperienza. Le sue risposte ci permetteranno di migliorare la qualità del servizio offerto a lei come paziente. Teniamo molto alla sua opinione.
+                    Your doctor has directed you to the Radiology department for some tests. Now, at the end of the exams and as you leave our department, we would like to ask you some questions about our department and your experience. Your answers will allow us to improve the quality of service offered to you as a patient. Your opinion is very important to us.
                     
-                    Ci vorranno solo pochi minuti del vostro tempo. Leggete attentamente ogni domanda, scegliete la vostra risposta e contrassegnatela. Se ritenete di non essere in grado di rispondere a una domanda specifica, passate alla successiva.
+                    It will only take a few minutes of your time. Please read each question carefully, choose your answer, and mark it. If you feel unable to answer a specific question, move on to the next one.
                     
-                    Per alcune domande vorremmo che ci desse un punteggio, che va da 1 a 7: 7 significa che è molto soddisfatto e 1 che è molto insoddisfatto. Potete darci qualsiasi punteggio che ritenete corretto.  *[7=ottimo, 6=molto soddisfatto, 5=soddisfatto, 4=neutro 3=né soddisfatto né insoddisfatto, 2=insoddisfatto, 1=molto insoddisfatto]*.
+                    For some questions, we would like you to give us a score ranging from 1 to 7: 7 means you are very satisfied and 1 means you are very dissatisfied. You can provide any score you deem appropriate. *[7=excellent, 6=very satisfied, 5=satisfied, 4=neutral, 3=neither satisfied nor dissatisfied, 2=dissatisfied, 1=very dissatisfied]*.
                     
-                    ### Perchè vogliamo misurare la Patient Satisfaction?
-                    1. Miglioramento dei servizi offerti dalla struttura mirata nelle aree segnalate 
-                    2. Far risparmiare il tempo dei nostripazienti tramite una migliore Patient Experience della nostra struttura
-                    3. Monitoraggio dei punti di forza e punti di miglioramento della nostra struttura
-                    """)
+                    ### Why Do We Want to Measure Patient Satisfaction?
+                    1. Improvement of targeted services offered by the facility
+                    2. Save our patients' time through a better Patient Experience in our facility
+                    3. Monitoring strengths and areas of improvement of our facility
+                    """
+                )
                 st.markdown("")
             st.write("")
-            new_title = '<b style="font-family:serif; color:#6082B6; font-size: 28px;">📌 Quanto tempo hai a disposizione per compilare il form?</b>'
+            new_title = '<b style="font-family:serif; color:#6082B6; font-size: 28px;">📌 How much time do you have to complete the form?</b>'
             st.markdown(new_title, unsafe_allow_html=True)
             st.write("")
-            slider = st.slider(label='Trascina lo slider', min_value=1,max_value=10, value=1, key='Form5')
+            slider = st.slider(label='Drag the slider (For English version set the slider to 0)', min_value=0,max_value=10, value=1, key='Form5')
         with b:
             st.write("")
         with c:
-            st.info("Ciao, sono Cleo il tuo assistente personale!")
-            st.info('Posso aiutarti a compilare il nostro form di Patient Satisfaction. Se hai dubbi non esitare a consultare la sezione "Istruzioni generali compilazione form"')
+            st.info("Hi, I'm Cleo, your personal assistant!")
+            st.info("I can help you complete our Patient Satisfaction form. If you have any doubts, feel free to check the 'General Form Filling Instructions' section.")
         with d:
             st.image(img2)
-            
-        # ###FORM 1
-        if slider<4:
+
+        # ###FORM 0 Eng
+        if slider == 0:
+            col1, col2 = st.columns([1, 0.60])
+            with col1:
+                new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
+                st.markdown(new_title, unsafe_allow_html=True)
+                st.info("➡️ 1. How did you schedule the appointment?")
+                cols = st.columns((1, 1))
+                # APPOINTMENT
+                var_a1 = cols[0].selectbox("I scheduled an appointment:", ["Personalmente",  "Telefono",  "Sito Web", "E-mail",  "Tramite medico",  "Altro"])
+                var_a2 = cols[1].slider("How satisfied are you with the ease of scheduling an appointment?", 1, 7, 1)
+        
+                # RECEPTION
+                st.info("➡️ 2. On the reception at our department")
+                cols2 = st.columns((2))
+                var_c1 = cols2[0].slider("How satisfied are you with the reception at our department?", 1, 7, 1)
+                var_c2 = cols2[1].slider("How satisfied are you with the waiting time for assistance at the reception?", 1, 7, 1)
+        
+            # PROCEDURE
+            st.info("➡️ 3. About the prescribed procedure")
+            cols3 = st.columns((1, 1, 1))
+            var_d1 = cols3[0].selectbox("Which medical imaging procedure did you undergo?", ["RMN", "CT", "Ultrasuoni", "Raggi X", "Mammografia", "Artrografia/Mielografia", "Interventi/Biopsie", "Altro"])
+            var_d2 = cols3[1].slider("How satisfied are you with the waiting time in the department before the procedure?", 1, 7, 1)
+            options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 70, 80, 90]
+            if var_d1 == "RMN":
+                var_d3 = cols3[2].selectbox("How long was the visit? (minutes)", options=options, index=options.index(30))
+            elif var_d1 == "CT Scan" or var_d1 == "Mammografia":
+                var_d3 = cols3[2].selectbox("How long was the visit? (minutes)", options=options, index=options.index(5))
+            elif var_d1 == "Ultrasound" or var_d1 == "Artrografia/Mielografia" or var_d1 == "Interventi/Biopsie":
+                var_d3 = cols3[2].selectbox("How long was the visit? (minutes)", options=options, index=options.index(20))
+            elif var_d1 == "Raggi X":
+                var_d3 = cols3[2].selectbox("How long was the visit? (minutes)", options=options, index=options.index(2))
+            else:
+                var_d3 = cols3[2].selectbox("How long was the visit? (minutes)", options=options, index=options.index(1))
+        
+            # EXPLANATION OF RESULTS
+            st.info("➡️ 4. Explanation of department's results")
+            cols3 = st.columns((1, 1, 1))
+            var_f1 = cols3[0].selectbox("Did you consult a healthcare provider after your department visit?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
+            var_f2 = cols3[1].selectbox("Did you consult a health professional to have the results explained?", ["NO", "Si, radiologo (medico)", "Si, tecnico radiologia", "Altro specialista"])
+            var_f3 = cols3[2].slider("How satisfied are you with the explanation provided by the radiologist?", 1, 7, 1)
+        
+            # PATIENT EXPERIENCE
+            st.info("➡️ 5. How was your experience in the department as a patient")
+            cols3 = st.columns((1, 1, 1, 1, 1))
+            var_h1 = cols3[0].slider("How satisfied are you with the availability of restroom facilities?", 1, 7, 1)
+            var_h2 = cols3[1].slider("How satisfied are you with the cleanliness of the department?", 1, 7, 1)
+            var_h5 = cols3[2].slider("How satisfied are you with the staff's friendliness?", 1, 7, 1)
+            var_h7 = cols3[3].slider("Did you feel your privacy was respected?", 1, 7, 1)
+            var_h9 = cols3[4].selectbox("Would you recommend our radiology department to your family and friends?", ["SI", "NO"])
+        
+            # PATIENT INFO
+            st.info("➡️ 6. Our analysis of your responses")
+            cols3 = st.columns((1, 1))
+            var_i1 = cols3[0].select_slider("Could you indicate your age group (optional)?", options=["< 18 anni",	"18-30anni", 	"30-65anni",  ">65 anni" ])
+            var_i2 = cols3[1].selectbox("Could you indicate your gender (optional)?", options=["Maschio", "Femmina", "Non Specificato" ])
+        
+            with col2:
+                med_accoglienza=(var_c1+var_c2)/2
+                med_experience=(var_h1+var_h2+var_h5+var_h7)/4
+                DATA = [{"taste": "APPUNTAMENTO", "Peso Area": var_a2},
+                            {"taste": "ACCOGLIENZA", "Peso Area": med_accoglienza},
+                            {"taste": "PROCEDURE", "Peso Area": var_d2},
+                            {"taste": "RISULTATI", "Peso Area": var_f3},
+                            {"taste": "ESPERIENZA", "Peso Area": med_experience}]
+                graph_pes(DATA)
+                media_tot=round(((med_accoglienza+med_experience+var_a2+var_d2+var_f3)/5), 1)
+        
+            # COMMENT 1
+            cols_text = st.columns((0.25, 1))
+            if media_tot == 1:
+                pass
+            elif media_tot <= 4:
+                cols_text[0].metric("Result of your survey:", value=str(media_tot) + "/7")
+                feedback_gen = cols_text[1].text_area("Your experience can be improved, tell us what you think and we will definitely improve")
+            elif media_tot > 4 and media_tot <= 5:
+                cols_text[0].metric("Result of your survey:", value=str(media_tot) + "/7")
+                feedback_gen = cols_text[1].text_area("Your experience didn't go perfectly, if you're interested, tell us about your experience and we will definitely improve the weak points of our facility")
+            elif media_tot > 5 and media_tot <= 7:
+                cols_text[0].metric("Result of your survey:", value=str(media_tot) + "/7")
+                feedback_gen = cols_text[1].text_area("Your experience seems to have gone well, if you're interested, tell us about your experience and we will continue to improve")
+            else:
+                feedback_gen = ""
+        
+            # ADDITIONAL COMMENT
+            if media_tot == 1:
+                pass
+            elif media_tot < 4.5:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("Your OVERALL EXPERIENCE AT OUR FACILITY is very poor with a result of " + str(media_tot) + "/7. We would like to ask what problems you encountered at our facility.", icon="🚨")
+                colss[1].write("")
+                add_comm = colss[2].text_area("Write to us what didn't work. We will improve thanks to your feedback. Your opinion is crucial for us.")
+            elif var_a2 < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("The APPOINTMENT area is very deficient with a result of " + str(var_a2) + "/7. We would like to ask what problems you encountered at our facility.", icon="🚨")
+                colss[1].write("")
+                add_comm = colss[2].text_area("Write to us what didn't work. We will improve thanks to your feedback. Your opinion is crucial for us.")
+            elif med_accoglienza < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("The PATIENT RECEPTION area is very deficient with a result of " + str(med_accoglienza) + "/7. We would like to ask what problems you encountered at our facility. Being one of the most important areas for us, we would love to hear your opinion.", icon="🚨")
+                colss[1].write("")
+                add_comm = colss[2].text_area("Write to us what didn't work. We will improve thanks to your feedback. Your opinion is crucial for us.")
+            elif var_d2 < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("The PROCEDURE area is very deficient with a result of " + str(var_d2) + "/7. We would like to ask what problems you encountered at our facility.", icon="🚨")
+                colss[1].write("")
+                add_comm = colss[2].text_area("Write to us what didn't work. We will improve thanks to your feedback. Your opinion is crucial for us.")
+            elif var_f3 < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("The RESULTS area is very deficient with a result of " + str(var_f3) + "/7. We would like to ask what problems you encountered at our facility.", icon="🚨")
+                colss[1].write("")
+                add_comm = colss[2].text_area("Write to us what didn't work. We will improve thanks to your feedback. Your opinion is crucial for us.")
+            elif med_experience < 4:
+                colss = st.columns([0.23, 0.02, 1])
+                colss[0].error("The PATIENT EXPERIENCE area is very deficient with a result of " + str(med_experience) + "/7. We would like to ask what problems you encountered at our facility.", icon="🚨")
+                colss[1].write("")
+                add_comm = colss[2].text_area("Write to us what didn't work. We will improve thanks to your feedback. Your opinion is crucial for us.")
+            else:
+                add_comm = ""
+        
+            @st.cache_resource()
+            def classif_nlp(str):
+                # str to classify
+                emotion_classifier = EmotionClassifier()
+                resp1 = emotion_classifier.predict([str])
+                sentiment_classifier = SentimentClassifier()
+                resp2 = sentiment_classifier.predict([str])
+                return resp1, resp2
+        
+            cols_text = st.columns([0.5, 1])
+            cols_text[0].subheader("Test the sentiment of your comment")
+            cols_text[0].write("")
+            but = cols_text[0].button("Test Sentiment 🔝 😐 👎")
+            if but:
+                if feedback_gen == "":
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("Insert a comment")
+                    emozione = ""
+                    sentiment = ""
+                else:
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    cols_text[1].write("")
+                    # force the classification to limit outliers
+                    if media_tot >= 5.5:
+                        resp1[0] = "joy"
+                        resp2[0] = "positive"
+                        emozione = cols_text[1].subheader("Emotion conveyed: " + resp1[0])
+                        sentiment = cols_text[1].subheader("Sentiment analysis: " + resp2[0])
+                    elif media_tot <= 3.5:
+                        resp1[0] = "sadness"
+                        resp2[0] = "negative"
+                        emozione = cols_text[1].subheader("Emotion conveyed: " + resp1[0])
+                        sentiment = cols_text[1].subheader("Sentiment analysis: " + resp2[0])
+                    else:
+                        emozione = cols_text[1].subheader("Emotion conveyed: " + resp1[0])
+                        sentiment = cols_text[1].subheader("Sentiment analysis: " + resp2[0])
+        
+            submitted = st.button(label="Submit")
+            if submitted == True:
+                if feedback_gen == "":
+                    emozione = ""
+                    sentiment = ""
+                else:
+                    resp1, resp2 = classif_nlp(feedback_gen)
+                    emozione = resp1[0]
+                    sentiment = resp2[0]
+                    if media_tot >= 5.5:
+                        resp1[0] = "joy"
+                        resp2[0] = "positive"
+                    elif media_tot <= 3.5:
+                        resp1[0] = "sadness"
+                        resp2[0] = "negative"
+                    else:
+                        pass
+                st.success("Successfully")
+                st.balloons()
+                # Storing data
+                datetime_object = datetime.datetime.now()
+                add_row_to_gsheet(
+                    df, [[var_a1, var_a2, "",
+                         "", "", "",
+                         var_c1, var_c2, "",
+                         var_d1, var_d2, var_d3, "", "", "", "",
+                         "", "",
+                         var_f1, var_f2, var_f3,
+                         "", "", "", "", "",
+                         var_h1, var_h2, "", "", var_h5, "", var_h7, "", var_h9,
+                         var_i1, var_i2,
+                         feedback_gen,
+                         str(datetime_object), "Short Form", add_comm, emozione, sentiment]])
+
+
+        if slider>1 and slider<4:
             col1,  col2 = st.columns([1, 0.60])
             with col1:
                 new_title = '<b style="font-family:serif; color:#FF0000; font-size: 40px;">📋 MEDi Experience Form:</b>'
