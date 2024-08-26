@@ -160,13 +160,19 @@ def dashboard_patient_satisf():
         with col2:
             #Settimana attuale psi
             df2_att_scorsa_settimana=df.loc[(df['Timestamp'] >= str(date_last_week))]
-            df2_medie_valori_week=df2_att_scorsa_settimana.mean().reset_index()
+
+            # Step 1: Numeric value
+            df2_medie_valori_week = df2_att_scorsa_settimana.select_dtypes(include=[np.number]).mean().reset_index()
+
             df2_medie_valori_week.columns = ['variables', 'count']
             psi_this_week=round(df2_medie_valori_week["count"].mean(), 4)
             psi_perc=round((psi_this_week/7)*100,2)
             #Settimana precedente alla sett scorsa psi
             df2_prima_scorsa_settimana=df.loc[(df['Timestamp'] < str(date_last_week))]
-            df2_medie_valori_prec_week=df2_prima_scorsa_settimana.mean().reset_index()
+
+            # Step 1: Numeric value
+            df2_medie_valori_prec_week = df2_prima_scorsa_settimana.select_dtypes(include=[np.number]).mean().reset_index()
+
             df2_medie_valori_prec_week.columns = ['variables', 'count']
             psi_prima_last_week=round(df2_medie_valori_prec_week['count'].mean(), 4)
             #differenza tra i PSI
@@ -178,6 +184,7 @@ def dashboard_patient_satisf():
             #Settimana attuale tws MEAN
             df2_medie_valori_tws_week=df2_att_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].mean().reset_index()
             df2_medie_valori_tws_week.columns = ['variables', 'count']
+            print(df2_medie_valori_tws_week)
             tws_this_week=round(df2_medie_valori_tws_week["count"].mean(), 2)
             #Settimana attuale tws STD
             df2_dev_stand_valori_tws_week=df2_att_scorsa_settimana[["Sodd_tempo_attesa_rec","Sodd-tempo_attes_reparto_pre", "Soddisf_Tempo_Attesa_Risult"]].std().reset_index()
@@ -258,7 +265,9 @@ def dashboard_patient_satisf():
                 ris_media=round(df_selection["Soddisf_Spiegaz_Radiologo"].mean(), 2)
                 st.header("Radar Chart Macro-Aree")
                 #esperienza
-                esp_media=round(df_selection[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Ambiente", "Soddisf_Privacy"]].mean(), 2)
+                print(df_selection[["Soddisf_Servizi_Igenici"]])
+                numeric_columns = df_selection.select_dtypes(include=[np.number]).columns
+                esp_media= df_selection[numeric_columns].mean(skipna=True)
                 esp_media=(esp_media[0]+esp_media[1]+esp_media[2]+esp_media[3]+esp_media[4]+esp_media[5])/len(esp_media)
                 st.subheader("")
                 DATA = [{"taste": "APPUNTAMENTO", "Peso Area": appunt_media},
@@ -364,7 +373,15 @@ def dashboard_patient_satisf():
             df3["FLungo"]=df3["Type_Form"]=="Form_lungo"
         
         #first-sec row
-        df4= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='1W')).mean().reset_index()
+        # Seleziona le colonne numeriche e datetime
+        numeric_columns = df.select_dtypes(include=[np.number]).columns
+        datetime_columns = df.select_dtypes(include=[np.datetime64]).columns
+
+        # Combinare colonne numeriche e datetime
+        df_numeric = df[numeric_columns]
+
+        # Raggruppa per settimana e calcola la media solo per le colonne numeriche
+        df4 = df.groupby(pd.Grouper(key='Timestamp', freq='1W'))[numeric_columns].mean().reset_index()
         df4["PX"]=round(df4[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
         df4["target"]=10
         df4["MA_PX"]=df4["PX"].rolling(2).mean()
@@ -511,7 +528,9 @@ def dashboard_patient_satisf():
             st.subheader("Correlation Matrix")
             # Correlation Matrix in Content
             st.write("")
-            df_corr = df.corr()
+            numeric_df = df.select_dtypes(include=[np.number])
+            # Calcola la matrice di correlazione
+            df_corr = numeric_df.corr()
             fig_corr = go.Figure([go.Heatmap(z=df_corr.values,
                                              x=df_corr.index.values,
                                              y=df_corr.columns.values)])
@@ -615,7 +634,14 @@ def dashboard_patient_satisf():
 
         #df_new = px.data.tips()
         #calcolo Patient Experience ogni 1 day
-        df5= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='D')).mean().reset_index()
+        # Seleziona le colonne numeriche e datetime
+        numeric_columns = df.select_dtypes(include=[np.number]).columns
+        datetime_columns = df.select_dtypes(include=[np.datetime64]).columns
+
+        # Combinare colonne numeriche e datetime
+        df_numeric = df[numeric_columns]
+
+        df5= df.groupby(pd.Grouper(key='Timestamp', axis=0,freq='D'))[numeric_columns].mean().reset_index()
         df5["PX"]=round(df5[["Soddisf_Servizi_Igenici", "Soddisf_Tempo_Attesa_Risult",  "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(axis=1), 2)
         #mean_px_daily=round(df5[["Soddisf_Servizi_Igenici", "Soddisf_Pulizia_Reparto", "Soddisf_Cibo_Bevande", "Soddisf_Posti_Sedere", "Soddisf_Cordialità_staff", "Soddisf_Privacy"]].mean(), 2)
         

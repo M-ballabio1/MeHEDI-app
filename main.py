@@ -6,7 +6,7 @@ import streamlit as st
 from PIL import Image
 import time
 import datetime
-import database as db
+#import database as db
 import streamlit_authenticator as stauth
 import google_auth_httplib2
 import httplib2
@@ -15,9 +15,9 @@ from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 from feel_it import EmotionClassifier, SentimentClassifier
 
-from utils.Dashboard_Operations import dashboard_operations
+#from utils.Dashboard_Operations import dashboard_operations
 from utils.Dashboard import dashboard_patient_satisf
-from utils.Dashboard_Economics import dashboard_economics
+#from utils.Dashboard_Economics import dashboard_economics
 from utils.Info_Page import landing_page
 from utils.addition.graphs import graph_pes
 
